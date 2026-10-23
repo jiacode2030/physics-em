@@ -238,7 +238,7 @@ let rz;new ResizeObserver(()=>{cancelAnimationFrame(rz);rz=requestAnimationFrame
 (function report(){
   const dlg=$('#rp'),form=$('#rp-form'),where=$('#rp-where'),type=$('#rp-type'),det=$('#rp-details'),ctxEl=$('#rp-ctx'),msg=$('#rp-msg'),send=$('#rp-send');
   const fbBox=$('#rp-fb'),fbMsg=$('#rp-fbmsg'),fbText=$('#rp-text'),cmtBtn=$('#rp-comment'),issue=$('#rp-issue');
-  const REPO='https://github.com/jiacode2030/ap-labs-feedback';
+  const REPO='https://github.com/jiacode2030/intulab-feedback';
   const COURSE='E&M Lab',COURSE_LABEL='course:em',SITE_VERSION='2026-10-23';
   const use=n=>(window.claude&&typeof window.claude.use==='function')?Promise.resolve(window.claude.use(n)).catch(()=>null):Promise.resolve(null);
   const cap={db:use('db'),user:use('user'),comments:use('comments')};
