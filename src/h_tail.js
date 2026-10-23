@@ -238,7 +238,8 @@ let rz;new ResizeObserver(()=>{cancelAnimationFrame(rz);rz=requestAnimationFrame
 (function report(){
   const dlg=$('#rp'),form=$('#rp-form'),where=$('#rp-where'),type=$('#rp-type'),det=$('#rp-details'),ctxEl=$('#rp-ctx'),msg=$('#rp-msg'),send=$('#rp-send');
   const fbBox=$('#rp-fb'),fbMsg=$('#rp-fbmsg'),fbText=$('#rp-text'),cmtBtn=$('#rp-comment'),issue=$('#rp-issue');
-  const REPO='https://github.com/jiacode2030/physics-em';
+  const REPO='https://github.com/jiacode2030/ap-labs-feedback';
+  const COURSE='E&M Lab',COURSE_LABEL='course:em',SITE_VERSION='2026-10-23';
   const use=n=>(window.claude&&typeof window.claude.use==='function')?Promise.resolve(window.claude.use(n)).catch(()=>null):Promise.resolve(null);
   const cap={db:use('db'),user:use('user'),comments:use('comments')};
   let src=null,ctx='',canWrite=true,lastText='';
@@ -268,7 +269,7 @@ let rz;new ResizeObserver(()=>{cancelAnimationFrame(rz);rz=requestAnimationFrame
     catch(e){if(e&&e.code==='quota_exceeded'){fbMsg.textContent='The report inbox is full right now.';}return false;}}
   async function fallback(r){lastText=asText(r);fbText.value=lastText;form.hidden=true;fbBox.hidden=false;
     const copied=await copy(lastText);const cm=await cap.comments;cmtBtn.hidden=!cm;
-    issue.href=REPO+'/issues/new?title='+encodeURIComponent(clip(`[${r.type}] ${viewName(r.where)}: ${r.details.replace(/\s+/g,' ')}`,90))+'&body='+encodeURIComponent(`**Where:** ${viewName(r.where)} (#${r.where})\n**Type:** ${r.type}\n\n${r.details}\n\n**Context:** ${r.context}`);
+    issue.href=REPO+'/issues/new?labels='+encodeURIComponent(COURSE_LABEL)+'&title='+encodeURIComponent(clip(`[${COURSE}] [${r.type}] ${viewName(r.where)}: ${r.details.replace(/\s+/g,' ')}`,100))+'&body='+encodeURIComponent(`**Course:** ${COURSE}\n**Module:** ${viewName(r.where)} (#${r.where})\n**Type:** ${r.type}\n**Site version:** ${SITE_VERSION}\n\n${r.details}\n\n**Context:** ${r.context}`);
     issue.hidden=false;issue.className='btn'+(cm?'':' primary');
     fbMsg.textContent=(fbMsg.textContent?fbMsg.textContent+' ':'')+(cm?'Your report couldn’t be saved here (you may have view-only access). '+(copied?'It’s copied to your clipboard: ':'Copy it below, then ')+'post it as a comment so the owner sees it, or open a public GitHub issue.'
       :'Send it as a GitHub issue (you’ll need a free GitHub account, and issues are public). '+(copied?'It’s also copied to your clipboard.':''));}
@@ -443,4 +444,10 @@ function flipFrom(el,from,ms=480){if(REDUCE||!el.animate)return null;const to=el
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{redraw();navSync(true);stepSync(true);});
 current='';route();
 })();
+/* Analytics: GoatCounter, shared with every AP Science Labs site. Anonymous, no cookies, no personal data.
+   Loads only on the public GitHub Pages site, and counts each module view as its own page. */
+(function analytics(){if(!/\.github\.io$/.test(location.hostname))return;window.goatcounter={no_onload:true};
+  const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.dataset.goatcounter='https://aplabs.goatcounter.com/count';
+  const view=()=>{const id=(location.hash||'').slice(1)||'overview';if(window.goatcounter&&window.goatcounter.count)window.goatcounter.count({path:location.pathname.replace(/\/$/,'')+'/'+id,title:id});};
+  s.onload=()=>{view();addEventListener('hashchange',view);};document.head.appendChild(s);})();
 </script>
