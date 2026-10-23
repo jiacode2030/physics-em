@@ -444,7 +444,7 @@ function flipFrom(el,from,ms=480){if(REDUCE||!el.animate)return null;const to=el
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{redraw();navSync(true);stepSync(true);});
 current='';route();
 })();
-/* Analytics: GoatCounter, shared with every AP Science Labs site. Anonymous, no cookies, no personal data.
+/* Analytics: GoatCounter, shared with every AP Labs site. Anonymous, no cookies, no personal data.
    Loads only on the public GitHub Pages site, and counts each module view as its own page. */
 (function analytics(){if(!/\.github\.io$/.test(location.hostname))return;window.goatcounter={no_onload:true};
   const s=document.createElement('script');s.async=true;s.src='https://gc.zgo.at/count.js';s.dataset.goatcounter='https://aplabs.goatcounter.com/count';
