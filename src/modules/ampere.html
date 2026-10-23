@@ -1,0 +1,72 @@
+  <!-- ============ AMPÈRE'S LAW ============ -->
+  <section class="view" id="v-ampere" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 12</span><span class="tag pu">AP 2: magnetism</span></div>
+        <h1>Ampère's law</h1>
+        <p class="lede">Gauss's law finds E when there is symmetry. Ampère's law does the same for B: choose a loop, add up B along it, and the answer depends only on the current passing through the loop. Wires, solenoids and toroids each take one line.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>Walk around a closed loop and add up the part of B that points along your path, times each little step. Ampère's law says this total equals μ₀ times the current that pierces the loop. It is not saying B depends only on that current, but that the loop sum does. When symmetry makes B constant and along the path, the sum is just B times the length of the loop, and you can solve for B immediately.</p>
+        <p>For a long straight wire the field circles the wire, so a circular loop is the natural choice: B(2πr) = μ₀I. For a thick wire with current spread evenly, a loop inside the wire encloses only the fraction of the current within it: B grows linearly from zero at the center and then falls off as 1/r outside.</p>
+        <p>A long solenoid packs the wire into a coil. A rectangular loop with one side inside and one outside shows that the field inside is uniform, B = μ₀nI, and nearly zero outside. A toroid (a solenoid bent into a doughnut) has B = μ₀NI/(2πr) inside the doughnut and zero outside.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span>∮ <i class="bf">B</i> · d<i>ℓ</i> = μ<sub>0</sub><i class="cur">I</i><sub>enc</sub></span><small>Ampère's law</small></div>
+        <div class="eqn"><span><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i>/(2π<i>r</i>)  (outside a wire);  μ<sub>0</sub><i>n</i><i class="cur">I</i>  (solenoid)</span><small>two key results</small></div>
+        <div class="eqn"><span><i class="bf">B</i> = μ<sub>0</sub><i>N</i><i class="cur">I</i>/(2π<i>r</i>)</span><small>toroid</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="am-mode" role="group" aria-label="Current arrangement"><button type="button" data-k="wire" aria-pressed="true">Thick wire</button><button type="button" data-k="sole">Solenoid</button><button type="button" data-k="tor">Toroid</button></div></div>
+        <canvas id="am-canvas" class="drag" aria-label="Cross-section views and graphs of the magnetic field of a thick wire, a solenoid and a toroid."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="am-I"><span>Current I</span> <output id="am-I-out"></output></label><input type="range" id="am-I" min="1" max="50" step="1" value="12"></div>
+          <div class="ctl"><label for="am-rad"><span id="am-rad-lbl">Wire radius R</span> <output id="am-rad-out"></output></label><input type="range" id="am-rad" min="1" max="6" step="0.5" value="2"></div>
+          <div class="ctl" id="am-n-ctl" hidden><label for="am-n"><span id="am-n-lbl">Turns per meter n</span> <output id="am-n-out"></output></label><input type="range" id="am-n" min="100" max="2000" step="100" value="500"></div>
+          <div class="ctl"><label for="am-r"><span>Amperian loop radius r</span> <output id="am-r-out"></output></label><input type="range" id="am-r" min="0.5" max="15" step="0.5" value="3"></div>
+        </div>
+        <div class="readout">
+          <div><span></span><strong class="ef" id="am-r1">—</strong></div>
+          <div><span></span><strong id="am-r2">—</strong></div>
+          <div><span></span><strong id="am-r3">—</strong></div>
+          <div><span></span><strong id="am-r4">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">Dashed circle: the Amperian loop of radius r. On the graph, B(r) is the field at that distance from the axis. Only the current passing through the loop matters.</p>
+        <div class="v3block"><p class="v3cap"><b>In 3D</b> The field you are finding, in space. A wire has circular field lines; inside a solenoid the field runs straight along the axis; a toroid traps it in a ring. The dashed loop is your Amperian loop.</p><canvas id="am3-canvas" aria-label="3D view of the current and its magnetic field. Drag to rotate."></canvas></div>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Thick wire: move the Amperian loop from inside the wire to outside. <button type="button" class="btn link" data-show='[["click", "#am-mode [data-k=wire]"], ["#am-rad", 2], ["#am-I", 12], ["#am-r", 1]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Inside, B grows in proportion to r because only the current within the loop counts. At r = R it peaks, and outside it falls as 1/r.</p></details></li>
+        <li><p>Double the current in the thick wire. <button type="button" class="btn link" data-show='[["click", "#am-mode [data-k=wire]"], ["#am-I", 24], ["#am-r", 3], ["#am-rad", 2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The field at every point doubles. B is proportional to I at fixed r.</p></details></li>
+        <li><p>Solenoid: move the loop outside the coil. <button type="button" class="btn link" data-show='[["click", "#am-mode [data-k=sole]"], ["#am-rad", 3], ["#am-r", 6]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Outside an ideal long solenoid the field is zero. The inside field μ₀nI is uniform; it doesn't depend on where you are inside, or on the coil's radius.</p></details></li>
+        <li><p>Toroid: look at the field inside the doughnut and just outside it. <button type="button" class="btn link" data-show='[["click", "#am-mode [data-k=tor]"], ["#am-rad", 6], ["#am-r", 8]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Inside the doughnut the field falls as 1/r (stronger on the inner edge). Everywhere else, including the hole in the middle, it is zero.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A long straight wire of radius R = 2.0 cm carries a total current of 12 A, uniformly distributed over its cross-section. Find the magnetic field at r = 1.0 cm and at r = 6.0 cm from the axis.</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="Cross-section of the wire with current out of the page. Dashed circles are Amperian loops at r = 1 cm and r = 6 cm."><circle cx="130" cy="115" r="70" style="fill:color-mix(in srgb,var(--cv) 10%,transparent);stroke:var(--cv);stroke-width:2"/><circle cx="130" cy="115" r="3" style="fill:var(--cv)"/><circle cx="155" cy="130" r="3" style="fill:var(--cv)"/><circle cx="105" cy="130" r="3" style="fill:var(--cv)"/><circle cx="130" cy="85" r="3" style="fill:var(--cv)"/><circle cx="165" cy="95" r="3" style="fill:var(--cv)"/><circle cx="95" cy="95" r="3" style="fill:var(--cv)"/><circle cx="130" cy="160" r="3" style="fill:var(--cv)"/><circle cx="175" cy="135" r="3" style="fill:var(--cv)"/><circle cx="85" cy="135" r="3" style="fill:var(--cv)"/><circle cx="145" cy="63" r="3" style="fill:var(--cv)"/><circle cx="115" cy="63" r="3" style="fill:var(--cv)"/><circle cx="150" cy="167" r="3" style="fill:var(--cv)"/><text x="130" y="120" text-anchor="middle" style="fill:var(--cv);font:600 12px 'IBM Plex Sans',sans-serif">⊙ I</text><text x="130" y="208" text-anchor="middle" style="fill:var(--muted);font:600 10px 'IBM Plex Sans',sans-serif">R = 2 cm; loops at r = 1 cm and 6 cm</text><g class="sl" data-s="1" hidden><circle cx="130" cy="115" r="38" style="fill:none;stroke:var(--ink);stroke-width:1.8;stroke-dasharray:5 4"/><circle cx="130" cy="115" r="100" style="fill:none;stroke:var(--ink);stroke-width:1.8;stroke-dasharray:5 4"/></g><g class="sl" data-s="2" hidden><line x1="92" y1="115" x2="92.0" y2="106.3" style="stroke:var(--ca);stroke-width:2.2;stroke-linecap:round"/><polygon points="92,100 96.95,109.0 87.05,109.0" style="fill:var(--ca)"/></g><g class="sl" data-s="3" hidden><line x1="130" y1="15" x2="141.7385324715562" y2="16.304281385728466" style="stroke:var(--ca);stroke-width:2.2;stroke-linecap:round"/><polygon points="148,17 138.50841033386695,20.92584075196079 139.60168244200793,11.086391778691967" style="fill:var(--ca)"/></g><g class="sl" data-s="4" hidden><circle cx="130" cy="115" r="70" style="fill:none;stroke:var(--ca);stroke-width:2.5"/></g></svg><div class="fbdnotes"><span class="i" data-s="1" hidden>circular loops: ∮B·dℓ = B(2πr)</span><span class="b" data-s="2" hidden>inside: I_enc = I(r/R)² = 3.0 A, B = 60 μT</span><span class="b" data-s="3" hidden>outside: all 12 A enclosed, B = 40 μT</span><span class="b" data-s="4" hidden>at r = R: B = 120 μT, the maximum</span><span class="i" data-s="5" hidden>out of the page ⇒ counterclockwise field lines</span></div></div><figcaption>Cross-section of the wire with current out of the page. Dashed circles are Amperian loops at r = 1 cm and r = 6 cm.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Choose the loop.</b> By symmetry B circles the axis and has the same size everywhere on a circle centered on the wire. Choose a circular Amperian loop of radius r. Then <span class="m">∮ <i class="bf">B</i> · d<i>ℓ</i> = <i class="bf">B</i>(2π<i>r</i>)</span>.</li>
+        <li hidden><b>r = 1.0 cm (inside).</b> The current enclosed is the fraction of the area: <span class="m"><i class="cur">I</i><sub>enc</sub> = <i class="cur">I</i>(<i>r</i>/<i>R</i>)² = 12 × (0.50)² = 3.0 A</span>. Then <span class="m"><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i><sub>enc</sub>/(2π<i>r</i>) = (4π × 10⁻⁷)(3.0)/(2π × 0.010) = 6.0 × 10⁻⁵ T</span>.</li>
+        <li hidden><b>r = 6.0 cm (outside).</b> All the current is enclosed: <span class="m"><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i>/(2π<i>r</i>) = (4π × 10⁻⁷)(12)/(2π × 0.060) = 4.0 × 10⁻⁵ T</span>.</li>
+        <li hidden><b>Check at the surface (r = R).</b> Both formulas must agree: <span class="m">μ<sub>0</sub><i class="cur">I</i>/(2π<i>R</i>) = 1.2 × 10⁻⁴ T</span>, the maximum field. At 1 cm it is half the value at the surface (r/R), 60 μT ✓.</li>
+        <li hidden><b>Direction.</b> Curl your fingers around the wire so that your thumb points along the current: B circles in the direction your fingers curl. Out of the page gives counterclockwise field lines.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Using the total current for a loop inside a thick wire. Only the current inside the loop counts.</li><li>Picking a loop with no symmetry. The law is always true, but you can't solve for B without a loop where B is constant and along the path.</li><li>Using n as the total number of turns for a solenoid. n is turns per unit length.</li><li>Saying B = 0 outside a toroid 'because there is no current there'. It is zero because an Amperian loop out there encloses no net current (the wire passes through it in both directions).</li></ul></div>
+      <div class="prose">
+        <h2>Choosing the loop</h2>
+        <div class="tablewrap"><table><thead><tr><th>Current arrangement</th><th>Loop</th><th>Field</th></tr></thead><tbody>
+<tr><td>long straight wire (radius R)</td><td>circle of radius r around the axis</td><td><span class="m"><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i><i>r</i>/(2π<i>R</i>²)</span> inside, <span class="m">μ<sub>0</sub><i class="cur">I</i>/(2π<i>r</i>)</span> outside</td></tr>
+<tr><td>long solenoid (n turns per meter)</td><td>rectangle, one side inside, one outside</td><td><span class="m"><i class="bf">B</i> = μ<sub>0</sub><i>n</i><i class="cur">I</i></span> inside, ≈ 0 outside</td></tr>
+<tr><td>toroid (N turns)</td><td>circle of radius r inside the doughnut</td><td><span class="m"><i class="bf">B</i> = μ<sub>0</sub><i>N</i><i class="cur">I</i>/(2π<i>r</i>)</span></td></tr>
+<tr><td>infinite current sheet (K per meter)</td><td>rectangle straddling the sheet</td><td><span class="m"><i class="bf">B</i> = μ<sub>0</sub><i>K</i>/2</span> on each side</td></tr>
+</tbody></table></div>
+        <h2>How it fits with the others</h2>
+        <ul>
+          <li>Ampère's law is to magnetic fields what Gauss's law is to electric fields: a way to get the field quickly when symmetry allows it. Biot–Savart is the always-works version (like Coulomb's law).</li>
+          <li>The law as written works for steady currents. For changing electric fields, Maxwell added a term (the displacement current), which comes up in the last module.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="0" data-explain="The loop is outside the wire, so it encloses the whole current I. B(2πr) = μ₀I gives B = μ₀I/(2πr). It does not depend on how the current is distributed inside the wire, as long as it has cylindrical symmetry.">
+        <p class="q">Check yourself: a thick cylindrical wire carries a uniform current I. For a point outside the wire, at distance r from the axis, the field is:</p>
+        <div class="opts"><button type="button">μ₀I/(2πr)</button><button type="button">μ₀I r/(2πR²)</button><button type="button">Zero</button><button type="button">μ₀I/(2πR)</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

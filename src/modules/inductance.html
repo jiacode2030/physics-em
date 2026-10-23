@@ -1,0 +1,80 @@
+  <!-- ============ INDUCTORS &AMP; LR CIRCUITS ============ -->
+  <section class="view" id="v-inductance" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 13</span><span class="tag calc">Calculus</span></div>
+        <h1>Inductors &amp; LR circuits</h1>
+        <p class="lede">A coil of wire resists any change in the current through it, the way a heavy flywheel resists any change in its speed. The inductor is the electromagnetic twin of mass, and an LR circuit follows the same exponential curve as an RC circuit.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>When current flows in a coil it makes a magnetic field through the coil itself. If the current changes, so does the flux through the coil, and Faraday's law makes an EMF that opposes the change: ε = −L dI/dt. The number L is the <b>inductance</b>, in henries (H). A big coil with a lot of turns, or an iron core, has a big L.</p>
+        <p>Think of inductance as electrical inertia. A resistor opposes current. An inductor opposes <em>changes</em> in current. Close a switch on an LR circuit and the current cannot jump: at first the inductor takes the whole battery voltage (its back-EMF cancels it), so the current starts at zero. Over time the current climbs toward ε/R and the back-EMF fades.</p>
+        <p>The time constant is τ = L/R: a big L (heavy flywheel) makes the current rise slowly; a big R lets it reach its final value quickly. And the energy is stored in the magnetic field: U = ½LI², just as a moving mass stores ½mv².</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span>ε<sub>L</sub> = −<i>L</i> d<i class="cur">I</i>/d<i>t</i></span><small>back-EMF of an inductor</small></div>
+        <div class="eqn"><span><i class="cur">I</i>(<i>t</i>) = (ε/<i>R</i>)(1 − <i>e</i><sup>−<i>t</i>/τ</sup>), &nbsp;τ = <i>L</i>/<i>R</i></span><small>switch closed</small></div>
+        <div class="eqn"><span><i>U</i> = ½<i>L</i><i class="cur">I</i>², &nbsp;<i>u</i> = <i class="bf">B</i>²/(2μ<sub>0</sub>)</span><small>stored magnetic energy</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="row"><button type="button" class="btn primary" id="lr-on">Close the switch</button><button type="button" class="btn" id="lr-off">Open it (current coasts through R)</button><button type="button" class="btn" id="lr-rst">Reset</button></div></div>
+        <canvas id="lr-canvas" class="drag" aria-label="An LR circuit with a switch: a battery, a resistor and an inductor, with graphs of the voltages and the current. The clock is slowed down so you can watch."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="lr-L"><span>Inductance L (mH)</span> <output id="lr-L-out"></output></label><input type="range" id="lr-L" min="50" max="500" step="10" value="200"></div>
+          <div class="ctl"><label for="lr-R"><span>Resistance R (Ω)</span> <output id="lr-R-out"></output></label><input type="range" id="lr-R" min="10" max="200" step="5" value="50"></div>
+          <div class="ctl"><label for="lr-E"><span>Battery ε (V)</span> <output id="lr-E-out"></output></label><input type="range" id="lr-E" min="3" max="24" step="1" value="12"></div>
+        </div>
+        <div class="readout">
+          <div><span>Current I</span><strong class="cur" id="lr-i">—</strong></div>
+          <div><span>Voltage across the inductor</span><strong class="frc" id="lr-vl">—</strong></div>
+          <div><span>Voltage across the resistor</span><strong id="lr-vr">—</strong></div>
+          <div><span>Magnetic energy ½LI²</span><strong class="ef" id="lr-u">—</strong></div>
+          <div><span>τ = L/R | time</span><strong id="lr-t">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">Time is shown in milliseconds but the animation is slowed so that one time constant takes about 1.5 s on your screen. When the switch closes the inductor opposes the rise in current with a back-EMF; as the current levels off, that voltage disappears. When the battery is removed, the inductor keeps the current going through R.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Close the switch and watch the two voltages. <button type="button" class="btn link" data-show='[["#lr-L", 200], ["#lr-R", 50], ["#lr-E", 12], ["click", "#lr-on"]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>At the start the inductor has all 12 V across it (back-EMF cancels the battery) and the current is zero. As the current rises, the voltage across the resistor grows and the inductor voltage falls. At the end the inductor has no voltage across it: it acts like a plain wire.</p></details></li>
+        <li><p>Double the inductance and close the switch. <button type="button" class="btn link" data-show='[["#lr-L", 400], ["#lr-R", 50], ["#lr-E", 12], ["click", "#lr-on"]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The time constant doubles: the current rises more slowly. The final current is the same, ε/R, because L doesn't matter once everything is steady.</p></details></li>
+        <li><p>Close the switch, wait until it levels off, then open it. <button type="button" class="btn link" data-show='[["#lr-L", 200], ["#lr-R", 50], ["#lr-E", 12], ["click", "#lr-on"]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The inductor keeps the current going through the resistor: the current decays exponentially and the inductor's voltage reverses sign. The stored magnetic energy turns into heat in R.</p></details></li>
+        <li><p>Increase R to 200 Ω. <button type="button" class="btn link" data-show='[["#lr-L", 200], ["#lr-R", 200], ["#lr-E", 12], ["click", "#lr-on"]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The time constant shrinks (L/R = 1 ms) and the final current falls to ε/R = 60 mA. Faster, but weaker.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A 0.20 H inductor and a 50 Ω resistor are connected in series with a 12 V battery through a switch. The switch is closed at t = 0. Find (a) the time constant, (b) the final current, (c) the current at t = 4.0 ms, (d) the initial rate of change of the current, and (e) the energy stored in the inductor at the end. Then the battery is removed (the inductor still has a path through the resistor). How long until the current falls to 10% of its value?</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="A battery, a resistor and an inductor in series."><line x1="40" y1="50" x2="200" y2="50" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="40" y1="175" x2="200" y2="175" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="40" y1="50" x2="40" y2="95" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="40" y1="135" x2="40" y2="175" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="30" y1="111" x2="50" y2="111" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/><line x1="35" y1="119" x2="45" y2="119" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/><text x="28" y="119" text-anchor="end" style="fill:var(--ink);font:600 11px 'IBM Plex Sans',sans-serif">12 V</text><polyline points="80.0,50.0 88.0,50.0 92.5,42.0 101.5,58.0 110.5,42.0 119.5,58.0 128.5,42.0 137.5,58.0 142.0,50.0 150.0,50.0" style="fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round"/><text x="115.0" y="36" text-anchor="middle" style="fill:var(--ink);font:600 12px 'IBM Plex Sans',sans-serif">50 Ω</text><line x1="200" y1="50" x2="200" y2="85" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="200" y1="175" x2="200" y2="145" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><path d="M 200 85 a 10 10 0 0 1 0 15 a 10 10 0 0 1 0 15 a 10 10 0 0 1 0 15 a 10 10 0 0 1 0 15" style="fill:none;stroke:var(--ink);stroke-width:2.5"/><text x="222" y="118" text-anchor="start" style="fill:var(--ink);font:600 11px 'IBM Plex Sans',sans-serif">0.20 H</text><g class="sl" data-s="1" hidden><text x="130" y="206" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">τ = L/R = 4.0 ms</text></g><g class="sl" data-s="2" hidden><line x1="100" y1="38" x2="143.7" y2="38.0" style="stroke:var(--cv);stroke-width:2.2;stroke-linecap:round"/><polygon points="150,38 141.0,42.95 141.0,33.05" style="fill:var(--cv)"/><text x="164.0" y="42.0" text-anchor="middle" style="fill:var(--cv);font:600 13px 'IBM Plex Sans',sans-serif">I</text><text x="125" y="26" text-anchor="middle" style="fill:var(--cv);font:600 11px 'IBM Plex Sans',sans-serif">0.24 A</text></g><g class="sl" data-s="3" hidden><text x="120" y="100" text-anchor="middle" style="fill:var(--cv);font:600 10px 'IBM Plex Sans',sans-serif">0.15 A at t = τ</text></g><g class="sl" data-s="4" hidden><text x="120" y="116" text-anchor="middle" style="fill:var(--hot);font:600 10px 'IBM Plex Sans',sans-serif">dI/dt = 60 A/s at t = 0</text></g><g class="sl" data-s="5" hidden><text x="120" y="132" text-anchor="middle" style="fill:var(--hot);font:600 10px 'IBM Plex Sans',sans-serif">U = 5.8 mJ</text></g></svg><div class="fbdnotes"><span class="i" data-s="1" hidden>τ = 0.20 H / 50 Ω = 4.0 ms</span><span class="v" data-s="2" hidden>steady state: I = ε/R = 0.24 A</span><span class="v" data-s="3" hidden>I(τ) = 0.24(1 − e⁻¹) = 0.15 A</span><span class="f" data-s="4" hidden>dI/dt = ε/L = 60 A/s at the start</span><span class="f" data-s="5" hidden>U = ½LI² = 5.8 mJ</span><span class="i" data-s="6" hidden>after removing the battery: 9.2 ms to fall to 10%</span></div></div><figcaption>A battery, a resistor and an inductor in series.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Time constant.</b> <span class="m">τ = <i>L</i>/<i>R</i> = 0.20/50 = 4.0 × 10⁻³ s = 4.0 ms</span>.</li>
+        <li hidden><b>Final current.</b> Once the current is steady, d<i>I</i>/d<i>t</i> = 0 and the inductor has no voltage: <span class="m"><i class="cur">I</i><sub>max</sub> = ε/<i>R</i> = 12/50 = 0.24 A</span>.</li>
+        <li hidden><b>Current at t = 4.0 ms (= τ).</b> <span class="m"><i class="cur">I</i> = 0.24(1 − <i>e</i>⁻¹) = 0.24(0.632) = 0.15 A</span>.</li>
+        <li hidden><b>Initial rate.</b> At t = 0 the current is zero, so the whole battery voltage is across the inductor: <span class="m">d<i class="cur">I</i>/d<i>t</i> = ε/<i>L</i> = 12/0.20 = 60 A/s</span>.</li>
+        <li hidden><b>Energy stored at the end.</b> <span class="m"><i>U</i> = ½<i>L</i><i class="cur">I</i>² = ½(0.20)(0.24)² = 5.8 mJ</span>.</li>
+        <li hidden><b>Decay after removing the battery.</b> <span class="m"><i class="cur">I</i> = <i class="cur">I</i><sub>0</sub><i>e</i><sup>−<i>t</i>/τ</sup></span>; set it to 0.10: <span class="m"><i>t</i> = τ ln 10 = (4.0 ms)(2.30) = 9.2 ms</span>.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Saying the inductor has no effect: it only matters while the current is changing.</li><li>Using τ = RL instead of L/R.</li><li>Thinking the current starts at ε/R. It starts at zero when the switch closes (an inductor opposes the change).</li><li>Forgetting that opening a switch in an inductive circuit can create a huge voltage: with dI/dt very large, the back-EMF L dI/dt can spark across the switch.</li></ul></div>
+      <div class="prose">
+        <h2>Inductance</h2>
+        <ul>
+          <li><b>Definition:</b> <span class="m"><i>L</i> = <i>N</i>Φ<sub>B</sub>/<i class="cur">I</i></span> (flux linkage per amp). For a long solenoid of length ℓ, area A and N turns: <span class="m"><i>L</i> = μ<sub>0</sub><i>N</i>²<i>A</i>/ℓ = μ<sub>0</sub><i>n</i>²<i>A</i>ℓ</span>.</li>
+          <li><b>Back-EMF:</b> <span class="m">ε<sub>L</sub> = −<i>L</i> d<i class="cur">I</i>/d<i>t</i></span>: it points so as to oppose the change in current.</li>
+          <li><b>Energy:</b> <span class="m"><i>U</i> = ½<i>L</i><i class="cur">I</i>²</span>, stored as magnetic field with energy density <span class="m"><i>u</i> = <i class="bf">B</i>²/(2μ<sub>0</sub>)</span>.</li>
+        </ul>
+        <h2>The LR circuit</h2>
+        <ul>
+          <li><b>Rising:</b> loop rule <span class="m">ε − <i class="cur">I</i><i>R</i> − <i>L</i> d<i class="cur">I</i>/d<i>t</i> = 0</span>, giving <span class="m"><i class="cur">I</i> = (ε/<i>R</i>)(1 − <i>e</i><sup>−<i>t</i>/τ</sup>)</span>, τ = <i>L</i>/<i>R</i>.</li>
+          <li><b>Decaying:</b> <span class="m"><i class="cur">I</i> = <i class="cur">I</i><sub>0</sub><i>e</i><sup>−<i>t</i>/τ</sup></span>.</li>
+          <li><b>Two limits:</b> at t = 0 an inductor acts like an open switch (current can't jump); at t → ∞ it acts like a plain wire. (A capacitor is the opposite.)</li>
+        </ul>
+        <h2>LR circuits with more than one resistor</h2>
+        <ul>
+          <li>Use the two limits: just after a switch changes, the inductor keeps its current; a long time later it acts as a plain wire and the current settles by ordinary series and parallel rules.</li>
+          <li>The time constant is <span class="m">τ = <i>L</i>/<i>R</i><sub>eq</sub></span>, where <i>R</i><sub>eq</sub> is the resistance the inductor "sees" across its own terminals.</li>
+          <li>Then <span class="m"><i class="cur">I</i>(<i>t</i>) = <i class="cur">I</i><sub>∞</sub> + (<i class="cur">I</i><sub>0</sub> − <i class="cur">I</i><sub>∞</sub>)<i>e</i><sup>−<i>t</i>/τ</sup></span>, with I₀ the current just after the change.</li>
+          <li>Opening a switch with the inductor still carrying current forces that current through whatever is left: a large resistor makes a large voltage spike, <span class="m"><i class="cur">I</i><sub>0</sub><i>R</i></span>.</li>
+        </ul>
+
+      </div>
+      <div class="quiz" data-correct="0" data-explain="An inductor opposes changes in current. The current through it cannot change instantly, so just after the switch closes it is still zero, and the inductor acts like an open switch (it has the whole battery voltage across it).">
+        <p class="q">Check yourself: a battery is connected to a resistor and an inductor in series at t = 0. Immediately afterward, the current is:</p>
+        <div class="opts"><button type="button">Zero</button><button type="button">ε/R</button><button type="button">ε/L</button><button type="button">Infinite</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

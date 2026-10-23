@@ -1,0 +1,67 @@
+  <!-- ============ EXPONENTIAL CHANGE ============ -->
+  <section class="view" id="v-expo" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C math</span><span class="tag calc">Calculus</span></div>
+        <h1>Exponential change</h1>
+        <p class="lede">Charging capacitors, decaying currents in coils, cooling coffee and falling raindrops all follow the same curve: it changes fastest at first, then eases into its final value. One number, the time constant τ, sets the whole timeline.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>Fill a bathtub through a leaky tap that slows as the tub fills. At first the water rises quickly; as the tub fills the flow slows, until it barely changes. Rule: <b>the rate of change is proportional to how far you still have to go.</b> That sentence, written as an equation, gives the exponential.</p>
+        <p>The time constant τ is how long it would take if the initial rate kept going. A bigger τ means a slower process. After one τ the quantity is 63% of the way there; after two, 86%; after three, 95%; after five it is within 1%. In practice, "done" means about 5τ.</p>
+        <p>You will meet this curve in RC circuits (τ = RC), in LR circuits (τ = L/R), and in Mechanics for drag. It is the same differential equation each time, only the letters change.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span><i>f</i>(<i>t</i>) = 1 − <i>e</i><sup>−<i>t</i>/τ</sup></span><small>fills up to its final value</small></div>
+        <div class="eqn"><span><i>f</i>(<i>t</i>) = <i>e</i><sup>−<i>t</i>/τ</sup></span><small>dies away to zero</small></div>
+        <div class="eqn"><span>d<i>f</i>/d<i>t</i> = (1 − <i>f</i>)/τ</span><small>rate ∝ distance still to go</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="ep-mode" role="group" aria-label="Which curve"><button type="button" data-k="up" aria-pressed="true">Fills up: 1 − e^(−t/τ)</button><button type="button" data-k="down">Dies away: e^(−t/τ)</button></div></div>
+        <canvas id="ep-canvas" class="drag" aria-label="Graph of an exponential approach to a final value, with markers at one, two and three time constants."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="ep-tau"><span>Time constant τ</span> <output id="ep-tau-out"></output></label><input type="range" id="ep-tau" min="0.5" max="4" step="0.1" value="1.5"></div>
+          <div class="ctl"><label for="ep-t"><span>Time t</span> <output id="ep-t-out"></output></label><input type="range" id="ep-t" min="0" max="10" step="0.1" value="2"></div>
+        </div>
+        <div class="readout">
+          <div><span>Value at time t</span><strong class="ef" id="ep-frac">—</strong></div>
+          <div><span>t / τ</span><strong id="ep-ratio">—</strong></div>
+          <div><span>Time to get halfway</span><strong id="ep-half">—</strong></div>
+          <div><span>Time to get within 10% of the end</span><strong id="ep-90">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">The curve changes fastest at the start, and each τ takes it a fixed fraction of the way from where it is to where it's going. It never quite arrives.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Slide time to exactly one time constant (t = τ). <button type="button" class="btn link" data-show='[["click", "#ep-mode [data-k=up]"], ["#ep-tau", 2], ["#ep-t", 2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The curve is at 63% of the way. That is 1 − 1/e. Try another τ: whenever t = τ it is still 63%.</p></details></li>
+        <li><p>Make τ larger (slow process), keep t the same. <button type="button" class="btn link" data-show='[["#ep-tau", 4], ["#ep-t", 2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>A bigger τ stretches the curve out in time. At the same t you are much less far along.</p></details></li>
+        <li><p>Switch to the dying curve and read it at 2τ and 3τ. <button type="button" class="btn link" data-show='[["click", "#ep-mode [data-k=down]"], ["#ep-tau", 1.5], ["#ep-t", 3]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>At t = 2τ only 14% is left; at 3τ, 5%. The remaining amount shrinks by the same factor, 1/e, every time τ passes.</p></details></li>
+        <li><p>How long until the fill-up curve is within 10% of the end? <button type="button" class="btn link" data-show='[["click", "#ep-mode [data-k=up]"], ["#ep-tau", 1.5], ["#ep-t", 3.5]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>About 2.3τ. You can read it off the "Time to get within 10%" readout. Within 1% takes 4.6τ.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A 12 V battery charges a capacitor through a resistor. The circuit has time constant τ = 0.50 s. The capacitor voltage is V(t) = 12(1 − e^(−t/τ)). Find the voltage at t = 0.75 s, and how long it takes to reach 10 V.</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="The curve rises from 0 toward 12 V. The marked point is at t = 0.75 s."><line x1="36" y1="190" x2="240" y2="190" style="stroke:var(--muted);stroke-width:1.5;stroke-linecap:round"/><line x1="36" y1="190" x2="36" y2="36" style="stroke:var(--muted);stroke-width:1.5;stroke-linecap:round"/><line x1="36" y1="52" x2="240" y2="52" style="stroke:var(--muted);stroke-width:1;stroke-linecap:round;stroke-dasharray:4 4"/><text x="30" y="56" text-anchor="end" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">12</text><polyline points="36.0,190.0 41.0,173.8 46.0,159.5 51.0,146.8 56.0,135.7 61.0,125.9 66.0,117.2 71.0,109.5 76.0,102.8 81.0,96.8 86.0,91.5 91.0,86.9 96.0,82.8 101.0,79.2 106.0,76.0 111.0,73.2 116.0,70.7 121.0,68.5 126.0,66.5 131.0,64.8 136.0,63.3 141.0,62.0 146.0,60.8 151.0,59.8 156.0,58.9 161.0,58.1 166.0,57.4 171.0,56.7 176.0,56.2 181.0,55.7 186.0,55.2 191.0,54.9 196.0,54.5 201.0,54.2 206.0,54.0 211.0,53.7 216.0,53.5 221.0,53.4 226.0,53.2 231.0,53.1 236.0,52.9" style="fill:none;stroke:var(--cx);stroke-width:2.8"/><text x="138" y="214" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">t (s)</text><text x="14" y="46" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">V</text><g class="sl" data-s="2" hidden><line x1="96.0" y1="190" x2="96.0" y2="82.7919621004833" style="stroke:var(--hot);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:4 3"/><line x1="36" y1="82.7919621004833" x2="96.0" y2="82.7919621004833" style="stroke:var(--hot);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:4 3"/><circle cx="96.0" cy="82.7919621004833" r="4.5" style="fill:var(--hot)"/><text x="150" y="162" text-anchor="start" style="fill:var(--hot);font:600 12px 'IBM Plex Sans',sans-serif">9.3 V at 0.75 s</text></g><g class="sl" data-s="3" hidden><line x1="36" y1="75.0" x2="240" y2="75.0" style="stroke:cv;stroke-width:1.5;stroke-linecap:round;stroke-dasharray:3 3"/><text x="238" y="69.0" text-anchor="end" style="fill:cv;font:600 11px 'IBM Plex Sans',sans-serif">10 V</text></g><g class="sl" data-s="4" hidden><line x1="107.68" y1="75.0" x2="107.68" y2="190" style="stroke:cv;stroke-width:1.5;stroke-linecap:round;stroke-dasharray:3 3"/><circle cx="107.68" cy="75.0" r="4.5" style="fill:cv"/><text x="107.68" y="206" text-anchor="middle" style="fill:cv;font:600 12px 'IBM Plex Sans',sans-serif">0.90 s</text></g></svg><div class="fbdnotes"><span class="e" data-s="1" hidden>starts at 0, rises fast, never passes 12 V</span><span class="f" data-s="2" hidden>t/τ = 1.5, V = 9.3 V</span><span class="v" data-s="3" hidden>target: 10 V, so e^(−t/τ) = 1/6</span><span class="v" data-s="4" hidden>t = τ ln 6 = 0.90 s</span><span class="i" data-s="5" hidden>✓ 10 V is 83% of 12 V, just under 2τ</span></div></div><figcaption>The curve rises from 0 toward 12 V. The marked point is at t = 0.75 s.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Check what the curve should do.</b> It starts at 0, rises quickly at first, and approaches 12 V without crossing it.</li>
+        <li hidden><b>Voltage at 0.75 s.</b> <span class="m"><i>t</i>/τ = 0.75/0.50 = 1.5</span>, so <span class="m"><i>V</i> = 12(1 − <i>e</i><sup>−1.5</sup>) = 12(1 − 0.223) = 9.3 V</span>.</li>
+        <li hidden><b>Time to reach 10 V.</b> Set <span class="m">10 = 12(1 − <i>e</i><sup>−<i>t</i>/τ</sup>)</span>, so <span class="m"><i>e</i><sup>−<i>t</i>/τ</sup> = 1 − 10/12 = 1/6</span>.</li>
+        <li hidden><b>Solve for t (take the natural log).</b> <span class="m"><i>t</i> = τ ln 6 = (0.50 s)(1.79) = 0.90 s</span>.</li>
+        <li hidden><b>Sanity check.</b> 10 V is 83% of the final value, a bit under 2τ = 1.0 s (where it would be 86%). 0.90 s is just under that ✓.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Reading the time constant as the time to finish. It is the time to reach 63%, not 100%.</li><li>Mixing up charging and decaying forms: one has 1 − e^(−t/τ), the other e^(−t/τ).</li><li>Forgetting the minus sign in the exponent (the curve would blow up).</li><li>Entering t in different units from τ. Keep both in seconds.</li></ul></div>
+      <div class="prose">
+        <h2>Where the curve comes from</h2>
+        <ul>
+          <li>If the rate is proportional to what's left, <span class="m">d<i>f</i>/d<i>t</i> = (1 − <i>f</i>)/τ</span>, separate variables: <span class="m">d<i>f</i>/(1 − <i>f</i>) = d<i>t</i>/τ</span>. Integrate: <span class="m">−ln(1 − <i>f</i>) = <i>t</i>/τ</span>. Solve: <span class="m"><i>f</i> = 1 − <i>e</i><sup>−<i>t</i>/τ</sup></span>.</li>
+          <li><b>Slope at the start</b> is 1/τ. If the curve kept that slope it would reach the end at t = τ. This tangent line is a handy way to read τ off a graph.</li>
+          <li><b>Handy numbers:</b> 1 − e⁻¹ = 0.632, 1 − e⁻² = 0.865, 1 − e⁻³ = 0.950, 1 − e⁻⁴ = 0.982, 1 − e⁻⁵ = 0.993. Half-way takes 0.693τ.</li>
+        </ul>
+        <h2>Solving "how long until…"</h2>
+        <ul>
+          <li>Isolate the exponential, take the natural log of both sides, and multiply by τ: <span class="m"><i>t</i> = −τ ln(1 − <i>f</i>)</span> for the fill-up, <span class="m"><i>t</i> = −τ ln <i>f</i></span> for the decay.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="2" data-explain="After three time constants the fill-up curve is at 1 − e⁻³ = 0.95, so it is 95% of the way to its final value.">
+        <p class="q">Check yourself: a capacitor charges with time constant τ. After 3τ, how far along is it?</p>
+        <div class="opts"><button type="button">63%</button><button type="button">86%</button><button type="button">95%</button><button type="button">100%</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

@@ -1,0 +1,44 @@
+  <section class="view" id="v-exam" hidden>
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Review<span class="tag ap">AP C E&amp;M + AP 2</span></div><h1>Exam review</h1><p class="lede">Build a mixed problem set from the units your exam covers. No hints during the set; everything is graded and explained when you submit.</p></div>
+      <div class="lab" id="ex-setup">
+        <div class="ctl"><span class="lbl">Which units does your exam cover?</span><div class="seg" id="ex-weeks" role="group" aria-label="Units"></div><div class="row"><button type="button" class="btn link" id="ex-all">Select all</button><button type="button" class="btn link" id="ex-none">Clear</button></div></div>
+        <div class="controls">
+          <div class="ctl"><span class="lbl">Number of problems</span><div class="seg" id="ex-n" role="group"><button type="button" data-n="5">5</button><button type="button" data-n="10" aria-pressed="true">10</button><button type="button" data-n="15">15</button></div></div>
+          <div class="ctl"><span class="lbl">Timer</span><div class="seg" id="ex-t" role="group"><button type="button" data-t="off" aria-pressed="true">Off</button><button type="button" data-t="on">2 min per problem</button></div></div>
+        </div>
+        <div class="row"><button type="button" class="btn primary" id="ex-start">Start the set</button></div>
+        <p class="err" id="ex-msg" aria-live="polite"></p>
+      </div>
+      <div id="ex-run" hidden style="display:flex;flex-direction:column;gap:14px">
+        <div class="scorebar"><strong id="ex-timer" style="font-family:var(--f-mono)"></strong></div>
+        <div class="probs" id="ex-list"></div>
+        <div class="row"><button type="button" class="btn primary" id="ex-submit">Submit and grade</button></div>
+        <div class="lab" id="ex-result" hidden></div>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="v-review" hidden>
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Review<span class="tag ap">Spaced practice</span></div><h1>Review my mistakes</h1><p class="lede">Every problem you miss in the practice set or exam review lands here and comes back with new numbers. Spacing reviews out over days is one of the most reliable ways to make things stick.</p></div>
+      <div class="intuit"><b class="k">How the queue works</b><p>Miss a problem: it's due right away. Get it right: it comes back in 1 day, then 3 days, then 7. After three correct reviews in a row it's mastered and leaves the queue. Miss it again and the count restarts.</p></div>
+      <div class="scorebar"><strong id="rv-stats" style="font-family:var(--f-mono)"></strong><button type="button" class="btn" id="rv-all">Show everything, even if not due</button></div>
+      <div class="probs" id="rv-list"></div>
+    </div>
+  </section>
+  <!-- ============ 07 PRACTICE ============ -->
+  <section class="view" id="v-practice" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">All units<span class="tag ap">AP C style</span><span class="tag pu">AP 2 style</span></div>
+        <h1>Practice set</h1>
+        <p class="lede"><span id="pr-count"></span> problems with randomized numbers, covering every unit. Answers within 2% count. Use k = 8.99 × 10⁹ N·m²/C², e = 1.60 × 10⁻¹⁹ C and μ₀ = 4π × 10⁻⁷ T·m/A. Type very large or small numbers like 3.2e-5. Progress is saved in this browser.</p>
+      </div>
+      <div class="scorebar"><strong id="pr-score" style="font-family:var(--f-mono)">0 of 15 solved</strong><div class="meter"><i id="pr-meter"></i></div><button type="button" class="btn" id="pr-reset">Reset progress</button></div>
+      <div class="seg" id="pr-filter" role="group" aria-label="Filter by topic"></div>
+      <div class="probs" id="pr-list"></div>
+    </div>
+  </section>
+  </main>
+</div>
+

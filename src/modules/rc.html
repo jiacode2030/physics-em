@@ -1,0 +1,81 @@
+  <!-- ============ RC CIRCUITS ============ -->
+  <section class="view" id="v-rc" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 11</span><span class="tag pu">AP 2: circuits</span></div>
+        <h1>RC circuits</h1>
+        <p class="lede">Put a resistor in front of a capacitor and it can no longer fill instantly. It fills fast at first and then slows as the capacitor pushes back, following the exponential curve you have already met, with time constant τ = RC.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>An empty capacitor looks like a plain wire at the moment the switch closes: all the battery voltage appears across the resistor, so the current starts at its maximum, ε/R. As charge builds up, the capacitor's own voltage opposes the battery, the voltage across the resistor shrinks, and the current dies away. When the capacitor reaches ε, the current is zero: a full capacitor acts like a broken wire.</p>
+        <p>Discharging is the mirror image. Connect the charged capacitor to just the resistor, and it drives a current that starts large and decays as the voltage falls. The charge, voltage and current all decay as e<sup>−t/RC</sup>.</p>
+        <p>A good mental habit: <b>t = 0: capacitor = wire. t → ∞: capacitor = open switch.</b> Then everything in between follows the exponential, with τ = RC controlling how fast.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span><i>Q</i>(<i>t</i>) = <i>C</i>ε(1 − <i>e</i><sup>−<i>t</i>/<i>RC</i></sup>)</span><small>charging</small></div>
+        <div class="eqn"><span><i class="cur">I</i>(<i>t</i>) = (ε/<i>R</i>)<i>e</i><sup>−<i>t</i>/<i>RC</i></sup></span><small>current while charging</small></div>
+        <div class="eqn"><span><i>Q</i>(<i>t</i>) = <i>Q</i><sub>0</sub><i>e</i><sup>−<i>t</i>/<i>RC</i></sup></span><small>discharging</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="row"><button type="button" class="btn primary" id="rc-chg">Charge</button><button type="button" class="btn" id="rc-dis">Discharge</button><button type="button" class="btn" id="rc-rst">Empty it</button></div><div class="seg" id="rc-sp" role="group" aria-label="Speed"><button type="button" data-k="1" aria-pressed="true">1×</button><button type="button" data-k="4">4×</button><button type="button" data-k="16">16×</button></div></div>
+        <canvas id="rc-canvas" class="drag" aria-label="An RC circuit with a switch, and graphs of the capacitor voltage and the current over time."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="rc-R"><span>Resistance R (kΩ)</span> <output id="rc-R-out"></output></label><input type="range" id="rc-R" min="1" max="20" step="1" value="10"></div>
+          <div class="ctl"><label for="rc-C"><span>Capacitance C (μF)</span> <output id="rc-C-out"></output></label><input type="range" id="rc-C" min="20" max="500" step="10" value="100"></div>
+          <div class="ctl"><label for="rc-E"><span>Battery ε (V)</span> <output id="rc-E-out"></output></label><input type="range" id="rc-E" min="3" max="24" step="1" value="12"></div>
+        </div>
+        <div class="readout">
+          <div><span>Capacitor voltage V<sub>C</sub></span><strong class="ef" id="rc-v">—</strong></div>
+          <div><span>Current I</span><strong class="cur" id="rc-i">—</strong></div>
+          <div><span>Charge Q</span><strong id="rc-q">—</strong></div>
+          <div><span>Stored energy U</span><strong class="frc" id="rc-u">—</strong></div>
+          <div><span>Time constant τ | elapsed time</span><strong id="rc-t">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">Press Charge to connect the battery, Discharge to disconnect it and let the capacitor drain through R. Switch at any time: the capacitor keeps whatever voltage it has. The faster 4× and 16× settings just speed up the clock.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Press Charge and watch until the capacitor is nearly full. <button type="button" class="btn link" data-show='[["#rc-R", 10], ["#rc-C", 100], ["#rc-E", 12]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The capacitor voltage rises quickly, then flattens toward 12 V. The current is largest at the start and fades to zero. At t = τ = 1.0 s the voltage is 63% of ε.</p></details></li>
+        <li><p>Double the resistance (R = 20 kΩ) and charge again. <button type="button" class="btn link" data-show='[["#rc-R", 20], ["#rc-C", 100], ["#rc-E", 12]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The time constant doubles, so everything takes twice as long. The final voltage is still ε, and the starting current is half as big (ε/R).</p></details></li>
+        <li><p>Charge fully, then press Discharge. <button type="button" class="btn link" data-show='[["#rc-R", 10], ["#rc-C", 100], ["#rc-E", 12]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Now the voltage and the current decay together, and the current runs the other way round the loop (the dots reverse).</p></details></li>
+        <li><p>Increase C to 500 μF. <button type="button" class="btn link" data-show='[["#rc-R", 10], ["#rc-C", 500], ["#rc-E", 12]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>A big capacitor holds more charge at the same voltage, so it takes longer to fill: τ = 5 s. Stored energy at the end is ½Cε² = 36 mJ, five times larger.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A 12 V battery charges an initially empty 50 μF capacitor through a 20 kΩ resistor. (a) What is the time constant? (b) Find the capacitor voltage and the current at t = 2.0 s. (c) How much energy does the capacitor store when full, and how much heat does the resistor make during charging?</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="A 12 V battery charging a 50 μF capacitor through a 20 kΩ resistor."><line x1="40" y1="60" x2="200" y2="60" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="40" y1="170" x2="200" y2="170" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="40" y1="60" x2="40" y2="100" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="40" y1="130" x2="40" y2="170" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="30" y1="111" x2="50" y2="111" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/><line x1="35" y1="119" x2="45" y2="119" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/><text x="26" y="119" text-anchor="end" style="fill:var(--ink);font:600 11px 'IBM Plex Sans',sans-serif">12 V</text><polyline points="80.0,60.0 88.0,60.0 93.3,52.0 104.0,68.0 114.7,52.0 125.3,68.0 136.0,52.0 146.7,68.0 152.0,60.0 160.0,60.0" style="fill:none;stroke:var(--ink);stroke-width:2;stroke-linejoin:round"/><text x="120.0" y="46" text-anchor="middle" style="fill:var(--ink);font:600 12px 'IBM Plex Sans',sans-serif">20 kΩ</text><line x1="200" y1="60" x2="200" y2="100" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="200" y1="130" x2="200" y2="170" style="stroke:var(--ink);stroke-width:2;stroke-linecap:round"/><line x1="188" y1="105" x2="212" y2="105" style="stroke:var(--ink);stroke-width:2.5;stroke-linecap:round"/><line x1="188" y1="125" x2="212" y2="125" style="stroke:var(--ink);stroke-width:2.5;stroke-linecap:round"/><text x="224" y="119" text-anchor="start" style="fill:var(--ink);font:600 11px 'IBM Plex Sans',sans-serif">50 μF</text><g class="sl" data-s="1" hidden><text x="130" y="210" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">τ = RC = 1.0 s</text></g><g class="sl" data-s="2" hidden><text x="184" y="140" text-anchor="end" style="fill:cx;font:600 10px 'IBM Plex Sans',sans-serif">V_C = 10.4 V</text></g><g class="sl" data-s="3" hidden><line x1="100" y1="48" x2="143.7" y2="48.0" style="stroke:var(--cv);stroke-width:2.2;stroke-linecap:round"/><polygon points="150,48 141.0,52.95 141.0,43.05" style="fill:var(--cv)"/><text x="164.0" y="52.0" text-anchor="middle" style="fill:var(--cv);font:600 13px 'IBM Plex Sans',sans-serif">I</text><text x="125" y="36" text-anchor="middle" style="fill:var(--cv);font:600 11px 'IBM Plex Sans',sans-serif">81 μA</text></g><g class="sl" data-s="4" hidden><text x="184" y="154" text-anchor="end" style="fill:var(--hot);font:600 10px 'IBM Plex Sans',sans-serif">U = 3.6 mJ</text></g><g class="sl" data-s="5" hidden><text x="120" y="86" text-anchor="middle" style="fill:var(--hot);font:600 11px 'IBM Plex Sans',sans-serif">heat 3.6 mJ</text></g></svg><div class="fbdnotes"><span class="i" data-s="1" hidden>τ = (20 kΩ)(50 μF) = 1.0 s</span><span class="e" data-s="2" hidden>V_C = 12(1 − e⁻²) = 10.4 V at t = 2 s</span><span class="v" data-s="3" hidden>I = (ε/R)e⁻² = 81 μA</span><span class="f" data-s="4" hidden>stored: ½Cε² = 3.6 mJ</span><span class="f" data-s="5" hidden>heat in R = 3.6 mJ, whatever R is</span></div></div><figcaption>A 12 V battery charging a 50 μF capacitor through a 20 kΩ resistor.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Time constant.</b> <span class="m">τ = <i>RC</i> = (20 × 10³ Ω)(50 × 10⁻⁶ F) = 1.0 s</span>.</li>
+        <li hidden><b>Voltage at t = 2.0 s.</b> <span class="m"><i>V</i><sub>C</sub> = ε(1 − <i>e</i><sup>−<i>t</i>/τ</sup>) = 12(1 − <i>e</i>⁻²) = 12(0.865) = 10.4 V</span>.</li>
+        <li hidden><b>Current at t = 2.0 s.</b> <span class="m"><i class="cur">I</i> = (ε/<i>R</i>)<i>e</i><sup>−<i>t</i>/τ</sup> = (0.60 mA)(0.135) = 81 μA</span>. (Check: <span class="m">(ε − <i>V</i><sub>C</sub>)/<i>R</i> = 1.6 V/20 kΩ = 80 μA</span> ✓.)</li>
+        <li hidden><b>Energy stored when full.</b> <span class="m"><i>U</i> = ½<i>C</i>ε² = ½(50 × 10⁻⁶)(12)² = 3.6 mJ</span>.</li>
+        <li hidden><b>Heat in the resistor.</b> The battery supplies <span class="m"><i>Q</i>ε = (<i>C</i>ε)ε = 7.2 mJ</span>. Half is stored; the other half, 3.6 mJ, becomes heat, <em>whatever the value of R</em>.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Using t = RC to mean "fully charged". After one time constant it is only 63% charged.</li><li>Believing the initial current is zero: for an uncharged capacitor it is the maximum, ε/R.</li><li>Forgetting that the resistor value does not affect the final charge or the total heat, only the time.</li><li>Mixing up charge and discharge formulas (1 − e^(−t/τ) vs e^(−t/τ)).</li></ul></div>
+      <div class="prose">
+        <h2>Charging</h2>
+        <ul>
+          <li>Loop rule: <span class="m">ε − <i class="cur">I</i><i>R</i> − <i>q</i>/<i>C</i> = 0</span> with <span class="m"><i class="cur">I</i> = d<i>q</i>/d<i>t</i></span>. Rearranged: <span class="m">d<i>q</i>/d<i>t</i> = (ε − <i>q</i>/<i>C</i>)/<i>R</i></span>.</li>
+          <li>This is the same equation as terminal speed with drag, so the solution is <span class="m"><i>q</i> = <i>C</i>ε(1 − <i>e</i><sup>−<i>t</i>/<i>RC</i></sup>)</span>.</li>
+          <li>The voltage across the resistor is <span class="m"><i>V</i><sub>R</sub> = ε<i>e</i><sup>−<i>t</i>/<i>RC</i></sup></span>; the two voltages always add to ε.</li>
+        </ul>
+        <h2>Discharging</h2>
+        <ul>
+          <li>Loop rule: <span class="m"><i>q</i>/<i>C</i> + <i>R</i> d<i>q</i>/d<i>t</i> = 0</span> (current flows out of the capacitor), so <span class="m"><i>q</i> = <i>Q</i><sub>0</sub><i>e</i><sup>−<i>t</i>/<i>RC</i></sup></span>.</li>
+          <li>Energy that was stored all ends up as heat in R: <span class="m">∫<i class="cur">I</i>²<i>R</i> d<i>t</i> = <i>Q</i><sub>0</sub>²/(2<i>C</i>)</span>.</li>
+        </ul>
+        <h2>Energy bookkeeping while charging</h2>
+        <ul>
+          <li>Battery supplies <span class="m"><i>C</i>ε²</span>; the capacitor stores <span class="m">½<i>C</i>ε²</span>; the resistor dissipates the other <span class="m">½<i>C</i>ε²</span>.</li>
+        </ul>
+        <h2>When there is more than one resistor</h2>
+        <ul>
+          <li>Ask what resistance the capacitor "sees": replace the capacitor with a test source and combine the resistors that are connected across it. That equivalent <span class="m"><i>R</i><sub>eq</sub></span> sets <span class="m">τ = <i>R</i><sub>eq</sub><i>C</i></span>.</li>
+          <li>Use the two limits to find the end points: at <i>t</i> = 0 an uncharged capacitor is a wire (or keeps whatever voltage it had); at <i>t</i> → ∞ the capacitor is an open switch and no current flows through its branch.</li>
+          <li>General recipe: <span class="m"><i>V</i>(<i>t</i>) = <i>V</i><sub>∞</sub> + (<i>V</i><sub>0</sub> − <i>V</i><sub>∞</sub>)<i>e</i><sup>−<i>t</i>/τ</sup></span>, where V₀ is the starting voltage and V∞ the final one.</li>
+        </ul>
+
+      </div>
+      <div class="quiz" data-correct="1" data-explain="At t = 0 the capacitor is empty, so it has no voltage across it. The loop rule then puts the whole battery voltage across the resistor, giving I = ε/R, the largest the current ever gets.">
+        <p class="q">Check yourself: an uncharged capacitor in series with a resistor is connected to a battery at t = 0. At that moment the current is:</p>
+        <div class="opts"><button type="button">Zero</button><button type="button">ε/R</button><button type="button">ε/(RC)</button><button type="button">Infinite</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

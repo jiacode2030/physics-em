@@ -1,0 +1,85 @@
+  <!-- ============ BIOT–SAVART LAW ============ -->
+  <section class="view" id="v-biot" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 12</span><span class="tag calc">Calculus</span></div>
+        <h1>Biot–Savart law</h1>
+        <p class="lede">Coulomb's law builds electric fields from point charges. The Biot–Savart law does the same for magnetism: cut any current into tiny pieces, find the small field each one makes, and add them up. It is the tool when a wire has an awkward shape.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>Each short piece of wire with current <b>I</b> and length <b>dl</b> makes a tiny magnetic field that circles around it, with strength proportional to I dl and falling as 1/r². Crucially, the direction is not along r̂ (as with a point charge) but perpendicular to both the current and the line to the point: dB ∝ I dl × r̂/r². Use the right-hand rule: thumb along the current, fingers curl the way B goes.</p>
+        <p>To find the total field of a loop or wire, you add up the dB from all the pieces. Like the charged ring, the slices of a current loop sit at the same distance from a point on the axis, but their fields point in different directions; the sideways parts cancel in pairs and only the axial component survives.</p>
+        <p>The result for a straight wire is B = μ₀I/(2πa) for a long wire and a bit smaller for a short one. For a circular loop, B = μ₀I/(2R) at the center. The Biot–Savart law always works, while Ampère's law (next module) is a shortcut that only works with symmetry.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span>d<i class="bf">B</i> = (μ<sub>0</sub>/4π) <i class="cur">I</i> d<i>ℓ</i> × <i>r̂</i>/<i>r</i>²</span><small>Biot–Savart law, μ₀/4π = 10⁻⁷ T·m/A</small></div>
+        <div class="eqn"><span><i class="bf">B</i><sub>loop axis</sub> = μ<sub>0</sub><i class="cur">I</i><i>R</i>²/(2(<i>R</i>² + <i>z</i>²)<sup>3/2</sup>)</span><small>circular loop, on its axis</small></div>
+        <div class="eqn"><span><i class="bf">B</i><sub>wire</sub> = μ<sub>0</sub><i class="cur">I</i>/(2π<i>a</i>)</span><small>long straight wire</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="bs-mode" role="group" aria-label="Current shape"><button type="button" data-k="loop" aria-pressed="true">Circular loop (point on the axis)</button><button type="button" data-k="wire">Straight wire segment</button></div></div>
+        <canvas id="bs-canvas" class="drag" aria-label="3D view of current slices and the magnetic field each makes at a point P. Drag to rotate."></canvas>
+        <div id="bs-l-ctl"><div class="controls">
+          <div class="ctl"><label for="bs-R"><span>Loop radius R</span> <output id="bs-R-out"></output></label><input type="range" id="bs-R" min="2" max="10" step="0.5" value="5"></div>
+          <div class="ctl"><label for="bs-z"><span>Point P on the axis, z</span> <output id="bs-z-out"></output></label><input type="range" id="bs-z" min="0" max="15" step="0.5" value="6"></div>
+          <div class="ctl"><label for="bs-arc"><span>Part of the loop that carries current</span> <output id="bs-arc-out"></output></label><input type="range" id="bs-arc" min="60" max="360" step="30" value="360"></div>
+        </div></div>
+        <div id="bs-w-ctl" hidden><div class="controls">
+          <div class="ctl"><label for="bs-L"><span>Wire length L</span> <output id="bs-L-out"></output></label><input type="range" id="bs-L" min="5" max="60" step="5" value="20"></div>
+          <div class="ctl"><label for="bs-a"><span>Distance a from the wire</span> <output id="bs-a-out"></output></label><input type="range" id="bs-a" min="2" max="30" step="1" value="6"></div>
+        </div></div>
+        <div class="controls">
+          <div class="ctl"><label for="bs-I"><span>Current I</span> <output id="bs-I-out"></output></label><input type="range" id="bs-I" min="1" max="20" step="1" value="10"></div>
+          <div class="ctl"><label for="bs-n"><span>Number of slices</span> <output id="bs-n-out"></output></label><input type="range" id="bs-n" min="2" max="36" step="1" value="12"></div>
+        </div>
+        <div class="readout">
+          <div><span></span><strong class="ef" id="bs-r1">—</strong></div>
+          <div><span></span><strong id="bs-r2">—</strong></div>
+          <div><span></span><strong id="bs-r3">—</strong></div>
+          <div><span></span><strong id="bs-r4">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">Each slice of current makes a small field dB (arrows at P, all drawn the same length for the loop so you can see their directions). In the loop, the sideways parts cancel in pairs and the axial parts add. Reduce the arc and they no longer cancel.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Loop: move P to the center of the loop (z = 0). <button type="button" class="btn link" data-show='[["click", "#bs-mode [data-k=loop]"], ["#bs-arc", 360], ["#bs-z", 0], ["#bs-R", 5]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>At the center every slice is at distance R, perpendicular to the line to P, and every dB points along the axis. B = μ₀I/(2R) is the largest field on the axis.</p></details></li>
+        <li><p>Cut the loop down to a half circle (arc = 180°). <button type="button" class="btn link" data-show='[["click", "#bs-mode [data-k=loop]"], ["#bs-arc", 180], ["#bs-z", 6], ["#bs-R", 5]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The sideways components no longer cancel, so the total field tilts. The sideways readout is no longer zero. Symmetry is what made the full-loop answer so simple.</p></details></li>
+        <li><p>Switch to a wire segment and increase its length. <button type="button" class="btn link" data-show='[["click", "#bs-mode [data-k=wire]"], ["#bs-a", 6], ["#bs-L", 60], ["#bs-n", 36]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>As the wire gets much longer than the distance a, the field approaches the infinite-wire value μ₀I/(2πa), and doesn't grow any more.</p></details></li>
+        <li><p>Increase the number of slices with the wire segment. <button type="button" class="btn link" data-show='[["click", "#bs-mode [data-k=wire]"], ["#bs-L", 20], ["#bs-a", 6], ["#bs-n", 2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>With two slices the sum is a rough guess. With 36 it matches the exact integral almost perfectly: the integral is what you get when the slices become infinitely thin.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A circular loop of radius 5.0 cm carries 8.0 A. Find the magnetic field (a) at its center and (b) on the axis 12 cm from the center. Give directions using the right-hand rule.</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="A slice dl of the loop makes a field dB at P on the axis."><ellipse cx="90" cy="115" rx="14" ry="62" style="fill:none;stroke:var(--cv);stroke-width:3"/><line x1="40" y1="115" x2="250" y2="115" style="stroke:var(--muted);stroke-width:1.3;stroke-linecap:round;stroke-dasharray:4 4"/><circle cx="200" cy="115" r="4.5" style="fill:var(--ink)"/><text x="200" y="103" text-anchor="middle" style="fill:var(--ink);font:600 12px 'IBM Plex Sans',sans-serif">P</text><text x="100" y="120" text-anchor="start" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">R</text><text x="150" y="134" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">z</text><g class="sl" data-s="1" hidden><line x1="90" y1="53" x2="200" y2="115" style="stroke:var(--muted);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:3 3"/><line x1="90" y1="60" x2="97.94239912986282" y2="57.73074310575348" style="stroke:cv;stroke-width:2;stroke-linecap:round"/><polygon points="104,56 96.70615405432461,63.23203369189847 93.98641488814057,53.71294661025433" style="fill:cv"/><text x="117.46133526697153" y="48.1539042094367" text-anchor="middle" style="fill:cv;font:600 13px 'IBM Plex Sans',sans-serif">dl</text><line x1="200" y1="115" x2="167.63489130329947" y2="98.81744565164973" style="stroke:var(--ca);stroke-width:2;stroke-linecap:round"/><polygon points="162,96 172.26355201672405,95.59750776405005 167.83613742127446,104.4523369549492" style="fill:var(--ca)"/><text x="149.47801932600117" y="93.73900966300059" text-anchor="middle" style="fill:var(--ca);font:600 13px 'IBM Plex Sans',sans-serif">dB</text></g><g class="sl" data-s="2" hidden><line x1="200" y1="115" x2="200.0" y2="143.7" style="stroke:var(--ca);stroke-width:1.8;stroke-linecap:round"/><polygon points="200,150 195.05,141.0 204.95,141.0" style="fill:var(--ca)"/><text x="130" y="205" text-anchor="middle" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">sideways parts cancel; axial parts add</text></g><g class="sl" data-s="3" hidden><line x1="200" y1="115" x2="243.7" y2="115.0" style="stroke:var(--ca);stroke-width:2.8;stroke-linecap:round"/><polygon points="250,115 241.0,119.95 241.0,110.05" style="fill:var(--ca)"/><text x="264.0" y="115.0" text-anchor="middle" style="fill:var(--ca);font:600 13px 'IBM Plex Sans',sans-serif">B</text></g></svg><div class="fbdnotes"><span class="b" data-s="1" hidden>a slice dl makes dB, ⊥ to dl and r̂</span><span class="b" data-s="2" hidden>cos α = R/r keeps only the axial part</span><span class="b" data-s="3" hidden>B = μ₀IR²/2(R²+z²)^(3/2)</span><span class="b" data-s="4" hidden>center: B = μ₀I/2R = 1.0 × 10⁻⁴ T</span><span class="b" data-s="5" hidden>z = 12 cm: B = 5.7 μT</span><span class="i" data-s="6" hidden>✓ falls like 1/z³ far away; direction by right hand</span></div></div><figcaption>A slice dl of the loop makes a field dB at P on the axis.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Set up one slice.</b> <span class="m">d<i class="bf">B</i> = (μ<sub>0</sub>/4π) <i class="cur">I</i> d<i>ℓ</i> × <i>r̂</i>/<i>r</i>²</span>. For every slice, dl is perpendicular to the line to P, so <span class="m">|d<i>ℓ</i> × <i>r̂</i>| = d<i>ℓ</i></span> and each slice is the same distance <span class="m"><i>r</i> = √(<i>R</i>² + <i>z</i>²)</span> from P.</li>
+        <li hidden><b>Keep only the axial part.</b> The sideways parts cancel in pairs. The axial component of each dB is <span class="m">d<i class="bf">B</i> cos α = d<i class="bf">B</i> (<i>R</i>/<i>r</i>)</span>. Add up over the loop: <span class="m">∫ d<i>ℓ</i> = 2π<i>R</i></span>.</li>
+        <li hidden><b>Result.</b> <span class="m"><i class="bf">B</i> = (μ<sub>0</sub><i class="cur">I</i>/4π)(<i>R</i>/<i>r</i>³)(2π<i>R</i>) = μ<sub>0</sub><i class="cur">I</i><i>R</i>²/(2(<i>R</i>² + <i>z</i>²)<sup>3/2</sup>)</span>.</li>
+        <li hidden><b>(a) At the center (z = 0).</b> <span class="m"><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i>/(2<i>R</i>) = (4π × 10⁻⁷)(8.0)/(2 × 0.050) = 1.0 × 10⁻⁴ T</span> = 0.10 mT.</li>
+        <li hidden><b>(b) On the axis, z = 12 cm.</b> <span class="m"><i class="bf">B</i> = (4π × 10⁻⁷)(8.0)(0.050)²/(2(0.0025 + 0.0144)<sup>3/2</sup>) = 5.7 × 10⁻⁶ T</span> = 5.7 μT.</li>
+        <li hidden><b>Direction and check.</b> Curl the fingers of your right hand along the current; the thumb gives the direction of B on the axis. The field is much weaker at 12 cm than at the center, and it falls off roughly as 1/z³ for large z ✓.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Treating dB like the field of a point charge (along r̂). It is perpendicular to both dl and r̂.</li><li>Adding the magnitudes of all the dB without cancelling the sideways components.</li><li>Using the formula for the center when the point is on the axis away from the center.</li><li>Forgetting that the loop formula needs the radius in meters.</li></ul></div>
+      <div class="prose">
+        <h2>Using the law</h2>
+        <ul>
+          <li><b>Direction:</b> the right-hand rule for <span class="m">d<i>ℓ</i> × <i>r̂</i></span>. For a long wire, the field circles the wire (thumb along I, fingers curl the way B goes).</li>
+          <li><b>Straight wire segment</b> at perpendicular distance <i>a</i>, spanning angles θ₁ and θ₂ from the perpendicular: <span class="m"><i class="bf">B</i> = (μ<sub>0</sub><i class="cur">I</i>/(4π<i>a</i>))(sin θ<sub>1</sub> + sin θ<sub>2</sub>)</span>. For an infinitely long wire, both angles → 90° and <span class="m"><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i>/(2π<i>a</i>)</span>.</li>
+          <li><b>Circular arc</b> (angle θ) at its center: <span class="m"><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i>θ/(4π<i>R</i>)</span>. A full loop (θ = 2π) gives μ₀I/(2R).</li>
+          <li><b>Loop on its axis, far away:</b> <span class="m"><i class="bf">B</i> ≈ μ<sub>0</sub>μ/(2π<i>z</i>³)</span> with μ = I·(area): the loop acts like a tiny bar magnet (a magnetic dipole).</li>
+        </ul>
+        <h2>Two parallel wires</h2>
+        <ul>
+          <li>Wire 1 makes a field <span class="m">μ<sub>0</sub><i>I</i><sub>1</sub>/(2π<i>d</i>)</span> at wire 2, which then feels a force per length <span class="m"><i>F</i>/<i>L</i> = μ<sub>0</sub><i>I</i><sub>1</sub><i>I</i><sub>2</sub>/(2π<i>d</i>)</span>. Parallel currents attract; opposite currents repel.</li>
+        </ul>
+        <h2>Field of a single moving charge</h2>
+        <ul>
+          <li>A current is just moving charge, so one charge <i>q</i> moving at velocity <i class="cur">v</i> makes <span class="m"><i class="bf">B</i> = (μ<sub>0</sub>/4π) <i>q</i><i class="cur">v</i> × <i>r̂</i>/<i>r</i>²</span> (for speeds much less than <i>c</i>).</li>
+          <li>It is largest in the plane perpendicular to <i class="cur">v</i>, and zero straight ahead of or behind the charge.</li>
+          <li>Compare with the electric field of the same charge: <span class="m"><i class="bf">B</i> = (<i>v</i>/<i>c</i>²)(<i class="ef">E</i> sin θ)</span>, a tiny fraction of E at everyday speeds.</li>
+        </ul>
+
+      </div>
+      <div class="quiz" data-correct="3" data-explain="At the center of a loop, every slice is perpendicular to the line to the center and at distance R. All the dB point along the axis in the same direction, so they simply add: B = μ₀I/(2R). There is nothing to cancel.">
+        <p class="q">Check yourself: all the pieces of a circular current loop contribute to the field at its exact center. How do their contributions combine?</p>
+        <div class="opts"><button type="button">They cancel, giving B = 0</button><button type="button">They partially cancel</button><button type="button">They add up to μ₀I/(2πR)</button><button type="button">They all point the same way and add to μ₀I/(2R)</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

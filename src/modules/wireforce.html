@@ -1,0 +1,76 @@
+  <!-- ============ FORCES ON WIRES &AMP; LOOPS ============ -->
+  <section class="view" id="v-wireforce" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 12</span><span class="tag pu">AP 2: magnetism</span></div>
+        <h1>Forces on wires &amp; loops</h1>
+        <p class="lede">A current is moving charge, so a magnetic field pushes a current-carrying wire sideways. Shape the wire into a loop and the pushes on opposite sides make a torque. That torque is the electric motor.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>A wire carrying a current in a magnetic field is just a stream of moving charges, each feeling F = qv × B. Add them up over the length of wire and you get <b>F = I L × B</b>: the force is perpendicular to both the wire and the field, with size ILB sin θ. Again, a wire running along the field feels nothing.</p>
+        <p>Bend the wire into a rectangular loop in a uniform field. The two sides that are perpendicular to B get equal and opposite forces, one on each side of the loop. They don't make a net force, but they do make a <b>torque</b> that rotates the loop until its plane is perpendicular to B (its normal lined up with B). The torque is τ = NIAB sin φ, where φ is the angle between the loop's normal and the field.</p>
+        <p>An electric motor keeps this going: just as the loop reaches the position where the torque would reverse, a commutator flips the current, so the torque keeps pushing the same way and the loop spins round. Try the spin button with and without the commutator.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span><i class="frc">F</i> = <i class="cur">I</i><i>L</i> × <i class="bf">B</i>, &nbsp;|<i class="frc">F</i>| = <i class="cur">I</i><i>L</i><i class="bf">B</i> sin θ</span><small>force on a straight wire</small></div>
+        <div class="eqn"><span><i>μ</i> = <i>NIA</i>, &nbsp;τ = μ × <i class="bf">B</i></span><small>magnetic moment, torque on a loop</small></div>
+        <div class="eqn"><span>τ = <i>NIA</i><i class="bf">B</i> sin φ, &nbsp;<i>U</i> = −μ · <i class="bf">B</i></span><small>magnitude; energy</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="wf-mode" role="group" aria-label="Show"><button type="button" data-k="wire" aria-pressed="true">A wire</button><button type="button" data-k="loop">A loop (motor)</button></div><div class="row"><button type="button" class="btn primary" id="wf-spin">Spin the loop</button><label style="display:flex;gap:6px;align-items:center;font-weight:400"><input type="checkbox" id="wf-comm"> commutator</label></div></div>
+        <canvas id="wf-canvas" class="drag" aria-label="3D view of a current-carrying wire or loop in a magnetic field that points up. Drag to rotate."></canvas>
+        <div id="wf-w-ctl"><div class="controls">
+          <div class="ctl"><label for="wf-I"><span>Current I</span> <output id="wf-I-out"></output></label><input type="range" id="wf-I" min="1" max="10" step="1" value="5"></div>
+          <div class="ctl"><label for="wf-L"><span>Wire length L</span> <output id="wf-L-out"></output></label><input type="range" id="wf-L" min="0.1" max="1" step="0.05" value="0.5"></div>
+          <div class="ctl"><label for="wf-th"><span>Angle between wire and B</span> <output id="wf-th-out"></output></label><input type="range" id="wf-th" min="0" max="180" step="5" value="90"></div>
+        </div></div>
+        <div id="wf-l-ctl" hidden><div class="controls">
+          <div class="ctl"><label for="wf-N"><span>Number of turns N</span> <output id="wf-N-out"></output></label><input type="range" id="wf-N" min="1" max="20" step="1" value="10"></div>
+          <div class="ctl"><label for="wf-ph"><span>Angle between loop normal and B</span> <output id="wf-ph-out"></output></label><input type="range" id="wf-ph" min="0" max="180" step="5" value="90"></div>
+        </div></div>
+        <div class="controls"><div class="ctl"><label for="wf-B"><span>Field B</span> <output id="wf-B-out"></output></label><input type="range" id="wf-B" min="0.1" max="1" step="0.05" value="0.4"></div></div>
+        <div class="readout">
+          <div><span>Force on the wire</span><strong class="frc" id="wf-r1">—</strong></div>
+          <div><span>Direction</span><strong id="wf-r2">—</strong></div>
+          <div><span>Maximum possible force</span><strong id="wf-r3">—</strong></div>
+          <div><span></span><strong id="wf-r4">—</strong></div>
+          <div><span></span><strong id="wf-r5">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">The field B is vertical (pink arrows). A wire parallel to B feels no force. A loop whose plane is perpendicular to B (its normal parallel to B) feels no torque, and one with its normal at 90° to B feels the largest torque, which tries to turn the normal toward B.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Start with the wire at 90° to the field, then turn it to be parallel to the field (0°). <button type="button" class="btn link" data-show='[["click", "#wf-mode [data-k=wire]"], ["#wf-th", 90], ["#wf-I", 5], ["#wf-L", 0.5], ["#wf-B", 0.4], ["#wf-th", 0]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>At 0° the wire is parallel to B and the force vanishes. At 90° it is largest. Between, the force is ILB sin θ.</p></details></li>
+        <li><p>Double the current and the field. <button type="button" class="btn link" data-show='[["click", "#wf-mode [data-k=wire]"], ["#wf-th", 90], ["#wf-I", 10], ["#wf-B", 0.8], ["#wf-L", 0.5]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Force depends on the product: doubling both quadruples it.</p></details></li>
+        <li><p>Show the loop with the normal at 90° to B, then move it to 0°. <button type="button" class="btn link" data-show='[["click", "#wf-mode [data-k=loop]"], ["#wf-N", 10], ["#wf-ph", 90], ["#wf-B", 0.4]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>At 90° the torque is the largest possible. As the normal swings toward B the torque falls, and at 0° it is zero: the loop is in stable equilibrium (it would sit there).</p></details></li>
+        <li><p>Press Spin the loop with the commutator on, then off. <button type="button" class="btn link" data-show='[["click", "#wf-mode [data-k=loop]"], ["#wf-N", 10], ["#wf-B", 0.4], ["#wf-comm", true]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>With the commutator the current flips every half-turn, so the torque never reverses and the loop keeps accelerating. Without it, the loop just rocks back and forth around φ = 0.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A rectangular coil of 20 turns, 5.0 cm × 8.0 cm, carries a current of 2.0 A in a uniform 0.30 T field. (a) Find the force on each 8.0 cm side when the coil's plane is parallel to the field. (b) Find the torque on the coil in that position. (c) What is the torque when the coil's plane is perpendicular to the field?</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="The loop seen edge-on: the forces on the two sides make a torque that turns the normal μ toward B."><rect x="60" y="60" width="140" height="80" transform="rotate(-18 130 100)" style="fill:color-mix(in srgb,var(--cv) 10%,transparent);stroke:var(--cv);stroke-width:2.5"/><line x1="130" y1="100" x2="130.0" y2="46.3" style="stroke:var(--ca);stroke-width:2.4;stroke-linecap:round"/><polygon points="130,40 134.95,49.0 125.05,49.0" style="fill:var(--ca)"/><text x="138.0" y="30.0" text-anchor="middle" style="fill:var(--ca);font:600 13px 'IBM Plex Sans',sans-serif">B</text><text x="130" y="210" text-anchor="middle" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">N = 20, I = 2.0 A, B = 0.30 T</text><text x="14" y="22" text-anchor="start" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">edge view of the loop</text><g class="sl" data-s="1" hidden><line x1="68" y1="128" x2="68.0" y2="163.7" style="stroke:var(--hot);stroke-width:2.4;stroke-linecap:round"/><polygon points="68,170 63.05,161.0 72.95,161.0" style="fill:var(--hot)"/><text x="78.0" y="188.0" text-anchor="middle" style="fill:var(--hot);font:600 13px 'IBM Plex Sans',sans-serif">F</text><line x1="192" y1="76" x2="192.0" y2="40.3" style="stroke:var(--hot);stroke-width:2.4;stroke-linecap:round"/><polygon points="192,34 196.95,43.0 187.05,43.0" style="fill:var(--hot)"/><text x="202.0" y="24.0" text-anchor="middle" style="fill:var(--hot);font:600 13px 'IBM Plex Sans',sans-serif">F</text></g><g class="sl" data-s="3" hidden><line x1="130" y1="100" x2="166.02329522228177" y2="87.99223492590608" style="stroke:var(--ink);stroke-width:2.4;stroke-linecap:round"/><polygon points="172,86 165.02717775932874,93.54203221950159 161.89652287576203,84.1500675688015" style="fill:var(--ink)"/><text x="187.2815661727072" y="83.57281127576427" text-anchor="middle" style="fill:var(--ink);font:600 13px 'IBM Plex Sans',sans-serif">μ</text></g></svg><div class="fbdnotes"><span class="f" data-s="1" hidden>forces act on the two 8 cm sides only</span><span class="f" data-s="2" hidden>F = NIℓB = 0.96 N on each side</span><span class="i" data-s="3" hidden>τ = 2F(0.025 m) = 0.048 N·m</span><span class="i" data-s="4" hidden>μ = NIA = 0.16 A·m²</span><span class="i" data-s="5" hidden>plane ⟂ B (μ ∥ B): τ = 0</span></div></div><figcaption>The loop seen edge-on: the forces on the two sides make a torque that turns the normal μ toward B.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Which sides feel force?</b> The two 8.0 cm sides perpendicular to B (when the plane is parallel to B) carry current at 90° to the field, so <span class="m">sin θ = 1</span>. The 5.0 cm sides are parallel to B (or anti-parallel) and feel no force.</li>
+        <li hidden><b>Force on each long side.</b> <span class="m"><i class="frc">F</i> = <i>N</i><i class="cur">I</i><i>ℓ</i><i class="bf">B</i> = (20)(2.0)(0.080)(0.30) = 0.96 N</span>. The two forces are equal and opposite, so the net force is zero.</li>
+        <li hidden><b>Torque (plane parallel to field).</b> The forces act at a lever arm of half the short side, 2.5 cm, from the axis: <span class="m">τ = 2(0.96 N)(0.025 m) = 0.048 N·m</span>. Check with the formula: <span class="m"><i>NIAB</i> = (20)(2.0)(0.0040)(0.30) = 0.048 N·m</span> ✓.</li>
+        <li hidden><b>Magnetic moment.</b> <span class="m">μ = <i>NIA</i> = (20)(2.0)(0.0040) = 0.16 A·m²</span>.</li>
+        <li hidden><b>Plane perpendicular to B.</b> Now the normal is along B (φ = 0), so <span class="m">τ = <i>NIAB</i> sin 0 = 0</span>. The forces on the loop are all in its plane, trying to stretch it but not turn it.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Using the total length of wire in the loop in F = ILB. Only the sides that are perpendicular to B feel a force.</li><li>Mixing up the angle: τ uses the angle between the <em>normal</em> and B; F uses the angle between the wire and B.</li><li>Forgetting N: a coil with N turns has N times the force and torque of one loop.</li><li>Thinking a magnetic field exerts a net force on a closed loop in a uniform field. The net force is zero; only the torque is nonzero.</li></ul></div>
+      <div class="prose">
+        <h2>Force on a wire</h2>
+        <ul>
+          <li>Each charge carrier feels <span class="m"><i>q</i><i class="cur">v</i><sub>d</sub> × <i class="bf">B</i></span>; summing over the <span class="m"><i>nAL</i></span> carriers in a length <i>L</i> gives <span class="m"><i class="frc">F</i> = <i class="cur">I</i><i>L</i> × <i class="bf">B</i></span> (here <i>L</i> is a vector along the current).</li>
+          <li><b>Curved wire:</b> integrate <span class="m">d<i class="frc">F</i> = <i class="cur">I</i> d<i>ℓ</i> × <i class="bf">B</i></span>. In a uniform field the force on a curved wire equals that of a straight wire joining its ends.</li>
+          <li><b>Two parallel wires</b> attract if their currents are in the same direction and repel if opposite (see Ampère's law): this is how the ampere used to be defined.</li>
+        </ul>
+        <h2>Loops, motors and meters</h2>
+        <ul>
+          <li><b>Torque:</b> <span class="m">τ = μ × <i class="bf">B</i></span> with <span class="m">μ = <i>NIA</i></span> pointing along the right-hand normal (curl your fingers along the current, thumb gives μ).</li>
+          <li><b>Energy:</b> <span class="m"><i>U</i> = −μ · <i class="bf">B</i></span>; lowest when μ is along B.</li>
+          <li><b>DC motor:</b> a commutator reverses the current each half turn. <b>Galvanometer</b> (analog meter): the loop turns against a spring until the spring torque balances the magnetic torque, so the deflection is proportional to the current.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="2" data-explain="The magnetic force on a wire is F = ILB sin θ. A wire parallel to the field has θ = 0, so sin θ = 0 and the force is zero.">
+        <p class="q">Check yourself: a straight current-carrying wire is placed parallel to a uniform magnetic field. The magnetic force on it is:</p>
+        <div class="opts"><button type="button">ILB, directed along the wire</button><button type="button">ILB, directed along the field</button><button type="button">Zero</button><button type="button">ILB, directed perpendicular to both</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

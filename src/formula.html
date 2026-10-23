@@ -1,0 +1,59 @@
+<div class="fs-scrim" id="fs-scrim" aria-hidden="true"></div>
+<button type="button" class="fs-btn" id="fs-btn" aria-controls="fs" aria-expanded="false"><span class="fs-ico" aria-hidden="true">Σ</span><span class="fs-lbl">Formula sheet</span></button>
+<aside class="fs" id="fs" aria-label="Formula sheet" aria-hidden="true">
+  <header><h2>Formula sheet</h2><button type="button" class="btn" id="fs-close">Close</button></header>
+  <div class="body">
+    <p class="fine" style="margin-top:8px">Covers the equations used in AP Physics C: Electricity and Magnetism, written for this site. It is not the official sheet; get that at <a href="https://apcentral.collegeboard.org/courses/ap-physics-c-electricity-and-magnetism/exam" target="_blank" rel="noopener">AP Central</a>. AP Physics 2 has its own sheet, without the calculus.</p>
+    <h3>Constants</h3><dl>
+      <dt><i>k</i> = 1/(4πε<sub>0</sub>) = 8.99 × 10⁹ N·m²/C²</dt><dd>Coulomb constant</dd>
+      <dt>ε<sub>0</sub> = 8.85 × 10⁻¹² C²/(N·m²)</dt><dd>permittivity of free space</dd>
+      <dt>μ<sub>0</sub> = 4π × 10⁻⁷ T·m/A</dt><dd>permeability of free space</dd>
+      <dt><i>e</i> = 1.60 × 10⁻¹⁹ C</dt><dd>elementary charge</dd>
+      <dt><i>m</i><sub>e</sub> = 9.11 × 10⁻³¹ kg, <i>m</i><sub>p</sub> = 1.67 × 10⁻²⁷ kg</dt><dd>electron, proton</dd>
+      <dt>1 eV = 1.60 × 10⁻¹⁹ J</dt><dd>electron-volt</dd></dl>
+    <h3>Charges and fields</h3><dl>
+      <dt><i class="frc">F</i> = <i>k</i>|<i>q</i><sub>1</sub><i>q</i><sub>2</sub>|/<i>r</i>²</dt><dd>Coulomb's law</dd>
+      <dt><i class="ef">E</i> = <i class="frc">F</i>/<i>q</i>, &nbsp;<i class="ef">E</i> = <i>k</i>|<i>q</i>|/<i>r</i>²</dt><dd>field; point charge</dd>
+      <dt>d<i class="ef">E</i> = <i>k</i> d<i>q</i>/<i>r</i>², &nbsp;d<i>q</i> = λ d<i>x</i>, σ d<i>A</i>, ρ d<i>V</i></dt><dd>continuous charge</dd>
+      <dt>Φ<sub>E</sub> = ∮ <i class="ef">E</i> · d<i>A</i> = <i>q</i><sub>enc</sub>/ε<sub>0</sub></dt><dd>Gauss's law</dd>
+      <dt><i class="ef">E</i> = σ/(2ε<sub>0</sub>), &nbsp;λ/(2πε<sub>0</sub><i>r</i>)</dt><dd>infinite sheet; infinite line</dd>
+      <dt><i class="ef">E</i> = σ/ε<sub>0</sub></dt><dd>just outside a conductor</dd></dl>
+    <h3>Potential and energy</h3><dl>
+      <dt>Δ<i>V</i> = −∫ <i class="ef">E</i> · d<i>r</i></dt><dd>potential difference</dd>
+      <dt><i class="ef">E</i><sub>x</sub> = −d<i>V</i>/d<i>x</i></dt><dd>field from potential</dd>
+      <dt><i>V</i> = <i>kq</i>/<i>r</i>, &nbsp;<i>V</i> = Σ <i>kq</i><sub>i</sub>/<i>r</i><sub>i</sub></dt><dd>point charges (scalars)</dd>
+      <dt><i>U</i> = <i>qV</i>, &nbsp;<i>U</i> = <i>kq</i><sub>1</sub><i>q</i><sub>2</sub>/<i>r</i></dt><dd>potential energy</dd>
+      <dt>Δ<i>V</i> = <i class="ef">E</i><i>d</i></dt><dd>uniform field</dd></dl>
+    <h3>Capacitors</h3><dl>
+      <dt><i>C</i> = <i>Q</i>/Δ<i>V</i></dt><dd>definition</dd>
+      <dt><i>C</i> = κε<sub>0</sub><i>A</i>/<i>d</i></dt><dd>parallel plates</dd>
+      <dt><i>U</i><sub>C</sub> = ½<i>Q</i>Δ<i>V</i> = ½<i>C</i>(Δ<i>V</i>)² = <i>Q</i>²/(2<i>C</i>)</dt><dd>stored energy</dd>
+      <dt><i>u</i> = ½ε<sub>0</sub><i class="ef">E</i>²</dt><dd>energy density</dd>
+      <dt><i>C</i><sub>p</sub> = Σ<i>C</i><sub>i</sub>, &nbsp;1/<i>C</i><sub>s</sub> = Σ 1/<i>C</i><sub>i</sub></dt><dd>parallel; series</dd></dl>
+    <h3>Circuits</h3><dl>
+      <dt><i class="cur">I</i> = d<i>Q</i>/d<i>t</i></dt><dd>current</dd>
+      <dt><i>R</i> = ρ<i>L</i>/<i>A</i>, &nbsp;Δ<i>V</i> = <i class="cur">I</i><i>R</i></dt><dd>resistance; Ohm's law</dd>
+      <dt><i>P</i> = <i class="cur">I</i>Δ<i>V</i> = <i class="cur">I</i>²<i>R</i> = (Δ<i>V</i>)²/<i>R</i></dt><dd>power</dd>
+      <dt><i>R</i><sub>s</sub> = Σ<i>R</i><sub>i</sub>, &nbsp;1/<i>R</i><sub>p</sub> = Σ 1/<i>R</i><sub>i</sub></dt><dd>series; parallel</dd>
+      <dt>Σ<i class="cur">I</i><sub>in</sub> = Σ<i class="cur">I</i><sub>out</sub>, &nbsp;ΣΔ<i>V</i><sub>loop</sub> = 0</dt><dd>Kirchhoff's rules</dd>
+      <dt><i>Q</i>(<i>t</i>) = <i>Q</i><sub>max</sub>(1 − <i>e</i><sup>−<i>t</i>/τ</sup>), &nbsp;τ = <i>RC</i></dt><dd>charging capacitor</dd>
+      <dt><i>J</i> = <i>nqv</i><sub>d</sub>, &nbsp;<i class="cur">I</i> = <i>nqv</i><sub>d</sub><i>A</i></dt><dd>current density; drift</dd></dl>
+    <h3>Magnetism</h3><dl>
+      <dt><i class="frc">F</i> = <i>q</i><i class="cur">v</i> × <i class="bf">B</i></dt><dd>force on a moving charge</dd>
+      <dt><i class="frc">F</i> = <i class="cur">I</i><i>L</i> × <i class="bf">B</i></dt><dd>force on a wire</dd>
+      <dt><i>r</i> = <i>mv</i>/(|<i>q</i>|<i class="bf">B</i>)</dt><dd>circular orbit radius</dd>
+      <dt>d<i class="bf">B</i> = (μ<sub>0</sub>/4π) <i class="cur">I</i> d<i>ℓ</i> × <i>r̂</i>/<i>r</i>²</dt><dd>Biot–Savart</dd>
+      <dt>∮ <i class="bf">B</i> · d<i>ℓ</i> = μ<sub>0</sub><i class="cur">I</i><sub>enc</sub></dt><dd>Ampère's law</dd>
+      <dt><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i>/(2π<i>r</i>), &nbsp;μ<sub>0</sub><i>n</i><i class="cur">I</i></dt><dd>long wire; solenoid</dd>
+      <dt><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i>/(2<i>R</i>)</dt><dd>center of a loop</dd>
+      <dt>τ = μ × <i class="bf">B</i>, &nbsp;μ = <i>NIA</i></dt><dd>torque on a loop</dd></dl>
+    <h3>Induction</h3><dl>
+      <dt>Φ<sub>B</sub> = ∫ <i class="bf">B</i> · d<i>A</i></dt><dd>magnetic flux</dd>
+      <dt>ℰ = −<i>N</i> dΦ<sub>B</sub>/d<i>t</i></dt><dd>Faraday's law (minus sign: Lenz)</dd>
+      <dt>ℰ = <i class="bf">B</i><i>ℓ</i><i class="cur">v</i></dt><dd>motional EMF</dd>
+      <dt>ℰ = −<i>L</i> d<i class="cur">I</i>/d<i>t</i>, &nbsp;<i>L</i> = <i>N</i>Φ<sub>B</sub>/<i class="cur">I</i></dt><dd>inductance</dd>
+      <dt><i>U</i><sub>L</sub> = ½<i>L</i><i class="cur">I</i>², &nbsp;<i>u</i> = <i class="bf">B</i>²/(2μ<sub>0</sub>)</dt><dd>stored energy</dd>
+      <dt><i class="cur">I</i>(<i>t</i>) = (ℰ/<i>R</i>)(1 − <i>e</i><sup>−<i>t</i>/τ</sup>), &nbsp;τ = <i>L</i>/<i>R</i></dt><dd>LR circuit</dd>
+      <dt>ω = 1/√(<i>LC</i>)</dt><dd>LC oscillation</dd></dl>
+  </div>
+</aside>

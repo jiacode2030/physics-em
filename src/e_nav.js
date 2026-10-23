@@ -1,0 +1,9 @@
+(function buildNav(){let nh='<a href="#overview" data-view="overview">Overview</a>',sh='<option value="overview">Overview</option>';
+  GROUPS.forEach(g=>{nh+=`<div class="grp">${g.w} · ${g.name}</div>`;sh+=`<optgroup label="${g.w} · ${g.name}">`;g.ids.forEach(id=>{nh+=`<a href="#${id}" data-view="${id}">${MODS[id].t}</a>`;sh+=`<option value="${id}">${MODS[id].t}</option>`;});sh+='</optgroup>';});
+  nh+='<div class="grp">Review</div><a href="#practice" data-view="practice">Practice set</a><a href="#methods" data-view="methods">Which principle?</a><a href="#exam" data-view="exam">Exam review</a><a href="#review" data-view="review">Review my mistakes</a><a href="#frq" data-view="frq">AP C FRQ practice</a>';sh+='<option value="practice">Practice set</option><option value="methods">Which principle?</option><option value="exam">Exam review</option><option value="review">Review my mistakes</option><option value="frq">AP C FRQ practice</option>';
+  $('#nav').innerHTML=nh;const sel=$('#navsel');sel.innerHTML=sh;sel.addEventListener('change',()=>{location.hash=sel.value;});})();
+const apTag=id=>MODS[id].ap.startsWith('AP')?'ap':'na';
+function renderMods(){const solved=store('kin-solved')||{};const cnt={};let k=0;PROBS.forEach(p=>{const c=cnt[p.topic]=cnt[p.topic]||[0,0];c[1]++;if(solved[p.id])c[0]++;});
+  $('#modgrid').innerHTML=GROUPS.map(g=>`<div class="modgroup"><div class="eyebrow">${g.w}</div><h3 class="gtitle">${g.name}</h3><div class="modgrid-inner">${g.ids.map(id=>{const m=MODS[id],c=cnt[id]||[0,0];
+    return `<a class="mod" href="#${id}" style="--i:${Math.min(k++,14)}">${GLYPH[id]?`<span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24">${GLYPH[id]}</svg></span>`:''}<h3>${m.t}</h3><p>${m.d}</p><div class="row"><span class="tag ${apTag(id)}">${m.ap}</span><span class="prog">${c[0]}/${c[1]} solved</span></div></a>`;}).join('')}</div></div>`).join('');}
+

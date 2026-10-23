@@ -1,0 +1,75 @@
+  <!-- ============ ENERGY OF CHARGES ============ -->
+  <section class="view" id="v-penergy" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 9</span><span class="tag pu">AP 2: electricity</span></div>
+        <h1>Energy of charges</h1>
+        <p class="lede">Move a charge through a potential difference and it gains or loses energy: ΔU = qΔV. That one line gives the speed of particles in accelerators, TV tubes and mass spectrometers, and it gives the energy stored in any arrangement of charges.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>Think of a charge as a ball on the potential hill. Let it fall through a voltage ΔV and it gains kinetic energy qΔV; the potential energy it loses becomes motion. No need to know the field or the path in between: only the voltage difference matters. That is why this is the tool for "speed after being accelerated through…" questions.</p>
+        <p>Physicists often use a new unit of energy: the <b>electron-volt</b>. One eV is the energy an electron (or any single-charge particle) gains falling through 1 V: 1 eV = 1.6 × 10⁻¹⁹ J. A proton accelerated through 500 V gains 500 eV, with no multiplication needed.</p>
+        <p>For several charges, the energy of the arrangement is the work it took to assemble them: add up kq₁q₂/r for every pair. Positive means you had to push (like charges close together); negative means the system is bound.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span>Δ<i>U</i> = <i>q</i>Δ<i>V</i>, &nbsp;Δ<i>K</i> = −Δ<i>U</i></span><small>energy from a potential difference</small></div>
+        <div class="eqn"><span>½<i>mv</i>² = |<i>q</i>|Δ<i>V</i></span><small>from rest, through ΔV</small></div>
+        <div class="eqn"><span><i>U</i> = Σ<sub>pairs</sub> <i>kq</i><sub>i</sub><i>q</i><sub>j</sub>/<i>r</i><sub>ij</sub></span><small>energy of a charge system</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="pe-mode" role="group" aria-label="What to show"><button type="button" data-k="accel" aria-pressed="true">Accelerate a particle</button><button type="button" data-k="assemble">Energy of a charge system</button></div></div>
+        <canvas id="pe-canvas" class="drag" aria-label="Either a charged particle accelerated between two plates, or three charges whose total potential energy is calculated."></canvas>
+        <div id="pe-a-ctl"><div class="controls">
+          <div class="ctl"><span class="lbl">Particle</span><div class="seg" id="pe-sp" role="group" aria-label="Particle"><button type="button" data-k="p" aria-pressed="true">Proton</button><button type="button" data-k="e">Electron</button><button type="button" data-k="a">Alpha particle</button></div></div>
+          <div class="ctl"><label for="pe-V"><span>Voltage ΔV between plates</span> <output id="pe-V-out"></output></label><input type="range" id="pe-V" min="50" max="2000" step="50" value="500"></div>
+          <div class="ctl"><span class="lbl">Run</span><div class="row"><button type="button" class="btn primary" id="pe-go">Release</button></div></div>
+        </div></div>
+        <div id="pe-s-ctl" hidden><div class="controls">
+          <div class="ctl"><label for="pe-q1"><span>Charge 1</span> <output id="pe-q1-out"></output></label><input type="range" id="pe-q1" min="-4" max="4" step="1" value="3"></div>
+          <div class="ctl"><label for="pe-q2"><span>Charge 2</span> <output id="pe-q2-out"></output></label><input type="range" id="pe-q2" min="-4" max="4" step="1" value="-2"></div>
+          <div class="ctl"><label for="pe-q3"><span>Charge 3</span> <output id="pe-q3-out"></output></label><input type="range" id="pe-q3" min="-4" max="4" step="1" value="2"></div>
+        </div></div>
+        <div class="readout">
+          <div><span>Kinetic energy gained</span><strong class="ef" id="pe-r1">—</strong></div>
+          <div><span>In electron-volts</span><strong id="pe-r2">—</strong></div>
+          <div><span>Final speed</span><strong class="cur" id="pe-r3">—</strong></div>
+          <div><span>Compared to the speed of light</span><strong id="pe-r4">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">Left mode: the charge starts at rest on the plate where it is repelled, and falls through the potential difference. Energy changes form (potential → kinetic) but the total stays the same. Right mode: drag the charges; the system energy is the sum over every pair.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Release a proton through 500 V, then an electron through the same voltage. <button type="button" class="btn link" data-show='[["click", "#pe-mode [data-k=accel]"], ["click", "#pe-sp [data-k=p]"], ["#pe-V", 500]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Both gain exactly the same energy: 500 eV. The electron is almost 2000 times lighter, so it ends up about 43 times faster.</p></details></li>
+        <li><p>Try an alpha particle (charge +2e) at 500 V. <button type="button" class="btn link" data-show='[["click", "#pe-mode [data-k=accel]"], ["click", "#pe-sp [data-k=a]"], ["#pe-V", 500]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Twice the charge means twice the energy (1000 eV). It is also about 4 times heavier than a proton, so it ends up slower than a proton.</p></details></li>
+        <li><p>Quadruple the voltage. <button type="button" class="btn link" data-show='[["click", "#pe-mode [data-k=accel]"], ["click", "#pe-sp [data-k=p]"], ["#pe-V", 2000]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Four times the energy, but only twice the speed: speed goes as √V.</p></details></li>
+        <li><p>Switch to the charge system. Make two charges +3 nC and +2 nC and the third zero. <button type="button" class="btn link" data-show='[["click", "#pe-mode [data-k=assemble]"], ["#pe-q1", 3], ["#pe-q2", 2], ["#pe-q3", 0]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Like charges: positive energy. It took work to push them together, and the energy would be released if they were let go.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A proton is released from rest at the positive plate of a parallel-plate accelerator, with a potential difference of 500 V between the plates. Find its kinetic energy and its speed when it reaches the negative plate. Then compare with an electron.</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="The proton falls through 500 V. The field does work qΔV on it."><rect x="40" y="55" width="8" height="120" style="fill:var(--pos)"/><rect x="212" y="55" width="8" height="120" style="fill:var(--neg)"/><text x="44" y="48" text-anchor="middle" style="fill:var(--pos);font:600 16px 'IBM Plex Sans',sans-serif">+</text><text x="216" y="48" text-anchor="middle" style="fill:var(--neg);font:600 16px 'IBM Plex Sans',sans-serif">−</text><circle cx="70" cy="115" r="11" style="fill:var(--pos)"/><text x="70" y="120" text-anchor="middle" style="fill:#fff;font:700 16px 'IBM Plex Sans',sans-serif">+</text><line x1="88" y1="80" x2="178.7" y2="80.0" style="stroke:var(--cx);stroke-width:2;stroke-linecap:round"/><polygon points="185,80 176.0,84.95 176.0,75.05" style="fill:var(--cx)"/><line x1="88" y1="150" x2="178.7" y2="150.0" style="stroke:var(--cx);stroke-width:2;stroke-linecap:round"/><polygon points="185,150 176.0,154.95 176.0,145.05" style="fill:var(--cx)"/><text x="130" y="68" text-anchor="middle" style="fill:var(--cx);font:600 13px 'IBM Plex Sans',sans-serif">E</text><text x="130" y="176" text-anchor="middle" style="fill:var(--ink);font:600 13px 'IBM Plex Sans',sans-serif">ΔV = 500 V</text><text x="70" y="138" text-anchor="middle" style="fill:var(--ink);font:600 12px 'IBM Plex Sans',sans-serif">p</text><g class="sl" data-s="1" hidden><text x="130" y="208" text-anchor="middle" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">ΔK + ΔU = 0: skip the field</text></g><g class="sl" data-s="2" hidden><circle cx="190" cy="115" r="11" style="fill:var(--pos)"/><text x="190" y="120" text-anchor="middle" style="fill:#fff;font:700 16px 'IBM Plex Sans',sans-serif">+</text><text x="190" y="138" text-anchor="middle" style="fill:cv;font:600 11px 'IBM Plex Sans',sans-serif">K = 500 eV</text></g><g class="sl" data-s="3" hidden><line x1="190" y1="100" x2="215.7" y2="100.0" style="stroke:var(--cv);stroke-width:2.4;stroke-linecap:round"/><polygon points="222,100 213.0,104.95 213.0,95.05" style="fill:var(--cv)"/><text x="236.0" y="96.0" text-anchor="middle" style="fill:var(--cv);font:600 13px 'IBM Plex Sans',sans-serif">v</text></g><g class="sl" data-s="4" hidden><text x="130" y="226" text-anchor="middle" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">electron: 1.3 × 10⁷ m/s, same energy</text></g></svg><div class="fbdnotes"><span class="i" data-s="1" hidden>energy method: only the voltage matters</span><span class="v" data-s="2" hidden>K = qΔV = 8.0 × 10⁻¹⁷ J = 500 eV</span><span class="v" data-s="3" hidden>v = 3.1 × 10⁵ m/s for the proton</span><span class="v" data-s="4" hidden>electron: 1.3 × 10⁷ m/s (43× faster)</span><span class="i" data-s="5" hidden>✓ speed ratio = √(m_p/m_e) = 43</span></div></div><figcaption>The proton falls through 500 V. The field does work qΔV on it.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Which principle?</b> The field between the plates is uniform, but you don't need it. Energy conservation links the start and end directly: <span class="m">Δ<i>K</i> + Δ<i>U</i> = 0</span>.</li>
+        <li hidden><b>Energy gained.</b> <span class="m"><i>K</i> = <i>q</i>Δ<i>V</i> = (1.6 × 10⁻¹⁹ C)(500 V) = 8.0 × 10⁻¹⁷ J = 500 eV</span>.</li>
+        <li hidden><b>Speed of the proton.</b> <span class="m">½<i>mv</i>² = 8.0 × 10⁻¹⁷</span>, so <span class="m"><i>v</i> = √(2(8.0 × 10⁻¹⁷)/(1.67 × 10⁻²⁷)) = 3.1 × 10⁵ m/s</span>.</li>
+        <li hidden><b>Electron.</b> The same 8.0 × 10⁻¹⁷ J goes to a much lighter particle: <span class="m"><i>v</i> = √(2(8.0 × 10⁻¹⁷)/(9.11 × 10⁻³¹)) = 1.3 × 10⁷ m/s</span>. That is 4% of the speed of light, so ignoring relativity is still fine.</li>
+        <li hidden><b>Check.</b> Ratio of speeds should be √(m<sub>p</sub>/m<sub>e</sub>) = √1836 = 43; 1.3 × 10⁷/3.1 × 10⁵ = 43 ✓.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Using the formula ΔU = qΔV with the potential <em>at one point</em> instead of the difference between two.</li><li>Forgetting that a negative charge gains energy moving toward <em>higher</em> potential.</li><li>Putting 500 V into the energy equation as 500 J. Energy is qΔV in joules.</li><li>Using E = ΔV/d to find speed: you don't need E at all for the energy method.</li></ul></div>
+      <div class="prose">
+        <h2>Energy methods for charges</h2>
+        <ul>
+          <li><b>Charge in a potential difference:</b> <span class="m">½<i>mv</i>² = |<i>q</i>|Δ<i>V</i></span>. Positive charges speed up going from high to low V, negative charges going from low to high.</li>
+          <li><b>Two point charges:</b> <span class="m"><i>U</i> = <i>kq</i><sub>1</sub><i>q</i><sub>2</sub>/<i>r</i></span> (zero at infinite separation). If they are released and fly apart, each ends up with kinetic energy and <span class="m"><i>K</i><sub>total</sub> = <i>U</i></span>.</li>
+          <li><b>Three or more:</b> add every pair once. Three charges have three pairs.</li>
+          <li><b>Escape and closest approach:</b> a charge shot straight at another stops where its kinetic energy has all turned into potential energy.</li>
+        </ul>
+        <h2>The electron-volt</h2>
+        <ul>
+          <li>1 eV = 1.60 × 10⁻¹⁹ J. Atomic energies are a few eV; X-rays are thousands.</li>
+          <li>A particle with charge <i>ne</i> falling through ΔV volts gains <i>n</i>ΔV eV.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="1" data-explain="Energy gained is qΔV, the same for any particle with the same charge. The electron is lighter, so it ends up faster, but the energy is equal.">
+        <p class="q">Check yourself: a proton and an electron are each released from rest at opposite plates and accelerated through the same 100 V. Which statement is correct?</p>
+        <div class="opts"><button type="button">The proton gains more energy</button><button type="button">They gain the same energy; the electron ends up faster</button><button type="button">They gain the same energy; the proton ends up faster</button><button type="button">The electron gains more energy</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

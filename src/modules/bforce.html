@@ -1,0 +1,88 @@
+  <!-- ============ MAGNETIC FORCE ON CHARGES ============ -->
+  <section class="view" id="v-bforce" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 12</span><span class="tag pu">AP 2: magnetism</span></div>
+        <h1>Magnetic force on charges</h1>
+        <p class="lede">A magnetic field pushes moving charges sideways. The push is always perpendicular to the motion, so it can bend a path into a circle or a spiral but can never speed a charge up or slow it down. That one fact drives mass spectrometers, cyclotrons and auroras.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>A charge sitting still in a magnetic field feels nothing. Make it move and a force appears, at right angles to both the velocity and the field: F = q v × B. Faster charges, stronger fields and bigger charges all feel more force, but only the part of the velocity <em>perpendicular</em> to B counts: F = qvB sin θ.</p>
+        <p>Because the force is perpendicular to the velocity, it does no work and cannot change the speed. All it can do is turn the charge. That turns the path into a circle (when the velocity is perpendicular to B), with the magnetic force acting as the centripetal force: qvB = mv²/r, so r = mv/(qB). Lighter, slower particles in stronger fields make tighter circles.</p>
+        <p>If the velocity has a component along the field, that component is unaffected and the charge drifts along B while it circles: a helix, or a spiral. The right-hand rule gives the direction: fingers along v, curl them toward B, the thumb points along the force on a <em>positive</em> charge (reverse it for electrons).</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span><i class="frc">F</i> = <i>q</i><i class="cur">v</i> × <i class="bf">B</i>, &nbsp;|<i class="frc">F</i>| = |<i>q</i>|<i>v</i><i class="bf">B</i> sin θ</span><small>magnetic force</small></div>
+        <div class="eqn"><span><i>r</i> = <i>mv</i><sub>⊥</sub>/(|<i>q</i>|<i class="bf">B</i>)</span><small>radius of the circle</small></div>
+        <div class="eqn"><span><i>T</i> = 2π<i>m</i>/(|<i>q</i>|<i class="bf">B</i>), &nbsp;ω = |<i>q</i>|<i class="bf">B</i>/<i>m</i></span><small>period and cyclotron frequency</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="bf-sp" role="group" aria-label="Particle"><button type="button" data-k="e" aria-pressed="true">Electron</button><button type="button" data-k="p">Proton</button><button type="button" data-k="a">Alpha particle</button></div><div class="seg" id="bf-view" role="group" aria-label="Camera"><button type="button" data-k="3d" aria-pressed="true">3D</button><button type="button" data-k="top">From above</button><button type="button" data-k="side">From the side</button></div></div>
+        <canvas id="bf-canvas" class="drag" aria-label="3D view of a charged particle moving in a uniform magnetic field. Drag to rotate the view."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="bf-v"><span>Speed (× 10⁶ m/s)</span> <output id="bf-v-out"></output></label><input type="range" id="bf-v" min="1" max="10" step="0.5" value="5"></div>
+          <div class="ctl"><label for="bf-ang"><span>Angle between v and B</span> <output id="bf-ang-out"></output></label><input type="range" id="bf-ang" min="10" max="90" step="5" value="60"></div>
+          <div class="ctl"><label for="bf-B"><span>Field B (mT)</span> <output id="bf-B-out"></output></label><input type="range" id="bf-B" min="0.5" max="5" step="0.5" value="2"></div>
+        </div>
+        <div class="readout">
+          <div><span>Radius of the circle</span><strong class="ef" id="bf-r">—</strong></div>
+          <div><span>Period of one loop</span><strong id="bf-T">—</strong></div>
+          <div><span>Pitch (distance along B per loop)</span><strong id="bf-p">—</strong></div>
+          <div><span>Magnetic force qvB sin θ</span><strong class="frc" id="bf-F">—</strong></div>
+          <div><span>Direction (seen from above)</span><strong id="bf-dir">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">The magnetic field (pink) points up. The force (orange) is always sideways to the velocity (green), so it changes the direction of motion but never the speed. The component of velocity along B is untouched, so the circle stretches into a spiral. The loop radius is drawn relative to the default setting for each particle.</p>
+      </div>
+      <div class="lab">
+        <div class="labbar"><span class="title">Velocity selector (proton)</span></div>
+        <canvas id="vs-canvas" aria-label="Velocity selector: a particle passes through crossed electric and magnetic fields. It goes straight only if its speed equals E over B."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="vs-v"><span>Proton speed (km/s)</span> <output id="vs-v-out"></output></label><input type="range" id="vs-v" min="20" max="200" step="5" value="100"></div>
+          <div class="ctl"><label for="vs-E"><span>Electric field (kV/m)</span> <output id="vs-E-out"></output></label><input type="range" id="vs-E" min="1" max="10" step="0.5" value="5"></div>
+          <div class="ctl"><label for="vs-B"><span>Magnetic field (T)</span> <output id="vs-B-out"></output></label><input type="range" id="vs-B" min="0.02" max="0.1" step="0.005" value="0.05"></div>
+        </div>
+        <div class="readout">
+          <div><span>Selected speed E/B</span><strong class="ef" id="vs-sel">—</strong></div>
+          <div><span>Electric force qE</span><strong class="frc" id="vs-fe">—</strong></div>
+          <div><span>Magnetic force qvB</span><strong class="frc" id="vs-fb">—</strong></div>
+          <div><span>Result</span><strong id="vs-res">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">B points into the page (×), E points down, and the proton enters from the left. Electric force pushes down; magnetic force pushes up. They cancel only at v = E/B. Too slow: electric force wins and it curves down. Too fast: magnetic force wins and it curves up.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Compare an electron and a proton at the same speed and field. <button type="button" class="btn link" data-show='[["click", "#bf-sp [data-k=e]"], ["#bf-v", 5], ["#bf-ang", 90], ["#bf-B", 2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The electron and the proton circle in opposite directions (opposite charges), and the proton's circle is about 1800 times larger because it is about 1800 times heavier.</p></details></li>
+        <li><p>Tilt the velocity: set the angle to 30° so there is a component along B. <button type="button" class="btn link" data-show='[["click", "#bf-sp [data-k=e]"], ["#bf-ang", 30], ["#bf-v", 5], ["#bf-B", 2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The circle shrinks (only v sin θ counts for the radius) and the particle spirals along B. The pitch is v cos θ times the period.</p></details></li>
+        <li><p>Double the magnetic field. <button type="button" class="btn link" data-show='[["click", "#bf-sp [data-k=e]"], ["#bf-ang", 90], ["#bf-v", 5], ["#bf-B", 4]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The radius halves and the period halves: the particle circles twice as often. The speed has not changed.</p></details></li>
+        <li><p>In the velocity selector, tune the speed to exactly E/B. <button type="button" class="btn link" data-show='[["#vs-E", 5], ["#vs-B", 0.05], ["#vs-v", 100]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>At 100 km/s = E/B, the electric and magnetic forces cancel and the proton flies straight through. Move the speed either way and it bends.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">An electron enters a region of uniform magnetic field B = 2.0 mT, directed into the page, with speed 5.0 × 10⁶ m/s perpendicular to the field. Find the radius of its circular path, the period of the motion and the magnetic force on it. What electric field, applied at the same time, would make the electron go straight?</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="The field points into the page. The force on the electron is toward the center of its circular path."><rect x="20" y="40" width="220" height="160" style="fill:color-mix(in srgb,var(--ca) 6%,transparent);stroke:none"/><text x="46" y="70" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="46" y="120" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="46" y="170" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="94" y="70" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="94" y="120" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="94" y="170" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="142" y="70" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="142" y="120" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="142" y="170" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="190" y="70" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="190" y="120" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="190" y="170" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="238" y="70" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="238" y="120" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="238" y="170" text-anchor="middle" style="fill:var(--ca);font:600 16px 'IBM Plex Sans',sans-serif">×</text><text x="120" y="28" text-anchor="middle" style="fill:var(--ca);font:600 12px 'IBM Plex Sans',sans-serif">B into the page</text><g class="sl" data-s="1" hidden><circle cx="105" cy="70" r="10" style="fill:var(--neg)"/><text x="105" y="75" text-anchor="middle" style="fill:#fff;font:700 16px 'IBM Plex Sans',sans-serif">−</text><line x1="105" y1="70" x2="141.7" y2="70.0" style="stroke:var(--cv);stroke-width:2.4;stroke-linecap:round"/><polygon points="148,70 139.0,74.95 139.0,65.05" style="fill:var(--cv)"/><text x="162.0" y="64.0" text-anchor="middle" style="fill:var(--cv);font:600 13px 'IBM Plex Sans',sans-serif">v</text><line x1="105" y1="70" x2="105.0" y2="91.7" style="stroke:var(--hot);stroke-width:2.4;stroke-linecap:round"/><polygon points="105,98 100.05,89.0 109.95,89.0" style="fill:var(--hot)"/><text x="115.0" y="116.0" text-anchor="middle" style="fill:var(--hot);font:600 13px 'IBM Plex Sans',sans-serif">F</text></g><g class="sl" data-s="2" hidden><path d="M 55 120 A 50 50 0 1 0 155 120 A 50 50 0 1 0 55 120" style="fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:5 4"/><line x1="105" y1="120" x2="105" y2="70" style="stroke:var(--muted);stroke-width:1.2;stroke-linecap:round"/><text x="112" y="100" text-anchor="start" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">r</text></g><g class="sl" data-s="3" hidden><text x="105" y="196" text-anchor="middle" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">T = 2πm/(eB) = 1.8 × 10⁻⁸ s</text></g><g class="sl" data-s="4" hidden><text x="122" y="106" text-anchor="start" style="fill:var(--hot);font:600 10px 'IBM Plex Sans',sans-serif">1.6 × 10⁻¹⁵ N</text></g><g class="sl" data-s="5" hidden><line x1="60" y1="60" x2="60.0" y2="83.7" style="stroke:var(--cx);stroke-width:2.4;stroke-linecap:round"/><polygon points="60,90 55.05,81.0 64.95,81.0" style="fill:var(--cx)"/><text x="68.0" y="108.0" text-anchor="middle" style="fill:var(--cx);font:600 13px 'IBM Plex Sans',sans-serif">E</text></g></svg><div class="fbdnotes"><span class="f" data-s="1" hidden>v → right, B into page: F ↓ for an electron</span><span class="i" data-s="2" hidden>qvB = mv²/r, so r = 1.4 × 10⁻² m</span><span class="i" data-s="3" hidden>period doesn't depend on speed</span><span class="f" data-s="4" hidden>F = evB = 1.6 × 10⁻¹⁵ N</span><span class="e" data-s="5" hidden>add E = vB = 1.0 × 10⁴ V/m (E points down)</span></div></div><figcaption>The field points into the page. The force on the electron is toward the center of its circular path.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Direction first.</b> Velocity along +x (right), B into the page. For a positive charge F would point up; the electron is negative, so the force is <em>down</em>. It is always toward the center of the circle.</li>
+        <li hidden><b>Use the magnetic force as the centripetal force.</b> <span class="m">|<i>q</i>|<i>v</i><i class="bf">B</i> = <i>mv</i>²/<i>r</i></span>, so <span class="m"><i>r</i> = <i>mv</i>/(<i>e</i><i class="bf">B</i>) = (9.11 × 10⁻³¹)(5.0 × 10⁶)/((1.6 × 10⁻¹⁹)(2.0 × 10⁻³)) = 1.4 × 10⁻² m</span>.</li>
+        <li hidden><b>Period.</b> <span class="m"><i>T</i> = 2π<i>m</i>/(<i>e</i><i class="bf">B</i>) = 2π(9.11 × 10⁻³¹)/((1.6 × 10⁻¹⁹)(2.0 × 10⁻³)) = 1.8 × 10⁻⁸ s</span>. It doesn't depend on the speed.</li>
+        <li hidden><b>Force.</b> <span class="m"><i class="frc">F</i> = <i>ev</i><i class="bf">B</i> = (1.6 × 10⁻¹⁹)(5.0 × 10⁶)(2.0 × 10⁻³) = 1.6 × 10⁻¹⁵ N</span>. Check: <span class="m"><i>mv</i>²/<i>r</i> = 1.6 × 10⁻¹⁵ N</span> ✓.</li>
+        <li hidden><b>Straight-line condition.</b> The electric force must cancel the magnetic force: <span class="m"><i>eE</i> = <i>ev</i><i class="bf">B</i></span>, so <span class="m"><i class="ef">E</i> = <i>v</i><i class="bf">B</i> = (5.0 × 10⁶)(2.0 × 10⁻³) = 1.0 × 10⁴ V/m</span>, directed so that the electric force on the electron is upward (E points down).</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Using v instead of v sin θ for the force or the radius.</li><li>Getting the direction wrong for a negative charge. The right-hand rule gives the force on a positive charge; for an electron reverse it.</li><li>Thinking the magnetic force speeds the particle up. It does no work: the speed is constant.</li><li>Using B in mT in the formula without converting to tesla.</li></ul></div>
+      <div class="prose">
+        <h2>Motion in a magnetic field</h2>
+        <ul>
+          <li><b>Perpendicular to B:</b> uniform circular motion with <span class="m"><i>r</i> = <i>mv</i>/(|<i>q</i>|<i class="bf">B</i>)</span>. Kinetic energy is constant.</li>
+          <li><b>Cyclotron frequency</b> <span class="m"><i>f</i> = |<i>q</i>|<i class="bf">B</i>/(2π<i>m</i>)</span> does not depend on speed or radius, which is what makes cyclotron accelerators work.</li>
+          <li><b>At an angle:</b> the perpendicular part circles, the parallel part drifts: pitch <span class="m"><i>p</i> = <i>v</i><sub>∥</sub><i>T</i></span>. Charges spiral along Earth's field lines toward the poles and make the aurora.</li>
+          <li><b>Zero when v ∥ B</b> (sin 0 = 0): a charge moving along the field feels no force.</li>
+        </ul>
+        <h2>Crossed fields and applications</h2>
+        <ul>
+          <li><b>Velocity selector:</b> E and B perpendicular, with <span class="m"><i>qE</i> = <i>qvB</i></span> for the chosen speed <span class="m"><i>v</i> = <i class="ef">E</i>/<i class="bf">B</i></span>. Independent of charge and mass.</li>
+          <li><b>Mass spectrometer:</b> select the speed, then send the ions into a second field. They circle with <span class="m"><i>r</i> = <i>mv</i>/(<i>qB</i>)</span>, so <span class="m"><i>m</i> = <i>qBr</i>/<i>v</i></span>: measure where they land to find the mass.</li>
+          <li><b>Hall effect:</b> in a current-carrying conductor in a field, charges pile up on one side, creating a measurable transverse voltage; its sign shows whether the carriers are positive or negative.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="1" data-explain="The magnetic force is always perpendicular to the velocity, so it does no work. It changes the direction of the velocity but not the speed, and the kinetic energy stays constant.">
+        <p class="q">Check yourself: a proton moves through a uniform magnetic field perpendicular to its velocity. Its kinetic energy:</p>
+        <div class="opts"><button type="button">Increases steadily</button><button type="button">Stays constant</button><button type="button">Decreases steadily</button><button type="button">Oscillates up and down</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

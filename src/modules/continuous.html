@@ -1,0 +1,69 @@
+  <!-- ============ RODS, RINGS &AMP; DISKS ============ -->
+  <section class="view" id="v-continuous" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 8</span><span class="tag calc">Calculus</span></div>
+        <h1>Rods, rings &amp; disks</h1>
+        <p class="lede">Real charged objects aren't points. Slice a ring or a disk into tiny pieces, let symmetry cancel the sideways parts, and the sum gives the field along the axis. Far away it becomes kQ/z² again, and up close a disk becomes an infinite sheet.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>Take a ring of charge and a point on its axis. Every slice of the ring is the same distance from the point, so the integral is easy. But the slices pull in different directions: each field points away from its slice, partly along the axis and partly sideways. The sideways parts of opposite slices cancel, leaving only the axial part.</p>
+        <p>A disk is a stack of rings. Add up the axial fields of all the thin rings from radius 0 to R. The result starts at zero in the center, grows rapidly as you approach, and levels off at σ/2ε₀ right at the surface: exactly the field of an infinite sheet, because to a point very close to it, the disk looks endless.</p>
+        <p>The test of any such formula: far away (z much larger than R) it must turn into kQ/z². If your answer doesn't, something is wrong.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span><i class="ef">E</i><sub>ring</sub> = <i>kQz</i>/(<i>z</i>² + <i>R</i>²)<sup>3/2</sup></span><small>on the axis</small></div>
+        <div class="eqn"><span><i class="ef">E</i><sub>disk</sub> = (σ/2ε<sub>0</sub>)[1 − <i>z</i>/√(<i>z</i>² + <i>R</i>²)]</span><small>on the axis, σ = Q/πR²</small></div>
+        <div class="eqn"><span><i class="ef">E</i><sub>sheet</sub> = σ/2ε<sub>0</sub></span><small>infinite sheet (z ≪ R)</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="ct-mode" role="group" aria-label="Shape"><button type="button" data-k="ring" aria-pressed="true">Ring</button><button type="button" data-k="disk">Disk</button></div></div>
+        <canvas id="ct-canvas" class="drag" aria-label="Side view of a charged ring or disk with the field along its axis, and a graph of field against distance."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="ct-R"><span>Radius R</span> <output id="ct-R-out"></output></label><input type="range" id="ct-R" min="2" max="15" step="0.5" value="6"></div>
+          <div class="ctl"><label for="ct-Q"><span>Total charge Q</span> <output id="ct-Q-out"></output></label><input type="range" id="ct-Q" min="1" max="20" step="1" value="8"></div>
+          <div class="ctl"><label for="ct-z"><span>Point at distance z</span> <output id="ct-z-out"></output></label><input type="range" id="ct-z" min="0.5" max="40" step="0.5" value="10"></div>
+        </div>
+        <div class="readout">
+          <div><span>E on the axis at z</span><strong class="ef" id="ct-E">—</strong></div>
+          <div><span>If all charge were at the center</span><strong class="ef" id="ct-pt">—</strong></div>
+          <div><span>Difference</span><strong id="ct-diff">—</strong></div>
+          <div><span>Far-away / near limit</span><strong id="ct-lim">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">Q in nC, distances in cm. The dashed curve is the point-charge field kQ/z². Far away, every shape looks like a point charge. A disk up close looks like an infinite sheet: the field stops growing and levels off at σ/2ε₀.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Show the ring, then move the point from near the ring to far away. <button type="button" class="btn link" data-show='[["click", "#ct-mode [data-k=ring]"], ["#ct-z", 10]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The ring field is zero at the center, rises to a peak near z = R/√2 (0.71R), then falls. Far away it follows the dashed point-charge curve.</p></details></li>
+        <li><p>Put the point at the very center of the ring (z ≈ 0). <button type="button" class="btn link" data-show='[["click", "#ct-mode [data-k=ring]"], ["#ct-z", 0.5]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Almost no field. Slices on opposite sides of the ring pull in opposite directions and cancel.</p></details></li>
+        <li><p>Switch to the disk and come in close (z = 0.5 cm). <button type="button" class="btn link" data-show='[["click", "#ct-mode [data-k=disk]"], ["#ct-z", 0.5]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The disk's field is large and nearly constant here: it approaches σ/2ε₀, the infinite-sheet value.</p></details></li>
+        <li><p>Move the point far from the disk and compare with a point charge. <button type="button" class="btn link" data-show='[["click", "#ct-mode [data-k=disk]"], ["#ct-z", 40], ["#ct-R", 3]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>At z = 40 cm with R = 3 cm, the disk is indistinguishable from a point charge: the difference readout is below 0.5%.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A ring of radius 0.10 m carries a uniform charge of +6.0 nC. Find the electric field on its axis at z = 0.20 m from the center, and compare it with a point charge of the same size at the center.</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="A ring seen edge-on. Opposite slices make fields at P whose sideways parts cancel, leaving the axial part."><line x1="40" y1="115" x2="248" y2="115" style="stroke:var(--muted);stroke-width:1.5;stroke-linecap:round;stroke-dasharray:4 4"/><line x1="70" y1="60" x2="70" y2="170" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/><circle cx="70" cy="60" r="9" style="fill:var(--pos)"/><text x="70" y="65" text-anchor="middle" style="fill:#fff;font:700 16px 'IBM Plex Sans',sans-serif">+</text><circle cx="70" cy="170" r="9" style="fill:var(--pos)"/><text x="70" y="175" text-anchor="middle" style="fill:#fff;font:700 16px 'IBM Plex Sans',sans-serif">+</text><circle cx="210" cy="115" r="4.5" style="fill:var(--ink)"/><text x="210" y="103" text-anchor="middle" style="fill:var(--ink);font:600 12px 'IBM Plex Sans',sans-serif">P</text><text x="78" y="115" text-anchor="start" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">R</text><text x="140" y="134" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">z</text><g class="sl" data-s="1" hidden><line x1="70" y1="60" x2="210" y2="115" style="stroke:var(--muted);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:3 3"/><line x1="70" y1="170" x2="210" y2="115" style="stroke:var(--muted);stroke-width:1.2;stroke-linecap:round;stroke-dasharray:3 3"/><line x1="210" y1="115" x2="173.8397649233059" y2="100.36371437371905" style="stroke:var(--hot);stroke-width:1.8;stroke-linecap:round"/><polygon points="168,98 178.1997254697877,96.78834809414401 174.48531716822916,105.9651215450533" style="fill:var(--hot)"/><line x1="210" y1="115" x2="173.8397649233059" y2="129.63628562628094" style="stroke:var(--hot);stroke-width:1.8;stroke-linecap:round"/><polygon points="168,132 174.48531716822916,124.0348784549467 178.1997254697877,133.21165190585597" style="fill:var(--hot)"/><text x="150" y="88" text-anchor="middle" style="fill:var(--hot);font:600 12px 'IBM Plex Sans',sans-serif">dE</text><text x="150" y="150" text-anchor="middle" style="fill:var(--hot);font:600 12px 'IBM Plex Sans',sans-serif">dE</text></g><g class="sl" data-s="2" hidden><line x1="210" y1="115" x2="243.7" y2="115.0" style="stroke:var(--cx);stroke-width:2.8;stroke-linecap:round"/><polygon points="250,115 241.0,119.95 241.0,110.05" style="fill:var(--cx)"/></g><g class="sl" data-s="3" hidden><text x="236" y="100" text-anchor="middle" style="fill:var(--cx);font:600 13px 'IBM Plex Sans',sans-serif">E</text></g><g class="sl" data-s="4" hidden><text x="135" y="206" text-anchor="middle" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">point charge would give 1.35 × 10³ N/C</text></g></svg><div class="fbdnotes"><span class="f" data-s="1" hidden>two opposite slices: sideways parts cancel</span><span class="e" data-s="2" hidden>only the axial parts add: E = kQz/(z²+R²)^(3/2)</span><span class="e" data-s="3" hidden>E = 9.6 × 10² N/C</span><span class="i" data-s="4" hidden>ring is 28% weaker than a point charge</span><span class="i" data-s="5" hidden>✓ z ≫ R gives kQ/z²; z = 0 gives 0</span></div></div><figcaption>A ring seen edge-on. Opposite slices make fields at P whose sideways parts cancel, leaving the axial part.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Slice and use symmetry.</b> Cut the ring into slices dq. Each is the same distance <span class="m"><i>r</i> = √(<i>z</i>² + <i>R</i>²)</span> from P. Sideways components cancel in pairs, so only the axial part <span class="m">d<i class="ef">E</i> cos φ</span> survives, with <span class="m">cos φ = <i>z</i>/<i>r</i></span>.</li>
+        <li hidden><b>Add the axial parts.</b> <span class="m"><i class="ef">E</i> = ∫ <i>k</i> d<i>q</i> <i>z</i>/<i>r</i>³ = <i>kz</i>/<i>r</i>³ ∫ d<i>q</i> = <i>kQz</i>/(<i>z</i>² + <i>R</i>²)<sup>3/2</sup></span>. Everything outside the integral is the same for every slice.</li>
+        <li hidden><b>Plug in the numbers.</b> <span class="m"><i>z</i>² + <i>R</i>² = 0.040 + 0.010 = 0.050 m²</span>, and <span class="m">0.050<sup>3/2</sup> = 0.01118</span>. So <span class="m"><i class="ef">E</i> = (8.99 × 10⁹)(6.0 × 10⁻⁹)(0.20)/0.01118 = 9.6 × 10² N/C</span>, pointing away from the ring along the axis.</li>
+        <li hidden><b>Compare with a point charge.</b> <span class="m"><i>kQ</i>/<i>z</i>² = (8.99 × 10⁹)(6.0 × 10⁻⁹)/(0.20)² = 1.35 × 10³ N/C</span>. The ring gives 28% less: at z = 2R it is still not far enough away to look like a point.</li>
+        <li hidden><b>Check the limits.</b> <span class="m"><i>z</i> ≫ <i>R</i></span> gives <span class="m"><i>kQ</i>/<i>z</i>²</span>, and z = 0 gives 0 ✓.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Adding the magnitudes of all the dE vectors without cancelling the sideways parts.</li><li>Using the distance from the center of the ring (z) for r in kdq/r². The distance from each slice is √(z² + R²).</li><li>Forgetting that for a disk σ = Q/(πR²), not Q/(2πR).</li><li>Taking the infinite-sheet formula for a small disk far away. That only works when z is much smaller than R.</li></ul></div>
+      <div class="prose">
+        <h2>Building up from the ring</h2>
+        <ul>
+          <li><b>Ring:</b> <span class="m"><i class="ef">E</i> = <i>kQz</i>/(<i>z</i>² + <i>R</i>²)<sup>3/2</sup></span>. Zero at the center, maximum at <span class="m"><i>z</i> = <i>R</i>/√2</span> where it equals about 0.385 <i>kQ</i>/<i>R</i>².</li>
+          <li><b>Disk:</b> stack thin rings of radius <i>r</i> and width d<i>r</i>, each with <span class="m">d<i>q</i> = σ·2π<i>r</i> d<i>r</i></span>. Integrating gives <span class="m"><i class="ef">E</i> = (σ/2ε<sub>0</sub>)[1 − <i>z</i>/√(<i>z</i>² + <i>R</i>²)]</span>.</li>
+          <li><b>Infinite sheet:</b> let <i>R</i> → ∞ and the bracket becomes 1: <span class="m"><i class="ef">E</i> = σ/2ε<sub>0</sub></span>, the same at every distance. It points away from the sheet on both sides.</li>
+        </ul>
+        <h2>Two rules of thumb</h2>
+        <ul>
+          <li>For a point much farther than the object's size, treat it as a point charge: <span class="m"><i>kQ</i>/<i>z</i>²</span>.</li>
+          <li>For a point much closer than the object's size, treat it as an infinite plane or line.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="0" data-explain="Opposite slices of the ring are the same distance from the center and pull in opposite directions, so all the sideways parts cancel exactly. At the center of the ring there is no axial part either, so the net field is zero.">
+        <p class="q">Check yourself: what is the electric field at the exact center of a uniformly charged ring?</p>
+        <div class="opts"><button type="button">Zero</button><button type="button">kQ/R²</button><button type="button">kQ/R</button><button type="button">Infinite</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

@@ -1,0 +1,90 @@
+  <!-- ============ MAXWELL'S EQUATIONS ============ -->
+  <section class="view" id="v-maxwell" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 13</span><span class="tag pu">Concepts</span></div>
+        <h1>Maxwell's equations</h1>
+        <p class="lede">Four equations contain everything about electricity and magnetism. Maxwell noticed one was missing a term, added it, and out popped a wave traveling at 3 × 10⁸ m/s: light is an electromagnetic wave.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>You have already met each of the four laws. <b>Gauss's law</b> says electric field lines start and end on charges. <b>Gauss's law for magnetism</b> says magnetic field lines never start or end: no magnetic monopoles. <b>Faraday's law</b> says a changing magnetic field makes an electric field. <b>Ampère's law</b> says currents make magnetic fields.</p>
+        <p>Maxwell realized Ampère's law was incomplete. Charge a capacitor: current flows in the wire, but no charge crosses the gap between the plates, yet the magnetic field circling the wire has to be the same size whether the loop is drawn around the wire or through the gap. His fix: <b>a changing electric field also makes a magnetic field</b>. The extra term, ε₀ dΦ<sub>E</sub>/dt, is the displacement current.</p>
+        <p>Now the two curl laws feed each other: a changing B makes E (Faraday), and a changing E makes B (Maxwell). That is a self-sustaining wave, with each field regenerating the other as it travels. Plug in the constants and the speed comes out as c = 1/√(μ₀ε₀) = 3.00 × 10⁸ m/s: the speed of light. Light, radio waves and X-rays are all the same thing at different frequencies.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span>∮ <i class="ef">E</i>·d<i>A</i> = <i>q</i>/ε<sub>0</sub>, &nbsp;∮ <i class="bf">B</i>·d<i>A</i> = 0</span><small>the two Gauss's laws</small></div>
+        <div class="eqn"><span>∮ <i class="ef">E</i>·d<i>ℓ</i> = −dΦ<sub>B</sub>/d<i>t</i></span><small>Faraday's law</small></div>
+        <div class="eqn"><span>∮ <i class="bf">B</i>·d<i>ℓ</i> = μ<sub>0</sub>(<i class="cur">I</i> + ε<sub>0</sub> dΦ<sub>E</sub>/d<i>t</i>)</span><small>Ampère–Maxwell law</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><span class="title">Electromagnetic wave</span></div>
+        <canvas id="mx-canvas" class="drag" aria-label="3D view of an electromagnetic wave: the electric field (blue) and magnetic field (pink) oscillate at right angles and the wave moves in the direction E × B. Drag to rotate."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="mx-f"><span>Frequency (log scale)</span> <output id="mx-f-out"></output></label><input type="range" id="mx-f" min="6" max="15" step="0.1" value="8"></div>
+        </div>
+        <div class="readout">
+          <div><span>Frequency f</span><strong class="ef" id="mx-fv">—</strong></div>
+          <div><span>Wavelength λ = c/f</span><strong id="mx-lam">—</strong></div>
+          <div><span>Kind of light</span><strong id="mx-band">—</strong></div>
+          <div><span>Speed c = 1/√(μ₀ε₀)</span><strong class="cur" id="mx-c">—</strong></div>
+          <div><span>E₀/B₀</span><strong id="mx-ratio">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">Move the slider to change the frequency from 1 MHz (AM radio) to 10¹⁵ Hz (ultraviolet). The wave always has the same speed; only the wavelength changes. The picture shows about two wavelengths, not to scale with the real length. In every case E and B are in phase, perpendicular to each other and to the direction of travel, with E₀ = cB₀.</p>
+      </div>
+      <div class="lab">
+        <div class="labbar"><span class="title">Displacement current</span></div>
+        <canvas id="mx-dcanvas" class="drag" aria-label="A charging parallel-plate capacitor with the field B around the wire and between the plates, with a graph of B against distance from the axis."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="mx-I"><span>Charging current I (A)</span> <output id="mx-I-out"></output></label><input type="range" id="mx-I" min="0.1" max="2" step="0.1" value="1"></div>
+          <div class="ctl"><label for="mx-pr"><span>Plate radius R (cm)</span> <output id="mx-pr-out"></output></label><input type="range" id="mx-pr" min="2" max="6" step="0.5" value="4"></div>
+          <div class="ctl"><label for="mx-r"><span>Distance r from the axis (cm)</span> <output id="mx-r-out"></output></label><input type="range" id="mx-r" min="0.5" max="12" step="0.5" value="3"></div>
+        </div>
+        <div class="readout">
+          <div><span>Rate of change of E between plates</span><strong class="ef" id="mx-dE">—</strong></div>
+          <div><span>Displacement current ε₀dΦ_E/dt</span><strong id="mx-Id">—</strong></div>
+          <div><span>B in the gap at r</span><strong id="mx-Bg">—</strong></div>
+          <div><span>B at the same r around the wire</span><strong id="mx-Bw">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">While the capacitor charges, a real current I flows in the wire but no charge crosses the gap. Yet B around the gap is just as if it did: the changing E between the plates acts like a current. Maxwell called it the displacement current, and it is what lets electromagnetic waves exist.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Slide the frequency to 100 MHz (FM radio) and read the wavelength. <button type="button" class="btn link" data-show='[["#mx-f", 8]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>λ = c/f = 3.0 m. The wave is a radio wave. The speed is the same for every setting; only the wavelength and frequency change.</p></details></li>
+        <li><p>Go up to visible light (about 5 × 10¹⁴ Hz). <button type="button" class="btn link" data-show='[["#mx-f", 14.7]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The wavelength is about 600 nm, a few hundred nanometers. Light is an electromagnetic wave with a frequency millions of times higher than FM radio.</p></details></li>
+        <li><p>Displacement current: pick the point between the plates at r = 2 cm. <button type="button" class="btn link" data-show='[["#mx-I", 1], ["#mx-pr", 4], ["#mx-r", 2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>There is no real current in the gap, yet there is a magnetic field. It is smaller than the field at the same distance around the wire (the displacement current only fills part of the loop) and grows in proportion to r.</p></details></li>
+        <li><p>Move the point outside the plates (r = 8 cm). <button type="button" class="btn link" data-show='[["#mx-I", 1], ["#mx-pr", 4], ["#mx-r", 8]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Now the loop encloses all the displacement current, which equals the real current I. B in the gap equals B around the wire: the two sides of the capacitor give the same B.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A radio station transmits at 100 MHz. At a certain point the electric field amplitude of the wave is E₀ = 50 V/m. Find (a) the wavelength, (b) the amplitude of the magnetic field, (c) the intensity (average power per area) and (d) the direction of travel if E points in +y and B points in +z.</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="A plane wave: E and B are in phase, perpendicular to each other and to the direction of travel."><path d="M 20 150 Q 50 100 80 150 T 140 150 T 200 150 T 250 150" style="fill:none;stroke:var(--cx);stroke-width:3"/><path d="M 20 150 Q 50 195 80 150 T 140 150 T 200 150 T 250 150" style="fill:none;stroke:var(--ca);stroke-width:3;stroke-dasharray:6 4"/><line x1="20" y1="150" x2="243.7" y2="150.0" style="stroke:var(--muted);stroke-width:1.4;stroke-linecap:round"/><polygon points="250,150 241.0,154.95 241.0,145.05" style="fill:var(--muted)"/><text x="130" y="227" text-anchor="middle" style="fill:var(--muted);font:600 10px 'IBM Plex Sans',sans-serif">direction of travel →</text><text x="60" y="100" text-anchor="middle" style="fill:var(--cx);font:600 14px 'IBM Plex Sans',sans-serif">E</text><text x="60" y="200" text-anchor="middle" style="fill:var(--ca);font:600 14px 'IBM Plex Sans',sans-serif">B</text><text x="130" y="38" text-anchor="middle" style="fill:var(--ink);font:600 12px 'IBM Plex Sans',sans-serif">E × B points along the motion</text><g class="sl" data-s="1" hidden><line x1="20" y1="198" x2="140" y2="198" style="stroke:var(--muted);stroke-width:1.2;stroke-linecap:round"/><text x="80" y="212" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">λ</text><text x="130" y="60" text-anchor="middle" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">f = 100 MHz → λ = 3.0 m</text></g><g class="sl" data-s="2" hidden><line x1="130" y1="150" x2="130.0" y2="116.3" style="stroke:var(--cx);stroke-width:2;stroke-linecap:round"/><polygon points="130,110 134.95,119.0 125.05,119.0" style="fill:var(--cx)"/><line x1="130" y1="150" x2="144.36510869670053" y2="157.18255434835027" style="stroke:var(--ca);stroke-width:2;stroke-linecap:round"/><polygon points="150,160 139.73644798327595,160.40249223594998 144.16386257872554,151.5476630450508" style="fill:var(--ca)"/></g><g class="sl" data-s="4" hidden><line x1="150" y1="128" x2="193.7" y2="128.0" style="stroke:cv;stroke-width:2.6;stroke-linecap:round"/><polygon points="200,128 191.0,132.95 191.0,123.05" style="fill:cv"/><text x="214.0" y="126.0" text-anchor="middle" style="fill:cv;font:600 13px 'IBM Plex Sans',sans-serif">+x</text></g></svg><div class="fbdnotes"><span class="i" data-s="1" hidden>λ = c/f = 3.0 m</span><span class="b" data-s="2" hidden>B₀ = E₀/c = 1.7 × 10⁻⁷ T</span><span class="f" data-s="3" hidden>I = ½ε₀cE₀² = 3.3 W/m²</span><span class="v" data-s="4" hidden>E = +y, B = +z ⇒ E × B = +x</span><span class="i" data-s="5" hidden>✓ equal energy in E and B</span></div></div><figcaption>A plane wave: E and B are in phase, perpendicular to each other and to the direction of travel.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Wavelength.</b> <span class="m">λ = <i>c</i>/<i>f</i> = (3.0 × 10⁸)/(1.0 × 10⁸) = 3.0 m</span>.</li>
+        <li hidden><b>Magnetic field amplitude.</b> In an electromagnetic wave <span class="m"><i class="ef">E</i><sub>0</sub> = <i>c</i><i class="bf">B</i><sub>0</sub></span>, so <span class="m"><i class="bf">B</i><sub>0</sub> = 50/(3.0 × 10⁸) = 1.7 × 10⁻⁷ T</span>.</li>
+        <li hidden><b>Intensity.</b> <span class="m"><i>I</i> = ½ε<sub>0</sub><i>c</i><i class="ef">E</i><sub>0</sub>² = ½(8.85 × 10⁻¹²)(3.0 × 10⁸)(50)² = 3.3 W/m²</span>.</li>
+        <li hidden><b>Direction.</b> The wave travels along <span class="m"><i class="ef">E</i> × <i class="bf">B</i></span>: <span class="m">ŷ × ẑ = x̂</span>, so it moves in the +x direction.</li>
+        <li hidden><b>Check.</b> The energy is shared equally between the electric and magnetic fields: <span class="m">½ε<sub>0</sub><i class="ef">E</i>² = <i class="bf">B</i>²/(2μ<sub>0</sub>)</span> at every instant ✓.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Thinking E and B in a wave are 90° out of phase (like a pendulum). They peak together.</li><li>Forgetting that the wave moves along E × B, not along E or B.</li><li>Believing the displacement current is a flow of charge. It is a changing electric field.</li><li>Using c = 3 × 10⁸ m/s in a medium: in glass or water the wave moves slower.</li></ul></div>
+      <div class="prose">
+        <h2>The four laws, side by side</h2>
+        <div class="tablewrap"><table><thead><tr><th>Law</th><th>In words</th><th>Where we met it</th></tr></thead><tbody>
+<tr><td><span class="m">∮ <i class="ef">E</i>·d<i>A</i> = <i>q</i><sub>enc</sub>/ε<sub>0</sub></span></td><td>charges are the sources of E</td><td>Gauss's law</td></tr>
+<tr><td><span class="m">∮ <i class="bf">B</i>·d<i>A</i> = 0</span></td><td>no magnetic monopoles; B lines are closed loops</td><td>Magnetic force, Biot–Savart</td></tr>
+<tr><td><span class="m">∮ <i class="ef">E</i>·d<i>ℓ</i> = −dΦ<sub>B</sub>/d<i>t</i></span></td><td>a changing B makes a (swirling) E</td><td>Faraday &amp; Lenz</td></tr>
+<tr><td><span class="m">∮ <i class="bf">B</i>·d<i>ℓ</i> = μ<sub>0</sub><i>I</i> + μ<sub>0</sub>ε<sub>0</sub> dΦ<sub>E</sub>/d<i>t</i></span></td><td>currents <em>and changing E</em> make B</td><td>Ampère's law (+ Maxwell's term)</td></tr>
+</tbody></table></div>
+        <h2>Electromagnetic waves</h2>
+        <ul>
+          <li><b>Speed:</b> <span class="m"><i>c</i> = 1/√(μ<sub>0</sub>ε<sub>0</sub>) = 2.998 × 10⁸ m/s</span>, in vacuum, for every frequency.</li>
+          <li><b>Relations:</b> <span class="m"><i>c</i> = <i>f</i>λ</span>, <span class="m"><i class="ef">E</i> = <i>c</i><i class="bf">B</i></span> at every point, and the energy flow (Poynting vector) is <span class="m"><i>S</i> = <i class="ef">E</i> × <i class="bf">B</i>/μ<sub>0</sub></span> along the direction of travel.</li>
+          <li><b>Spectrum:</b> radio, microwave, infrared, visible (400–700 nm), ultraviolet, X-rays, gamma rays: the same wave at different frequencies.</li>
+        </ul>
+        <h2>Displacement current</h2>
+        <ul>
+          <li>Between capacitor plates of area A: <span class="m"><i>I</i><sub>d</sub> = ε<sub>0</sub> dΦ<sub>E</sub>/d<i>t</i> = ε<sub>0</sub><i>A</i> d<i class="ef">E</i>/d<i>t</i> = d<i>Q</i>/d<i>t</i></span>, equal to the real current in the wires. For a loop of radius r inside the plates, <span class="m"><i class="bf">B</i> = μ<sub>0</sub><i class="cur">I</i><i>r</i>/(2π<i>R</i>²)</span>.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="3" data-explain="Maxwell added the displacement current: a changing electric field produces a magnetic field. Together with Faraday&#x27;s law (changing B produces E) this makes a self-propagating wave.">
+        <p class="q">Check yourself: which of these did Maxwell add to Ampère's law?</p>
+        <div class="opts"><button type="button">A term for magnetic monopoles</button><button type="button">A term for the force on moving charges</button><button type="button">A term for the speed of light</button><button type="button">A term showing that a changing electric field makes a magnetic field</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

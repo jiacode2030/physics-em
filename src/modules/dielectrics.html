@@ -1,0 +1,71 @@
+  <!-- ============ DIELECTRICS ============ -->
+  <section class="view" id="v-dielectrics" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 10</span></div>
+        <h1>Dielectrics</h1>
+        <p class="lede">Slide an insulator between the plates of a capacitor and its capacitance goes up by a factor κ. The insulator's molecules line up against the field and weaken it. The same effect makes insulators attract charged objects, and it is why real capacitors are stuffed with plastic or ceramic.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>An insulator has no free charges, but its molecules can be stretched or turned: the positive end pulled one way by the field, the negative end the other. This is <b>polarization</b>. Inside the slab the little dipoles line up so that the positive ends point toward the negative plate. Stack them up and you get a layer of negative <b>bound charge</b> on the face next to the positive plate, and positive bound charge next to the negative plate.</p>
+        <p>These bound charges make their own field, pointing <em>against</em> the field from the plates. The field inside the dielectric drops to E₀/κ, where κ ≥ 1 is the dielectric constant. For the same charge on the plates, a smaller field means a smaller voltage (ΔV = Ed), so <b>C = Q/ΔV grows by a factor κ</b>.</p>
+        <p>To keep the story straight, always decide first whether the battery is connected. <b>Isolated</b> (Q fixed): ΔV drops by κ, the field drops by κ, the energy drops by κ. <b>Battery connected</b> (ΔV fixed): Q grows by κ, the field in the gap stays at V/d, the energy grows by κ.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span><i>C</i> = κ<i>C</i><sub>0</sub> = κε<sub>0</sub><i>A</i>/<i>d</i></span><small>fully filled</small></div>
+        <div class="eqn"><span><i class="ef">E</i><sub>in</sub> = <i class="ef">E</i><sub>0</sub>/κ</span><small>same free charge</small></div>
+        <div class="eqn"><span><i>u</i> = ½κε<sub>0</sub><i class="ef">E</i>²</span><small>energy density</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="dl-mode" role="group" aria-label="Connection"><button type="button" data-k="iso" aria-pressed="true">Disconnected (isolated)</button><button type="button" data-k="batt">Battery stays connected</button></div></div>
+        <canvas id="dl-canvas" class="drag" aria-label="Side view of a parallel-plate capacitor with a dielectric slab sliding in from the right."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="dl-k"><span>Dielectric constant κ</span> <output id="dl-k-out"></output></label><input type="range" id="dl-k" min="1" max="10" step="0.5" value="4"></div>
+          <div class="ctl"><label for="dl-f"><span>Slab pushed in</span> <output id="dl-f-out"></output></label><input type="range" id="dl-f" min="0" max="1" step="0.05" value="0"></div>
+        </div>
+        <div class="readout">
+          <div><span>Capacitance C</span><strong class="ef" id="dl-C">—</strong></div>
+          <div><span>Charge Q</span><strong id="dl-Q">—</strong></div>
+          <div><span>Voltage ΔV</span><strong id="dl-V">—</strong></div>
+          <div><span>Field E (V/d)</span><strong class="ef" id="dl-E">—</strong></div>
+          <div><span>Stored energy U</span><strong class="frc" id="dl-U">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">The capacitor starts at 100 V before the slab goes in (C₀ = 88.5 pF). Slide the slab in and compare the two modes: with the battery off, the voltage and field fall; with the battery on, the charge and energy rise. The small ± on the slab are bound charges from polarization.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Disconnect the battery (isolated), then push the κ = 4 slab all the way in. <button type="button" class="btn link" data-show='[["click", "#dl-mode [data-k=iso]"], ["#dl-k", 4], ["#dl-f", 1]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Capacitance goes up 4×. The charge cannot change, so the voltage drops to 25 V and the field falls to a quarter. The energy also falls to a quarter: the field pulls the slab in.</p></details></li>
+        <li><p>Do the same with the battery connected. <button type="button" class="btn link" data-show='[["click", "#dl-mode [data-k=batt]"], ["#dl-k", 4], ["#dl-f", 1]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The battery holds 100 V. The field stays at V/d, but the charge on the plates rises 4× because the capacitor can hold more at the same voltage. The energy ½CV² rises 4×; the battery paid for it.</p></details></li>
+        <li><p>Increase κ to 10 with the slab fully in, isolated. <button type="button" class="btn link" data-show='[["click", "#dl-mode [data-k=iso]"], ["#dl-k", 10], ["#dl-f", 1]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Voltage drops to 10 V. A material with a large κ is a very strong way to boost capacitance (water κ ≈ 80, some ceramics > 1000).</p></details></li>
+        <li><p>Push the slab in only halfway. <button type="button" class="btn link" data-show='[["click", "#dl-mode [data-k=iso]"], ["#dl-k", 4], ["#dl-f", 0.5]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The capacitor acts like two capacitors in parallel, one with the slab (κC₀/2) and one without (C₀/2): C = C₀(1 + κ)/2.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">An air-filled parallel-plate capacitor has C₀ = 100 pF and is charged to 200 V, then disconnected from the battery. A dielectric slab with κ = 4 is slid in until it fills the gap. Find the new voltage, the energy before and after, and explain where the energy went. What would happen with the battery still connected?</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="The slab&#x27;s faces carry bound charge that partly cancels the field."><line x1="30" y1="60" x2="230" y2="60" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/><line x1="30" y1="170" x2="230" y2="170" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/><text x="130" y="48" text-anchor="middle" style="fill:var(--pos);font:600 13px 'IBM Plex Sans',sans-serif">+Q</text><text x="130" y="186" text-anchor="middle" style="fill:var(--neg);font:600 13px 'IBM Plex Sans',sans-serif">−Q</text><g class="sl" data-s="2" hidden><rect x="60" y="68" width="140" height="94" style="fill:color-mix(in srgb,var(--cx) 14%,transparent);stroke:var(--cx);stroke-width:1.5"/><circle cx="72" cy="75" r="3.2" style="fill:var(--neg)"/><circle cx="72" cy="155" r="3.2" style="fill:var(--pos)"/><circle cx="88" cy="75" r="3.2" style="fill:var(--neg)"/><circle cx="88" cy="155" r="3.2" style="fill:var(--pos)"/><circle cx="104" cy="75" r="3.2" style="fill:var(--neg)"/><circle cx="104" cy="155" r="3.2" style="fill:var(--pos)"/><circle cx="120" cy="75" r="3.2" style="fill:var(--neg)"/><circle cx="120" cy="155" r="3.2" style="fill:var(--pos)"/><circle cx="136" cy="75" r="3.2" style="fill:var(--neg)"/><circle cx="136" cy="155" r="3.2" style="fill:var(--pos)"/><circle cx="152" cy="75" r="3.2" style="fill:var(--neg)"/><circle cx="152" cy="155" r="3.2" style="fill:var(--pos)"/><circle cx="168" cy="75" r="3.2" style="fill:var(--neg)"/><circle cx="168" cy="155" r="3.2" style="fill:var(--pos)"/><circle cx="184" cy="75" r="3.2" style="fill:var(--neg)"/><circle cx="184" cy="155" r="3.2" style="fill:var(--pos)"/><text x="130" y="118" text-anchor="middle" style="fill:cx;font:600 14px 'IBM Plex Sans',sans-serif">κ = 4</text></g><g class="sl" data-s="3" hidden><line x1="130" y1="84" x2="130.0" y2="97.7" style="stroke:var(--cx);stroke-width:1.6;stroke-linecap:round"/><polygon points="130,104 125.05,95.0 134.95,95.0" style="fill:var(--cx)"/><line x1="130" y1="128" x2="130.0" y2="141.7" style="stroke:var(--cx);stroke-width:1.6;stroke-linecap:round"/><polygon points="130,148 125.05,139.0 134.95,139.0" style="fill:var(--cx)"/><text x="130" y="206" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">E → E₀/κ inside</text></g><g class="sl" data-s="4" hidden><text x="130" y="226" text-anchor="middle" style="fill:var(--muted);font:600 11px 'IBM Plex Sans',sans-serif">bound charge on the faces</text></g></svg><div class="fbdnotes"><span class="i" data-s="1" hidden>Q = 20 nC, and it stays (isolated)</span><span class="e" data-s="2" hidden>C = κC₀ = 400 pF, so ΔV = 50 V</span><span class="e" data-s="3" hidden>energy: 2.0 μJ → 0.50 μJ</span><span class="f" data-s="4" hidden>1.5 μJ pulled the slab in</span><span class="e" data-s="5" hidden>battery on: Q = 80 nC, U = 8.0 μJ</span></div></div><figcaption>The slab's faces carry bound charge that partly cancels the field.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Charge.</b> <span class="m"><i>Q</i> = <i>C</i><sub>0</sub>Δ<i>V</i><sub>0</sub> = (100 pF)(200 V) = 20 nC</span>, and it stays 20 nC because the capacitor is isolated.</li>
+        <li hidden><b>New capacitance and voltage.</b> <span class="m"><i>C</i> = κ<i>C</i><sub>0</sub> = 400 pF</span> so <span class="m">Δ<i>V</i> = <i>Q</i>/<i>C</i> = 50 V</span>. The field also drops to one quarter.</li>
+        <li hidden><b>Energy before and after.</b> <span class="m"><i>U</i><sub>0</sub> = ½<i>C</i><sub>0</sub>Δ<i>V</i><sub>0</sub>² = 2.0 μJ</span> and <span class="m"><i>U</i> = <i>Q</i>²/(2<i>C</i>) = 0.50 μJ</span>. The energy fell by 1.5 μJ.</li>
+        <li hidden><b>Where did it go?</b> The field attracts the dielectric (the slab is pulled in). That 1.5 μJ became kinetic energy of the slab, or work done on whoever held it back.</li>
+        <li hidden><b>Battery connected instead.</b> The voltage stays 200 V, so <span class="m"><i>Q</i> = κ<i>C</i><sub>0</sub>Δ<i>V</i> = 80 nC</span> (the battery supplies 60 nC more), and <span class="m"><i>U</i> = ½(400 pF)(200)² = 8.0 μJ</span>. The battery did 12 μJ of work (60 nC × 200 V): 6 μJ went into stored energy and 6 μJ into pulling the slab in.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Using κ as the factor for the <em>field</em> in the wrong direction: E goes <em>down</em> by κ for the same free charge.</li><li>Not saying whether the battery is connected. Q fixed and V fixed give opposite answers.</li><li>Treating a dielectric like a conductor. Inside a conductor E = 0; inside a dielectric E = E₀/κ.</li><li>Forgetting that the energy changes. Something does work as the slab moves.</li></ul></div>
+      <div class="prose">
+        <h2>What a dielectric does</h2>
+        <ul>
+          <li><b>Polarization:</b> the field distorts (or rotates) the molecules into small dipoles aligned with the field.</li>
+          <li><b>Bound charge:</b> the dipoles leave a surface layer of bound charge on each face. Its surface density is <span class="m">σ<sub>b</sub> = σ<sub>f</sub>(1 − 1/κ)</span>, where σ<sub>f</sub> is the free charge on the plates.</li>
+          <li><b>Net field:</b> <span class="m"><i class="ef">E</i> = (σ<sub>f</sub> − σ<sub>b</sub>)/ε<sub>0</sub> = σ<sub>f</sub>/(κε<sub>0</sub>) = <i class="ef">E</i><sub>0</sub>/κ</span>.</li>
+          <li>The permittivity of the material is <span class="m">ε = κε<sub>0</sub></span>. All the vacuum formulas work with ε<sub>0</sub> replaced by κε<sub>0</sub> inside the dielectric.</li>
+        </ul>
+        <h2>Why real capacitors use them</h2>
+        <ul>
+          <li>Higher capacitance for the same size (κ ≈ 2–5 plastics, hundreds to thousands for ceramics).</li>
+          <li>Higher breakdown voltage than air (about 3 × 10⁶ V/m for air), so more charge fits before sparks.</li>
+          <li>They keep the plates apart so they can be very close.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="1" data-explain="Because the capacitor is isolated, Q cannot change. The dielectric raises C by 3, so ΔV = Q/C drops to one third. The field E = ΔV/d also drops to one third.">
+        <p class="q">Check yourself: an isolated, charged capacitor has a dielectric with κ = 3 slid fully between its plates. The voltage across it becomes:</p>
+        <div class="opts"><button type="button">3 times larger</button><button type="button">One third as large</button><button type="button">The same as before</button><button type="button">Zero</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

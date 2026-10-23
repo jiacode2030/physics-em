@@ -1,0 +1,56 @@
+  <main>
+  <!-- ============ OVERVIEW ============ -->
+  <section class="view" id="v-overview">
+    <div class="wrap">
+      <div class="hero">
+        <div class="copy">
+          <div class="eyebrow"><span class="tag ap">AP Physics C: E&amp;M</span><span class="tag pu">AP Physics 2: electricity &amp; magnetism</span></div>
+          <h1>Electricity &amp; magnetism, <span class="hl">made visible.</span></h1>
+          <p class="lede">Fields are invisible, so this site draws them. Every module has a live simulation you can drag and change: charges and field lines, voltage maps, circuits, magnets and coils, many of them in 3D. It covers all of AP Physics C: Electricity &amp; Magnetism and the electricity and magnetism units of AP Physics 2.</p>
+          <div class="row"><a class="btn primary" href="#coulomb" style="text-decoration:none">Start with charge</a><a class="btn" href="#practice" style="text-decoration:none">Go to the practice set</a></div>
+          <div class="countdown" id="ap-count" aria-live="polite"></div>
+          <p class="heronote">This is an independent, unofficial study aid. It is not affiliated with, reviewed by, or endorsed by the College Board. Use it to study, not on graded work.</p>
+          <p class="ov-report">Spotted a mistake or something confusing? <button type="button" class="btn link rp-link" data-report="overview" style="padding:0">Report an issue</button></p>
+        </div>
+        <figure class="strobe" style="margin:0">
+          <canvas id="hero-canvas" class="drag" aria-label="Field lines of a positive and a negative charge. Drag either charge to reshape the field."></canvas>
+          <figcaption>Field lines leave the + charge and end on the − charge. The moving dots show the direction of the field. Drag either charge.</figcaption>
+        </figure>
+      </div>
+
+      <div class="lab lab3d">
+        <div class="labbar"><span class="title">See it in 3D</span><div class="seg" id="g3-scene" role="group" aria-label="3D scene"><button type="button" data-k="wire" aria-pressed="true">Wire's field</button><button type="button" data-k="helix" aria-pressed="false">Charge in a B field</button><button type="button" data-k="flux" aria-pressed="false">Flux through a loop</button></div></div>
+        <canvas id="g3-canvas" aria-label="3D scene you can rotate: drag to spin it all the way around"></canvas>
+        <p class="small" id="g3-cap" style="margin:0"></p>
+      </div>
+
+      <div class="head"><h2>New to E&amp;M? Start here</h2><p class="lede" style="font-size:15px">You should know mechanics first: forces, energy and circular motion all come back. The calculus is explained as it comes up, and the optional math toolkit fills gaps.</p></div>
+      <div class="start">
+        <div><h3>How to use a module</h3><ol><li>Read <b>The intuition</b>: the idea in everyday words.</li><li>Play with the simulation. Do <b>Try this</b>: guess first, then open the answer.</li><li>Work the <b>Worked example</b> one step at a time, starting with its diagram.</li><li>Read the equations and the explanation.</li><li>Answer <b>Check yourself</b>, then do the practice problems.</li></ol><p>Look for <span class="gloss" tabindex="0" data-term="electric field">dotted words</span>: tap them for a quick definition. Every simulation has a <b>Coach</b> that explains whatever control you just moved, and a <b>Reset</b> button.</p></div>
+        <div><h3>Five ideas you'll use everywhere</h3><ul><li><b>Fields carry the force.</b> A charge makes a field; the field pushes other charges: <span class="m"><i class="frc">F</i> = <i>q</i><i class="ef">E</i></span>.</li><li><b>Superposition.</b> Fields from separate sources just add, as arrows.</li><li><b>Voltage is height.</b> Positive charges roll downhill in potential, like balls on a hill.</li><li><b>Moving charge makes magnetism</b>, and magnetism pushes sideways on moving charge.</li><li><b>Changing flux makes EMF.</b> That one idea runs generators, transformers and induction stoves.</li></ul></div>
+        <div><h3>Suggested path</h3><p><b>AP Physics C: E&amp;M:</b> go in order, Units 8 to 13. Maxwell's equations is an optional wrap-up. Then work through <a href="#frq">FRQ practice</a>.</p><p><b>AP Physics 2:</b> do the modules tagged AP 2: Coulomb's law, fields, potential, capacitors, circuits, magnetic force, Ampère's law (the field of a wire) and Faraday's law. Skip the calculus-heavy ones.</p><p><b>Before an exam:</b> drill <a href="#methods">Which tool?</a>, build a mixed set in <a href="#exam">Exam review</a>, and clear your <a href="#review">mistakes queue</a>.</p><p>Shaky on the integrals? The optional <a href="#slices">Math toolkit</a> shows how to turn a charged rod into an integral, and how exponential curves work.</p><p>Stuck on notation? Open the <b>Formula sheet</b> button at the bottom right.</p><p class="small" style="margin:0"><b>Use it to study, not on graded work.</b> Follow your course's rules: don't use this site on homework you submit, in labs, or during quizzes and exams.</p></div>
+      </div>
+      <div class="head"><h2>Modules by unit</h2><p class="small" id="ov-prog" style="margin:0"></p></div>
+      <div class="modgroups" id="modgrid"></div>
+
+      <div class="head">
+        <h2>How this maps to your course</h2>
+        <p class="lede" style="font-size:15px">Units are numbered the way AP Physics C numbers them (Mechanics is Units 1–7). The AP Physics 2 column shows where the same ideas appear in that course, usually without calculus. Course outlines change, so check the current Course and Exam Description on AP Central for exact topics.</p>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr><th>Unit</th><th>Modules</th><th>AP Physics C: E&amp;M</th><th>AP Physics 2 (electricity and magnetism topics)</th></tr></thead>
+          <tbody>
+            <tr><td>Optional</td><td><a href="#slices">Charge slices</a>, <a href="#expo">Exponential change</a></td><td>The calculus the course uses</td><td>Not needed</td></tr>
+            <tr><td>8</td><td><a href="#coulomb">Coulomb's law</a>, <a href="#efield">Electric fields</a>, <a href="#continuous">Rods, rings &amp; disks</a>, <a href="#gauss">Gauss's law</a></td><td>Unit 8: Electric charges, fields and Gauss's law</td><td>Electric force, field and potential</td></tr>
+            <tr><td>9</td><td><a href="#potential">Electric potential</a>, <a href="#penergy">Energy of charges</a></td><td>Unit 9: Electric potential</td><td>Electric force, field and potential</td></tr>
+            <tr><td>10</td><td><a href="#conductors">Conductors</a>, <a href="#capacitors">Capacitors</a>, <a href="#dielectrics">Dielectrics</a></td><td>Unit 10: Conductors and capacitors</td><td>Capacitors (dielectrics are Physics C only)</td></tr>
+            <tr><td>11</td><td><a href="#current">Current &amp; resistance</a>, <a href="#circuits">Kirchhoff's rules</a>, <a href="#rc">RC circuits</a></td><td>Unit 11: Electric circuits</td><td>Electric circuits</td></tr>
+            <tr><td>12</td><td><a href="#bforce">Magnetic force</a>, <a href="#wireforce">Wires &amp; loops</a>, <a href="#biot">Biot–Savart</a>, <a href="#ampere">Ampère's law</a></td><td>Unit 12: Magnetic fields and electromagnetism</td><td>Magnetism (no Biot–Savart)</td></tr>
+            <tr><td>13</td><td><a href="#faraday">Faraday &amp; Lenz</a>, <a href="#motional">Motional EMF</a>, <a href="#inductance">Inductors</a>, <a href="#lc">LC oscillations</a>, <a href="#maxwell">Maxwell's equations</a></td><td>Unit 13: Electromagnetic induction (Maxwell's equations are mostly conceptual)</td><td>Electromagnetic induction (Faraday, Lenz, motional EMF; no inductors)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+

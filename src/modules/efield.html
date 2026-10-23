@@ -1,0 +1,83 @@
+  <!-- ============ ELECTRIC FIELDS ============ -->
+  <section class="view" id="v-efield" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 8</span><span class="tag pu">AP 2: electricity</span></div>
+        <h1>Electric fields</h1>
+        <p class="lede">A charge changes the space around it. Put another charge anywhere in that space and it feels a push or pull. The electric field is a map of that push, drawn before the second charge even arrives.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>Think of a weather map with wind arrows. You don't need to throw a leaf to know which way it would blow; the arrows already tell you. The electric field is the same kind of map: at every point it shows the force a tiny positive test charge would feel, per coulomb of its charge.</p>
+        <p>Positive charges push the test charge away, so their field points outward. Negative charges pull it in, so their field points inward. With several charges, work out each one's arrow and add them, tip to tail. That's all superposition means.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span><i class="ef">E</i> = <i class="frc">F</i>/<i>q</i></span><small>definition (N/C)</small></div>
+        <div class="eqn"><span><i class="ef">E</i> = <i>k</i>|<i>q</i>|/<i>r</i>²</span><small>point charge, <i>k</i> = 8.99 × 10⁹</small></div>
+        <div class="eqn"><span><i class="ef">E</i><sub>net</sub> = <i class="ef">E</i><sub>1</sub> + <i class="ef">E</i><sub>2</sub> + …</span><small>add as vectors</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar">
+          <div class="seg" id="ef-preset" role="group" aria-label="Arrangement">
+            <button type="button" data-k="one" aria-pressed="true">One charge</button>
+            <button type="button" data-k="dipole">Dipole</button>
+            <button type="button" data-k="like">Like charges</button>
+            <button type="button" data-k="three">Three charges</button>
+          </div>
+          <div class="seg" id="ef-show" role="group" aria-label="Draw the field as">
+            <button type="button" data-k="lines" aria-pressed="true">Field lines</button>
+            <button type="button" data-k="arrows">Arrows</button>
+          </div>
+        </div>
+        <canvas id="ef-canvas" class="drag" aria-label="Electric field of the charges. Drag the charges or the small probe."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="ef-q1"><span>Charge 1</span> <output id="ef-q1-out"></output></label><input type="range" id="ef-q1" min="-4" max="4" step="1" value="2"></div>
+          <div class="ctl"><label for="ef-q2"><span>Charge 2</span> <output id="ef-q2-out"></output></label><input type="range" id="ef-q2" min="-4" max="4" step="1" value="0"></div>
+        </div>
+        <div class="readout">
+          <div><span>|E| at the probe</span><strong class="ef" id="ef-E">—</strong></div>
+          <div><span>Direction of E</span><strong id="ef-dir">—</strong></div>
+          <div><span>Force on a +1 nC test charge</span><strong class="frc" id="ef-F">—</strong></div>
+          <div><span>Force on an electron</span><strong class="frc" id="ef-Fe">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">The grid squares are 5 cm. The probe's arrow is E there; a positive charge at the probe would be pushed along it, a negative one the opposite way.</p>
+        <div class="v3block"><p class="v3cap"><b>In 3D</b> The same two charges in space. Field lines leave a positive charge in every direction, not just in the flat picture. Drag to spin it around.</p><canvas id="ef3-canvas" aria-label="3D field lines of the two charges. Drag to rotate."></canvas></div>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>Start with one positive charge, then flip it negative. <button type="button" class="btn link" data-show='[["click", "#ef-preset [data-k=one]"], ["#ef-q1", -2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The lines keep the same shape but now point inward. The probe's arrow turns around and points at the charge.</p></details></li>
+        <li><p>Make a dipole and put the probe exactly between the charges. <button type="button" class="btn link" data-show='[["click", "#ef-preset [data-k=dipole]"]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>The field points from + toward −. Both charges' arrows point the same way there, so they add: the field between a dipole's charges is strong.</p></details></li>
+        <li><p>Two equal positive charges: find the spot where the field is zero. <button type="button" class="btn link" data-show='[["click", "#ef-preset [data-k=like]"]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Exactly halfway between them the two pushes are equal and opposite, so |E| drops to zero. No field lines pass through that point.</p></details></li>
+        <li><p>Make charge 2 twice as big as charge 1, both positive. <button type="button" class="btn link" data-show='[["click", "#ef-preset [data-k=like]"], ["#ef-q1", 2], ["#ef-q2", 4]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Twice as many lines leave charge 2. The zero-field point moves toward the smaller charge, where the weaker charge's field can still match the stronger one's.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A +4.0 nC charge sits at x = 0 and a −2.0 nC charge sits at x = 0.30 m. Find the electric field at x = 0.10 m, and the force on an electron placed there.</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="fbd" data-fbd="{&quot;obj&quot;: &quot;charge&quot;, &quot;sign&quot;: &quot;P&quot;, &quot;others&quot;: [[-95, 0, &quot;+&quot;], [95, 0, &quot;−&quot;]], &quot;forces&quot;: [[&quot;E₁&quot;, 0, 0.6, {&quot;dy&quot;: -14}], [&quot;E₂&quot;, 0, 0.15, {&quot;dy&quot;: 14}]], &quot;cap&quot;: &quot;Field arrows at P. Both point right.&quot;}"></div><figcaption>Field arrows at P (x = 0.10 m). Both point toward +x: away from the + charge, toward the − charge.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Draw the arrows first.</b> The + charge pushes a test charge away from it: to the right. The − charge pulls a test charge toward it: also to the right. Same direction, so the magnitudes add.</li>
+        <li hidden><b>Field from the +4.0 nC charge</b> (r = 0.10 m). <span class="m"><i class="ef">E</i><sub>1</sub> = (8.99 × 10⁹)(4.0 × 10⁻⁹)/(0.10)² = 3.60 × 10³ N/C</span>, pointing +x.</li>
+        <li hidden><b>Field from the −2.0 nC charge</b> (r = 0.20 m). <span class="m"><i class="ef">E</i><sub>2</sub> = (8.99 × 10⁹)(2.0 × 10⁻⁹)/(0.20)² = 4.5 × 10² N/C</span>, pointing +x.</li>
+        <li hidden><b>Add.</b> <span class="m"><i class="ef">E</i> = 3.60 × 10³ + 0.45 × 10³ = 4.05 × 10³ N/C</span> in the +x direction.</li>
+        <li hidden><b>Force on the electron.</b> <span class="m"><i class="frc">F</i> = <i>qE</i> = (−1.6 × 10⁻¹⁹)(4.05 × 10³) = −6.5 × 10⁻¹⁶ N</span>: magnitude 6.5 × 10⁻¹⁶ N, pointing −x. A negative charge is pushed opposite to E.</li>
+        <li hidden><b>Check.</b> The electron is pulled toward the + charge on its left and pushed away from the − charge on its right: both to the left. ✓</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Putting the sign of the charge into kq/r² and then also choosing a direction from a picture. Use magnitudes for size, the picture for direction.</li><li>Adding field magnitudes when the arrows point different ways. Add components.</li><li>Thinking E at a point depends on the charge you put there. E is set by the other charges; the charge you place only decides the force, F = qE.</li><li>Forgetting that E points opposite to the force on a negative charge.</li></ul></div>
+      <div class="prose">
+        <h2>Reading field lines</h2>
+        <ul>
+          <li><b>Direction:</b> at every point the field is tangent to the line through it. Lines start on positive charges and end on negative ones (or run off to infinity).</li>
+          <li><b>Strength:</b> where lines crowd together the field is strong; where they spread out it is weak. The number of lines leaving a charge is proportional to its charge.</li>
+          <li><b>Lines never cross.</b> The field has one direction at each point, so two lines can't pass through the same spot.</li>
+          <li><b>A charge is not pushed along a field line forever.</b> The line gives the direction of the force, not the path. A moving charge keeps its momentum and curves away from the line.</li>
+        </ul>
+        <h2>The equations behind the picture</h2>
+        <ul>
+          <li><b>Point charge:</b> <span class="m"><i class="ef">E</i> = <i>kq</i> <i>r̂</i>/<i>r</i>²</span>, where <span class="m"><i>r̂</i></span> points from the charge to the point. With <span class="m"><i>k</i> = 1/(4πε<sub>0</sub>)</span> and <span class="m">ε<sub>0</sub> = 8.85 × 10⁻¹² C²/(N·m²)</span>.</li>
+          <li><b>Superposition:</b> <span class="m"><i class="ef">E</i> = Σ <i>kq</i><sub>i</sub> <i>r̂</i><sub>i</sub>/<i>r</i><sub>i</sub>²</span>. Split each arrow into x and y components, add each column, then recombine.</li>
+          <li><b>Dipole:</b> far away (r much bigger than the separation d), its field falls off as <span class="m">1/<i>r</i>³</span>, faster than a single charge, because the + and − nearly cancel.</li>
+          <li><b>Units:</b> N/C. You will also see V/m; they are the same unit.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="2" data-explain="Each charge pushes a test charge away from itself. At the midpoint the two pushes have equal size and opposite directions, so they cancel.">
+        <p class="q">Check yourself: two equal positive charges sit 10 cm apart. What is the electric field at the point exactly halfway between them?</p>
+        <div class="opts"><button type="button">Twice the field of one charge</button><button type="button">Pointing toward one of the charges</button><button type="button">Zero</button><button type="button">Pointing straight up, away from the line</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+

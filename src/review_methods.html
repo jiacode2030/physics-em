@@ -1,0 +1,30 @@
+  <section class="view" id="v-methods" hidden>
+    <div class="wrap">
+      <div class="head"><div class="eyebrow">Review<span class="tag ap">AP C E&amp;M + AP 2</span></div><h1>Which tool do I use?</h1><p class="lede">Half the battle in E&amp;M is choosing the right law. Learn the clues, then practice picking.</p></div>
+      <div class="intuit"><b class="k">The intuition</b><p>Each law answers a different kind of question. Coulomb's law is the brute-force way to add up charges. Gauss's law is the shortcut when the charge has symmetry. Potential and energy make problems about speed and work easy because they are scalars. Kirchhoff's rules handle circuits. Magnetic force laws handle moving charges and currents. Biot–Savart and Ampère's law find magnetic fields, and Faraday's law handles anything that changes with time.</p><p>Ask first: <b>is the question about a field, a voltage, a current in a circuit, a force from B, or something that changes?</b></p></div>
+      <div class="tablewrap"><table><thead><tr><th>Clue in the problem</th><th>Reach for</th></tr></thead><tbody>
+<tr><td>A few <b>point charges</b>; asks for force or field at a spot</td><td>Coulomb's law and superposition (draw each arrow, add components)</td></tr>
+<tr><td>A <b>sphere, long line or infinite sheet</b> of charge; asks for E</td><td>Gauss's law with a matching Gaussian surface</td></tr>
+<tr><td>A <b>rod, ring or arc</b> of charge, no full symmetry</td><td>Slice into dq and integrate (Coulomb's law as an integral)</td></tr>
+<tr><td>Asks for a <b>speed, work or energy</b> of a charge, or "through a potential difference"</td><td>Potential and energy: ΔU = qΔV, conservation of energy</td></tr>
+<tr><td>A <b>circuit with batteries and resistors</b>; asks for currents or voltages</td><td>Kirchhoff's rules (junction and loop), plus series/parallel shortcuts</td></tr>
+<tr><td>A <b>capacitor or resistor changing over time</b></td><td>Kirchhoff's loop rule with a time constant: exponential charge or decay</td></tr>
+<tr><td>A <b>moving charge or a current-carrying wire</b> in a given B; asks for force or path</td><td>Magnetic force: F = qv × B or F = IL × B</td></tr>
+<tr><td>Field of an <b>awkward current shape</b> (arc, finite segment)</td><td>Biot–Savart law</td></tr>
+<tr><td>Field of a <b>long wire, solenoid or toroid</b></td><td>Ampère's law with a matching loop</td></tr>
+<tr><td>A <b>changing flux, moving rod or loop, or a changing current</b>; asks for EMF or induced current</td><td>Faraday's law, with Lenz's law for direction</td></tr>
+</tbody></table></div>
+      <div class="sorter"><h3>Practice: pick the tool</h3><p class="small" style="margin:0">Choose the first tool you would reach for. <span id="mt-score"></span></p>
+<div class="mitem" data-correct="1" data-explain="A uniformly charged sphere has spherical symmetry, so a spherical Gaussian surface makes E constant over it. Gauss's law gives the field in one line."><p>1. Find the electric field 2 cm from the center of a uniformly charged solid sphere.</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="0" data-explain="Three point charges: find each one's force by Coulomb's law and add the vectors."><p>2. Three point charges sit at the corners of a triangle. What is the net force on one of them?</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="2" data-explain="Speed from a voltage means energy: qΔV = ½mv². No need to know the field in between."><p>3. A proton is accelerated from rest through 500 V. How fast does it end up?</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="3" data-explain="A circuit with two batteries and a junction needs the junction rule and loop rules."><p>4. Find the current in each branch of a circuit with two batteries and three resistors that aren't simply in series or parallel.</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="4" data-explain="A charge moving through B feels F = qv × B, which acts as the centripetal force: r = mv/(qB)."><p>5. An electron moves at 3 × 10⁶ m/s perpendicular to a 0.01 T field. What is the radius of its path?</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="6" data-explain="A long straight current has cylindrical symmetry, so Ampère's law with a circular loop gives B at once."><p>6. What is the magnetic field 4 cm from a long straight wire carrying 10 A?</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="7" data-explain="A rod moving through a field changes the flux through the circuit. Faraday's law (motional EMF) gives the voltage."><p>7. A rod slides along rails in a magnetic field. What EMF is induced across it?</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="5" data-explain="A short curved segment of current has no symmetry for Ampère's law. Add up Biot–Savart contributions along the arc."><p>8. Find the magnetic field at the center of a circular arc of wire carrying current.</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="3" data-explain="A charging capacitor is a loop with an EMF, a resistor and a capacitor. Kirchhoff's loop rule gives dq/dt and the exponential."><p>9. A capacitor charges through a resistor. What is the current after 2 time constants?</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+<div class="mitem" data-correct="2" data-explain="Net work on a charge moved between two points is qΔV, regardless of the path."><p>10. How much work does it take to move a +2 nC charge from a point at 10 V to a point at 60 V?</p><div class="sopts"></div><p class="fb" aria-live="polite"></p></div>
+</div>
+    </div>
+  </section>

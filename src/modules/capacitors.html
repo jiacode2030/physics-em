@@ -1,0 +1,93 @@
+  <!-- ============ CAPACITORS ============ -->
+  <section class="view" id="v-capacitors" hidden>
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Unit<span class="tag ap">AP C Unit 10</span><span class="tag pu">AP 2: electricity</span></div>
+        <h1>Capacitors</h1>
+        <p class="lede">A capacitor stores charge, and with it energy, by holding two conductors close together at different potentials. It is the simplest example of "energy stored in an electric field", and it is the other half of every RC and LC circuit.</p>
+      </div>
+      <div class="intuit"><b class="k">The intuition</b>
+        <p>Two metal plates facing each other, with a gap. Connect a battery and charge flows: +Q onto one plate, −Q onto the other, until the plates' voltage matches the battery. The charge you get per volt is the <b>capacitance</b>, C = Q/ΔV. Bigger plates hold more charge for the same voltage (A in the numerator); plates closer together hold more (d in the denominator): <b>C = ε₀A/d</b>.</p>
+        <p>The energy of a charged capacitor is U = ½CΔV² = Q²/(2C). It is stored in the field between the plates: the energy per volume is u = ½ε₀E², and it is the same for any electric field anywhere.</p>
+        <p>There are two different kinds of "change something on a capacitor" questions, and mixing them up is the most common error. <b>Battery connected:</b> ΔV stays fixed, everything else adjusts. <b>Battery disconnected:</b> Q stays fixed, everything else adjusts. Ask yourself first which one it is.</p>
+      </div>
+      <div class="eqgrid">
+        <div class="eqn"><span><i>C</i> = <i>Q</i>/Δ<i>V</i> = ε<sub>0</sub><i>A</i>/<i>d</i></span><small>parallel plates</small></div>
+        <div class="eqn"><span><i>U</i> = ½<i>C</i>Δ<i>V</i>² = <i>Q</i>²/(2<i>C</i>) = ½<i>Q</i>Δ<i>V</i></span><small>stored energy</small></div>
+        <div class="eqn"><span><i>C</i><sub>par</sub> = <i>C</i><sub>1</sub> + <i>C</i><sub>2</sub>, &nbsp;1/<i>C</i><sub>ser</sub> = 1/<i>C</i><sub>1</sub> + 1/<i>C</i><sub>2</sub></span><small>combinations</small></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="cp-mode" role="group" aria-label="Connection"><button type="button" data-k="batt" aria-pressed="true">Battery stays connected</button><button type="button" data-k="iso">Disconnected (isolated)</button></div></div>
+        <canvas id="cp-canvas" class="drag" aria-label="Side view of a parallel-plate capacitor connected to a battery, with the plate charges and field between the plates."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="cp-A"><span>Plate area A (cm²)</span> <output id="cp-A-out"></output></label><input type="range" id="cp-A" min="10" max="200" step="10" value="100"></div>
+          <div class="ctl"><label for="cp-d"><span>Plate separation d (mm)</span> <output id="cp-d-out"></output></label><input type="range" id="cp-d" min="0.5" max="5" step="0.5" value="2"></div>
+          <div class="ctl"><label for="cp-V"><span>Battery voltage</span> <output id="cp-V-out"></output></label><input type="range" id="cp-V" min="1" max="12" step="1" value="12"></div>
+        </div>
+        <div class="readout">
+          <div><span>Capacitance C</span><strong class="ef" id="cp-C">—</strong></div>
+          <div><span>Charge on a plate Q</span><strong id="cp-Q">—</strong></div>
+          <div><span>Voltage ΔV</span><strong id="cp-VV">—</strong></div>
+          <div><span>Field E between plates</span><strong class="ef" id="cp-E">—</strong></div>
+          <div><span>Stored energy U</span><strong class="frc" id="cp-U">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">With the battery attached, the voltage is fixed and the charge changes. After you disconnect it the charge is fixed instead, and the voltage and energy change. Compare the field E in the two modes as you pull the plates apart.</p>
+        <div class="v3block"><p class="v3cap"><b>In 3D</b> The same capacitor as a real object. Charge sits on the facing surfaces of the plates, and the field between them is uniform. Spread the plates apart or enlarge them and watch the field arrows.</p><canvas id="cp3-canvas" aria-label="3D parallel-plate capacitor. Drag to rotate."></canvas></div>
+      </div>
+      <div class="lab">
+        <div class="labbar"><div class="seg" id="cc-mode" role="group" aria-label="Connection"><button type="button" data-k="ser" aria-pressed="true">In series</button><button type="button" data-k="par">In parallel</button></div></div>
+        <canvas id="cc-canvas" class="drag" aria-label="Two capacitors connected to a battery, in series or in parallel."></canvas>
+        <div class="controls">
+          <div class="ctl"><label for="cc-V"><span>Battery voltage</span> <output id="cc-V-out"></output></label><input type="range" id="cc-V" min="2" max="24" step="1" value="12"></div>
+          <div class="ctl"><label for="cc-C1"><span>C₁ (μF)</span> <output id="cc-C1-out"></output></label><input type="range" id="cc-C1" min="1" max="10" step="1" value="4"></div>
+          <div class="ctl"><label for="cc-C2"><span>C₂ (μF)</span> <output id="cc-C2-out"></output></label><input type="range" id="cc-C2" min="1" max="10" step="1" value="2"></div>
+        </div>
+        <div class="readout">
+          <div><span>Equivalent capacitance</span><strong class="ef" id="cc-eq">—</strong></div>
+          <div><span>Total charge from the battery</span><strong id="cc-Q">—</strong></div>
+          <div><span>V across C₁</span><strong id="cc-v1">—</strong></div>
+          <div><span>V across C₂</span><strong id="cc-v2">—</strong></div>
+          <div><span>Charges Q₁ and Q₂</span><strong id="cc-q12">—</strong></div>
+        </div>
+        <p class="small" style="margin:0">Series: one path, so the same charge on each, and the voltages split (the smaller capacitor takes the bigger share). Parallel: the same voltage across each, and the charges split.</p>
+      </div>
+      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>
+        <li><p>With the battery connected, double the plate separation. <button type="button" class="btn link" data-show='[["click", "#cp-mode [data-k=batt]"], ["#cp-A", 100], ["#cp-d", 2], ["#cp-V", 12], ["#cp-d", 4]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>C halves. The battery keeps ΔV = 12 V, so Q halves: charge flows back to the battery. E = ΔV/d halves too. Energy ½CΔV² halves.</p></details></li>
+        <li><p>Disconnect the battery, then double the separation. <button type="button" class="btn link" data-show='[["click", "#cp-mode [data-k=batt]"], ["#cp-A", 100], ["#cp-d", 2], ["#cp-V", 12], ["click", "#cp-mode [data-k=iso]"], ["#cp-d", 4]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>Now Q cannot change. C halves, so ΔV = Q/C doubles. The field E = Q/(ε₀A) does not change at all: it depends only on the charge density. Energy Q²/2C doubles, and the extra energy is the work you did pulling the plates apart against their attraction.</p></details></li>
+        <li><p>Series: 4 μF and 2 μF on 12 V. Then switch to parallel. <button type="button" class="btn link" data-show='[["click", "#cc-mode [data-k=ser]"], ["#cc-V", 12], ["#cc-C1", 4], ["#cc-C2", 2]]'>Set it up for me</button></p><details><summary>What you should see</summary><p>In series C_eq = 1.33 μF (less than either), each gets the same 16 μC, and the smaller capacitor takes the bigger voltage (8 V vs 4 V). In parallel C_eq = 6 μF (the sum), each has 12 V, and the larger capacitor holds more charge.</p></details></li>
+      </ol></div>
+      <div class="example"><h3>Worked example</h3><p class="prob">A parallel-plate capacitor has plates 10 cm × 10 cm, 2.0 mm apart, connected to a 12 V battery. (a) Find C, Q, E and U. (b) The battery is disconnected and the plates are pulled apart to 4.0 mm. Find the new voltage, field and energy, and the work needed.</p><p class="small" style="margin:0">Try it yourself first, then reveal one step at a time.</p><div class="exgrid"><div class="figs"><figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 230" role="img" aria-label="Parallel plates, area A = 100 cm², separation d = 2.0 mm, 12 V battery."><line x1="40" y1="90" x2="220" y2="90" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/><line x1="40" y1="140" x2="220" y2="140" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/><line x1="232" y1="90" x2="232" y2="140" style="stroke:var(--muted);stroke-width:1.2;stroke-linecap:round"/><text x="246" y="120" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">d</text><text x="130" y="28" text-anchor="middle" style="fill:var(--ink);font:600 12px 'IBM Plex Sans',sans-serif">A = 100 cm², d = 2.0 mm</text><line x1="20" y1="90" x2="40" y2="90" style="stroke:var(--ink);stroke-width:1.5;stroke-linecap:round"/><line x1="20" y1="140" x2="40" y2="140" style="stroke:var(--ink);stroke-width:1.5;stroke-linecap:round"/><line x1="20" y1="90" x2="20" y2="104" style="stroke:var(--ink);stroke-width:1.5;stroke-linecap:round"/><line x1="20" y1="126" x2="20" y2="140" style="stroke:var(--ink);stroke-width:1.5;stroke-linecap:round"/><line x1="10" y1="111" x2="30" y2="111" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/><line x1="15" y1="119" x2="25" y2="119" style="stroke:var(--ink);stroke-width:3;stroke-linecap:round"/><text x="130" y="200" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">ε = 12 V</text><g class="sl" data-s="2" hidden><text x="130" y="78" text-anchor="middle" style="fill:var(--pos);font:600 13px 'IBM Plex Sans',sans-serif">+Q</text><text x="130" y="162" text-anchor="middle" style="fill:var(--neg);font:600 13px 'IBM Plex Sans',sans-serif">−Q</text><line x1="130" y1="95" x2="130.0" y2="128.7" style="stroke:var(--cx);stroke-width:2.4;stroke-linecap:round"/><polygon points="130,135 125.05,126.0 134.95,126.0" style="fill:var(--cx)"/><text x="147" y="120" text-anchor="start" style="fill:var(--cx);font:600 13px 'IBM Plex Sans',sans-serif">E</text></g><g class="sl" data-s="3" hidden><text x="20" y="76" text-anchor="middle" style="fill:bad;font:600 16px 'IBM Plex Sans',sans-serif">✕</text><text x="20" y="166" text-anchor="middle" style="fill:bad;font:600 16px 'IBM Plex Sans',sans-serif">✕</text><text x="130" y="214" text-anchor="middle" style="fill:bad;font:600 11px 'IBM Plex Sans',sans-serif">battery disconnected: Q is stuck</text></g><g class="sl" data-s="4" hidden><line x1="40" y1="190" x2="220" y2="190" style="stroke:var(--muted);stroke-width:3;stroke-linecap:round;stroke-dasharray:6 4"/><line x1="236" y1="140" x2="236" y2="190" style="stroke:var(--muted);stroke-width:1.2;stroke-linecap:round"/><text x="252" y="168" text-anchor="middle" style="fill:var(--muted);font:600 12px 'IBM Plex Sans',sans-serif">d′</text></g></svg><div class="fbdnotes"><span class="e" data-s="1" hidden>C = ε₀A/d = 44 pF</span><span class="e" data-s="2" hidden>Q = 0.53 nC, E = 6.0 × 10³ V/m, U = 3.2 nJ</span><span class="i" data-s="3" hidden>disconnected: Q = 0.53 nC stays fixed</span><span class="e" data-s="4" hidden>d′ = 4.0 mm → C′ = 22 pF, ΔV′ = 24 V</span><span class="f" data-s="5" hidden>W = ΔU = 6.4 − 3.2 = 3.2 nJ (work you did)</span><span class="i" data-s="6" hidden>✓ E is unchanged: it only depends on Q/A</span></div></div><figcaption>Parallel plates, area A = 100 cm², separation d = 2.0 mm, 12 V battery.</figcaption></figure></div><div class="exbody"><ol class="exsteps">
+        <li hidden><b>Capacitance.</b> <span class="m"><i>C</i> = ε<sub>0</sub><i>A</i>/<i>d</i> = (8.85 × 10⁻¹²)(0.010)/(0.0020) = 4.4 × 10⁻¹¹ F = 44 pF</span>.</li>
+        <li hidden><b>Charge, field and energy at 12 V.</b> <span class="m"><i>Q</i> = <i>C</i>Δ<i>V</i> = 0.53 nC</span>, <span class="m"><i class="ef">E</i> = Δ<i>V</i>/<i>d</i> = 12/0.0020 = 6.0 × 10³ V/m</span>, <span class="m"><i>U</i> = ½<i>C</i>Δ<i>V</i>² = ½(4.4 × 10⁻¹¹)(12)² = 3.2 nJ</span>.</li>
+        <li hidden><b>Disconnect: what is fixed?</b> With the battery gone the charge has nowhere to go: <b>Q = 0.53 nC stays constant</b>.</li>
+        <li hidden><b>New values at d = 4.0 mm.</b> <span class="m"><i>C</i>′ = 22 pF</span>, so <span class="m">Δ<i>V</i>′ = <i>Q</i>/<i>C</i>′ = 24 V</span>. The field: <span class="m"><i class="ef">E</i> = Δ<i>V</i>′/<i>d</i>′ = 24/0.0040 = 6.0 × 10³ V/m</span>, unchanged. Energy: <span class="m"><i>U</i>′ = <i>Q</i>²/(2<i>C</i>′) = 6.4 nJ</span>.</li>
+        <li hidden><b>Work done.</b> <span class="m"><i>W</i> = Δ<i>U</i> = 6.4 − 3.2 = 3.2 nJ</span>. You pulled against the attraction between the plates, and the energy went into the field.</li>
+        <li hidden><b>Check.</b> The field has the same value because E = Q/(ε₀A) and neither Q nor A changed ✓. The volume of field doubled while the energy density stayed the same, so the energy doubled ✓.</li>
+      </ol><div class="row"><button type="button" class="btn primary" data-next>Show step 1</button><button type="button" class="btn" data-all>Show all steps</button></div></div></div></div>
+      <div class="oops"><h3>Common mistakes</h3><ul><li>Using ΔV = constant after the battery has been disconnected (or Q constant with the battery on).</li><li>Adding capacitances in series. They add in parallel; in series it is the reciprocals.</li><li>Using the battery voltage for each capacitor in a series pair. The battery voltage is shared.</li><li>Forgetting to convert mm and cm² to SI units in C = ε₀A/d.</li></ul></div>
+      <div class="prose">
+        <h2>Parallel plates</h2>
+        <ul>
+          <li><b>Field:</b> between large plates the field is uniform, <span class="m"><i class="ef">E</i> = σ/ε<sub>0</sub> = <i>Q</i>/(ε<sub>0</sub><i>A</i>)</span> (the fields of the two sheets add between them and cancel outside).</li>
+          <li><b>Voltage:</b> <span class="m">Δ<i>V</i> = <i class="ef">E</i><i>d</i> = <i>Qd</i>/(ε<sub>0</sub><i>A</i>)</span>, so <span class="m"><i>C</i> = <i>Q</i>/Δ<i>V</i> = ε<sub>0</sub><i>A</i>/<i>d</i></span>. It depends only on the geometry.</li>
+          <li><b>Other shapes:</b> a spherical capacitor has <span class="m"><i>C</i> = 4πε<sub>0</sub><i>ab</i>/(<i>b</i> − <i>a</i>)</span>; a cylindrical one has <span class="m"><i>C</i> = 2πε<sub>0</sub><i>L</i>/ln(<i>b</i>/<i>a</i>)</span>. Find each by Gauss's law, then integrate E to get ΔV.</li>
+        </ul>
+        <h2>Energy</h2>
+        <ul>
+          <li><span class="m"><i>U</i> = ∫ Δ<i>V</i> d<i>q</i> = ∫ (<i>q</i>/<i>C</i>) d<i>q</i> = <i>Q</i>²/(2<i>C</i>)</span>: each extra bit of charge costs more energy, because the voltage is higher.</li>
+          <li><b>Energy density:</b> <span class="m"><i>u</i> = <i>U</i>/(<i>Ad</i>) = ½ε<sub>0</sub><i class="ef">E</i>²</span>.</li>
+        </ul>
+        <h2>Combining capacitors</h2>
+        <ul>
+          <li><b>Parallel:</b> same ΔV, charges add: <span class="m"><i>C</i><sub>eq</sub> = Σ<i>C</i><sub>i</sub></span>.</li>
+          <li><b>Series:</b> same Q, voltages add: <span class="m">1/<i>C</i><sub>eq</sub> = Σ 1/<i>C</i><sub>i</sub></span>.</li>
+        </ul>
+      </div>
+      <div class="quiz" data-correct="2" data-explain="With the battery disconnected, the charge on the plates is stuck. The field depends only on the charge density σ = Q/A, and that does not change when d changes. The voltage doubles, but E = ΔV/d stays the same.">
+        <p class="q">Check yourself: an isolated, charged parallel-plate capacitor has its plates pulled to twice the separation. What happens to the electric field between the plates?</p>
+        <div class="opts"><button type="button">It doubles</button><button type="button">It is cut in half</button><button type="button">It is unchanged</button><button type="button">It drops to zero</button></div>
+        <p class="fb" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
