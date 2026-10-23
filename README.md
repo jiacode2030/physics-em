@@ -33,6 +33,6 @@ Quick regeneration: `for f in tools/gen_*.py; do (cd tools && python3 $(basename
 
 Every module and problem has a **Report an issue** link. It opens a pre-filled GitHub issue (or saves to the artifact database when hosted as an artifact).
 
-Issues go to the shared [AP Labs feedback](https://github.com/jiacode2030/ap-labs-feedback/issues) tracker, labelled `course:em`. You can also [open one directly](https://github.com/jiacode2030/ap-labs-feedback/issues/new/choose).
+Issues go to the shared [Intulab feedback](https://github.com/jiacode2030/ap-labs-feedback/issues) tracker, labelled `course:em`. You can also [open one directly](https://github.com/jiacode2030/ap-labs-feedback/issues/new/choose).
 
-The **More AP labs** link in the side rail goes to the [AP Labs](https://jiacode2030.github.io/ap-labs/) landing page. Visits are counted anonymously with GoatCounter (no cookies), shared with the other AP Labs sites.
+The **More labs** link in the side rail goes to the [Intulab](https://jiacode2030.github.io/ap-labs/) landing page. Visits are counted anonymously with GoatCounter (no cookies), shared with the other Intulab sites.
