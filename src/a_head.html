@@ -51,6 +51,13 @@
 @font-face{font-family:'STIX Two Text';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/stixtwotext-greek-191a07.woff2) format('woff2');unicode-range:U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF}
 @font-face{font-family:'STIX Two Text';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/stixtwotext-latin-ext-925ed5.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
 @font-face{font-family:'STIX Two Text';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/stixtwotext-latin-5cd9c2.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+/* ===== Delight pack (shared by all labs): the headline gradient follows the mouse, the main buttons lean toward it, the demo card tilts, clicks ring out, right answers burst, a lab lights up while you drag its controls ===== */
+.hero h1 .hl.gx{background-size:180% 100%!important;background-position:var(--gx,40%) 0!important;transition:background-position .25s ease-out}
+.ring{position:fixed;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:2px solid var(--m-acc,var(--accent,#5CB8FF));pointer-events:none;z-index:40;animation:ring .65s ease-out forwards}
+@keyframes ring{from{opacity:.8;transform:scale(.4)}to{opacity:0;transform:scale(5)}}
+.lab:has(input[type=range]:active),.lab:has(.seg button:active){box-shadow:0 0 0 3px color-mix(in srgb,var(--m-acc,var(--accent,#5CB8FF)) 30%,transparent),var(--shadow-1,none)}
+#v-overview .hero .strobe{transition:transform .25s ease-out}
+@media (prefers-reduced-motion:reduce){.ring{display:none}.hero h1 .hl.gx{transition:none}}
 </style>
 <style>
 /* Layout: a lab-notebook app. Module rail on the left (top strip on phones), one module per view.
@@ -536,6 +543,12 @@ kbd{font:500 11px/1.4 var(--f-mono);border:1px solid var(--line);border-bottom-w
   .btn.primary:hover::after{transform:translateX(120%)}
 }
 @media (prefers-reduced-motion:reduce){a.mod:hover{transform:translateY(-3px)}.btn.primary::after{display:none}}
+#ptr{position:fixed;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;pointer-events:none;z-index:0;opacity:0;transition:opacity .5s;
+  background:radial-gradient(circle,color-mix(in srgb,var(--m-acc,var(--accent,#5CB8FF)) 13%,transparent),transparent 66%);will-change:transform}
+#ptr.on.ov{opacity:1}
+.spark{position:fixed;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:50%;pointer-events:none;z-index:40;background:var(--m-acc,var(--accent,#5CB8FF));box-shadow:0 0 8px var(--m-acc,var(--accent,#5CB8FF));animation:spark .75s ease-out forwards}
+@keyframes spark{from{opacity:.9;transform:translate(0,0) scale(1)}to{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.2)}}
+@media (prefers-reduced-motion:reduce){#ptr,.spark{display:none}}
 /* link back to the Intulab landing page */
 .morelabs{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;min-height:36px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 12px 6px 9px;font:500 12.5px var(--f-body);text-decoration:none;
   transition:color var(--d-1),border-color var(--d-1)}
