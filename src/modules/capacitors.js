@@ -57,7 +57,7 @@ Object.assign(TT,{capacitors:"Before touching the numbers ask: is the battery st
 PROBS.push(
  {id:'capC',topic:'capacitors',title:'Capacitance of parallel plates',gen(){const A=pick([50,100,200,400]),d=pick([.5,1,2,4]),ans=EPS0*A*1e-4/(d*1e-3)*1e12;
    return {q:`A parallel-plate capacitor has plates of area ${A} cm² separated by ${d} mm of air. What is its capacitance, in pF?`,ans,unit:'pF',hint:'C = ε₀A/d, with A in m² and d in m.',
-   sol:`<span class="m"><i>C</i> = ε<sub>0</sub><i>A</i>/<i>d</i> = (8.85 × 10⁻¹²)(${num(A*1e-4)})/(${num(d*1e-3)}) = <b>${fmt(ans,3)} pF</b></span>.`};}},
+   sol:`<span class="m"><i>C</i> = ε<sub>0</sub><i>A</i>/<i>d</i> = (8.85 × 10⁻¹²)(${sciv(A*1e-4)} m²)/(${sciv(d*1e-3)} m) = <b>${fmt(ans,3)} pF</b></span>.`};}},
  {id:'capU',topic:'capacitors',title:'Energy stored',gen(){const C=pick([2,5,10,22,47]),V=pick([6,12,24,50]),ans=.5*C*V*V;
    return {q:`A ${C} μF capacitor is charged to ${V} V. How much energy does it store, in μJ?`,ans,unit:'μJ',hint:'U = ½CΔV².',
    sol:`<span class="m"><i>U</i> = ½<i>C</i>Δ<i>V</i>² = ½(${C})(${V})² = <b>${fmt(ans,3)} μJ</b></span>.`};}},

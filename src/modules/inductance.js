@@ -45,5 +45,5 @@ PROBS.push(
    return {q:`An inductor carries a steady ${num(I)} A. A switch suddenly forces that current through a ${R} Ω resistor connected across the inductor. What is the voltage across the resistor immediately afterwards?`,ans,unit:'V',hint:'The inductor keeps its current at the instant of the change, so the resistor carries the same current: V = IR.',
    sol:`<span class="m"><i>V</i> = <i class="cur">I</i><i>R</i> = (${num(I)})(${R}) = <b>${fmt(ans,3)} V</b></span>: opening a switch in an inductive circuit can make a big voltage.`};}},
  {id:'lrsolen',topic:'inductance',title:'Inductance of a solenoid',gen(){const N=pick([200,500,1000]),A=pick([2,5,10]),l=pick([10,20,40]),ans=MU0*N*N*A*1e-4/(l*.01)*1e3;
-   return {q:`A solenoid has ${N} turns, cross-sectional area ${A} cm² and length ${l} cm. What is its inductance, in mH?`,ans,unit:'mH',hint:'L = μ₀N²A/ℓ.',sol:`<span class="m"><i>L</i> = μ<sub>0</sub><i>N</i>²<i>A</i>/ℓ = (4π × 10⁻⁷)(${N})²(${num(A*1e-4)})/${num(l/100)} = <b>${fmt(ans,4)} mH</b></span>.`};}}
+   return {q:`A solenoid has ${N} turns, cross-sectional area ${A} cm² and length ${l} cm. What is its inductance, in mH?`,ans,unit:'mH',hint:'L = μ₀N²A/ℓ.',sol:`<span class="m"><i>L</i> = μ<sub>0</sub><i>N</i>²<i>A</i>/ℓ = (4π × 10⁻⁷)(${N})²(${sciv(A*1e-4)} m²)/(${num(l/100)} m) = <b>${fmt(ans,4)} mH</b></span>.`};}}
 );
