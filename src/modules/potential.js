@@ -65,7 +65,7 @@ PROBS.push(
 PROBS.push(
  {id:'vring',topic:'potential',calc:1,title:'Potential on the axis of a ring',gen(){const Q=pick([4,8,12,20]),R=pick([.05,.1,.15]),z=pick([.1,.2,.3]),ans=KC*Q*1e-9/Math.sqrt(R*R+z*z);
    return {q:`A ring of radius ${num(R)} m carries a uniform charge of +${Q} nC. What is the electric potential on its axis, ${num(z)} m from the center? (V = 0 at infinity.)`,ans,unit:'V',hint:'Every slice of the ring is the same distance √(R² + z²) from the point, so V = kQ/√(R² + z²). No components needed.',
-   sol:`<span class="m"><i>V</i> = <i>kQ</i>/√(<i>R</i>² + <i>z</i>²) = (8.99 × 10⁹)(${Q} × 10⁻⁹)/√(${num(R*R)} + ${num(z*z)}) = <b>${sf(ans,'V')}</b></span>.`};}},
+   sol:`<span class="m"><i>V</i> = <i>kQ</i>/√(<i>R</i>² + <i>z</i>²) = (8.99 × 10⁹)(${Q} × 10⁻⁹)/√(${num(R)}² + ${num(z)}²) = <b>${sf(ans,'V')}</b></span>.`};}},
  {id:'vshell',topic:'potential',title:'Potential inside a charged shell',gen(){const Q=pick([5,10,20]),R=pick([2,4,5,8]),r=R*pick([.25,.5,.75]),ans=KC*Q*1e-9/(R*.01);
    return {q:`A thin spherical shell of radius ${R} cm carries a uniform charge of +${Q} nC. What is the potential at ${num(r)} cm from its center (inside the shell)? (V = 0 at infinity.)`,ans,unit:'V',hint:'E = 0 inside the shell, so the potential cannot change inside: it equals the potential at the surface, kQ/R.',
    sol:`<span class="m"><i>V</i> = <i>kQ</i>/<i>R</i> = (8.99 × 10⁹)(${Q} × 10⁻⁹)/${num(R/100)} = <b>${sf(ans,'V')}</b></span>, the same everywhere inside.`};}},
