@@ -14,6 +14,8 @@ const LABEL='600 12px "IBM Plex Sans", system-ui, sans-serif';
 
 function fmt(n,d=2){if(n==null||!isFinite(n))return '—';let s=Math.abs(n)>=1e5?n.toExponential(2):n.toFixed(d);if(/^-0(\.0+)?$/.test(s))s=s.slice(1);return s.replace('-','−');}
 function num(n){return String(+(+n).toFixed(3)).replace('-','−');}
+// Scientific notation with a trimmed mantissa, e.g. sciv(2e-4) = '2 × 10⁻⁴', sciv(2.5e-3) = '2.5 × 10⁻³'. Use for small given values that num() would round away.
+function sciv(n){if(!n||!isFinite(n))return num(n);let e=Math.floor(Math.log10(Math.abs(n))),m=+(n/10**e).toPrecision(4);if(Math.abs(m)>=10){m=+(m/10).toPrecision(4);e++;}const sup={'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};return String(m).replace('-','−')+' × 10'+String(e).split('').map(c=>sup[c]).join('');}
 function clamp(x,a,b){return Math.max(a,Math.min(b,x));}
 function niceStep(range,n){const raw=range/n;const mag=Math.pow(10,Math.floor(Math.log10(raw)));const r=raw/mag;return (r<1.5?1:r<3?2:r<7?5:10)*mag;}
 function tick(v,step){return fmt(v,Math.max(0,-Math.floor(Math.log10(step)+1e-9)));}

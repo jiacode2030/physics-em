@@ -30,13 +30,13 @@ Object.assign(TT,{continuous:"Before integrating, ask which parts of dE cancel. 
 PROBS.push(
  {id:'ringE',topic:'continuous',calc:1,title:'Field on the axis of a ring',gen(){const Q=pick([4,6,8,12]),R=pick([.05,.1,.15]),z=pick([.1,.2,.3]),ans=KC*Q*1e-9*z/Math.pow(z*z+R*R,1.5);
    return {q:`A ring of radius ${num(R)} m carries a total charge of +${num(Q)} nC spread uniformly. What is the electric field on the axis, ${num(z)} m from the center of the ring?`,ans,unit:'N/C',hint:'Only the component along the axis survives: E = kQz/(z² + R²)^(3/2).',
-   sol:`<span class="m"><i class="ef">E</i> = (8.99 × 10⁹)(${num(Q)} × 10⁻⁹)(${num(z)})/(${num(z*z)} + ${num(R*R)})<sup>3/2</sup> = <b>${sf(ans,'N/C')}</b></span>, along the axis, away from the ring.`};}},
+   sol:`<span class="m"><i class="ef">E</i> = (8.99 × 10⁹)(${num(Q)} × 10⁻⁹)(${num(z)})/(${num(z)}² + ${num(R)}²)<sup>3/2</sup> = <b>${sf(ans,'N/C')}</b></span>, along the axis, away from the ring.`};}},
  {id:'ringmax',topic:'continuous',calc:1,title:'Where the ring field peaks',gen(){const R=pick([3,4,6,8,10,12]),ans=R/Math.sqrt(2);
    return {q:`A uniformly charged ring has radius ${num(R)} cm. At what distance from its center along the axis is the field strongest, in cm?`,ans,unit:'cm',hint:'Set dE/dz = 0 for E = kQz/(z² + R²)^(3/2). The peak is at z = R/√2.',
    sol:`<span class="m">d<i>E</i>/d<i>z</i> = 0</span> gives <span class="m"><i>z</i><sup>2</sup> = <i>R</i><sup>2</sup>/2</span>, so <span class="m"><i>z</i> = <i>R</i>/√2 = <b>${fmt(ans,3)} cm</b></span>.`};}},
  {id:'diskE',topic:'continuous',calc:1,title:'Field on the axis of a disk',gen(){const sg=pick([1,2,3,5]),R=pick([.05,.1,.2]),z=pick([.05,.1,.2]),ans=sg*1e-6/(2*EPS0)*(1-z/Math.sqrt(z*z+R*R));
    return {q:`A disk of radius ${num(R)} m carries a uniform surface charge density σ = +${num(sg)} μC/m². What is the electric field on the axis, ${num(z)} m from the disk?`,ans,unit:'N/C',hint:'E = (σ/2ε₀)[1 − z/√(z² + R²)], with ε₀ = 8.85 × 10⁻¹² C²/(N·m²).',
-   sol:`<span class="m"><i class="ef">E</i> = (${num(sg)} × 10⁻⁶/(2 × 8.85 × 10⁻¹²))[1 − ${num(z)}/√(${num(z*z)} + ${num(R*R)})] = <b>${sf(ans,'N/C')}</b></span>.`};}},
+   sol:`<span class="m"><i class="ef">E</i> = (${num(sg)} × 10⁻⁶/(2 × 8.85 × 10⁻¹²))[1 − ${num(z)}/√(${num(z)}² + ${num(R)}²)] = <b>${sf(ans,'N/C')}</b></span>.`};}},
  {id:'sheetE',topic:'continuous',title:'Field of an infinite sheet',gen(){const sg=pick([2,4,6,8,10]),ans=sg*1e-9/(2*EPS0);
    return {q:`A very large flat sheet carries a uniform surface charge density of +${num(sg)} nC/m². What is the field strength 2 cm from it (far from the edges)?`,ans,unit:'N/C',hint:'For an infinite sheet E = σ/2ε₀, at any distance.',
    sol:`<span class="m"><i class="ef">E</i> = σ/(2ε<sub>0</sub>) = ${num(sg)} × 10⁻⁹/(2 × 8.85 × 10⁻¹²) = <b>${sf(ans,'N/C')}</b></span>, whatever the distance.`};}}
