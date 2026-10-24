@@ -486,6 +486,15 @@ kbd{font:500 11px/1.4 var(--f-mono);border:1px solid var(--line);border-bottom-w
 .appdlg summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600}
 .appdlg summary::before{content:'▸';margin-right:8px}.appdlg details[open] summary::before{content:'▾'}
 .appdlg .approw{display:flex;justify-content:flex-end;margin-top:18px}
+/* Pointer feel (shared with the Intulab landing page): a soft glow follows the mouse, module cards tilt toward it and light up. Mouse and trackpad only; off for reduced motion. */
+#ptr{position:fixed;left:0;top:0;width:560px;height:560px;margin:-280px 0 0 -280px;border-radius:50%;pointer-events:none;z-index:0;opacity:0;transition:opacity .5s;
+  background:radial-gradient(circle,color-mix(in srgb,var(--accent,#5CB8FF) 12%,transparent),transparent 66%);will-change:transform}
+#ptr.on{opacity:1}
+@media (hover:hover) and (pointer:fine){
+  a.mod:hover{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(-3px);
+    background-image:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--accent,#5CB8FF) 15%,transparent),transparent 70%)}
+}
+@media (prefers-reduced-motion:reduce){#ptr{display:none}a.mod:hover{transform:translateY(-3px)}}
 /* link back to the Intulab landing page */
 .morelabs{display:inline-flex;align-items:center;gap:8px;align-self:flex-start;min-height:36px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:6px 12px 6px 9px;font:500 12.5px var(--f-body);text-decoration:none;
   transition:color var(--d-1),border-color var(--d-1)}
