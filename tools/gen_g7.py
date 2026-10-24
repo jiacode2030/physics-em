@@ -10,6 +10,83 @@ fa_svg=svg(f'<circle cx="130" cy="115" r="70" style="fill:color-mix(in srgb,var(
   ''.join(txt(x,y,'×','bf',15) for x in (95,130,165) for y in (85,120,155))+
   f'<path d="M 130 52 A 63 63 0 1 1 129 52" style="fill:none;stroke:var(--cv);stroke-width:3"/>'+arr(88,72,100,62,'cv','',2.2)+txt(130,38,'N = 200, r = 4.0 cm','ink',12)+txt(130,218,'B into page, decreasing: Lenz → clockwise current','mut',10),
   'A coil in a field that points into the page and is decreasing. The induced current must make more field into the page, so it flows clockwise.')
+# ===== LENZ DRILL =====
+from mk import *
+LC,LY,LR=80,62,40
+def dots(sym,c='bf'): 
+    pts=[(62,46),(98,46),(62,78),(98,78),(80,62)]
+    return ''.join(txt(x,y+5,sym,c,15,weight=500) for x,y in pts)
+def lp(): return loop(LC,LY,LR,'ink',2.6)
+def cap(t,c='bf'): return txt(80,124,t,c,11)
+OPTS=['Clockwise','Counter-clockwise','No current']
+L=[]
+# L1 into page, increasing -> CCW
+L.append(dict(q='The magnetic field through the loop points <b>into the page</b> and is <b>growing stronger</b>. Which way does the induced current flow?',
+  opts=OPTS,correct=1,before=lp()+dots('×')+cap('into the page, growing'),
+  after=lp()+dots('×')+curarrow(LC,LY,LR-6,False)+cap('induced field: out of the page','bf'),
+  why='<b>Counter-clockwise.</b> The into-page flux is growing, so the loop opposes it by making its own field <em>out of the page</em> inside the loop. By the right-hand rule that needs a counter-clockwise current.'))
+# L2 into page, decreasing -> CW
+L.append(dict(q='The field through the loop points <b>into the page</b> and is <b>getting weaker</b>. Which way is the induced current?',
+  opts=OPTS,correct=0,before=lp()+dots('×')+cap('into the page, fading'),
+  after=lp()+dots('×')+curarrow(LC,LY,LR-6,True)+cap('induced field: into the page','bf'),
+  why='<b>Clockwise.</b> The into-page flux is fading, so the loop tries to keep it up: it makes more field <em>into the page</em>, which takes a clockwise current.'))
+# L3 out of page, increasing -> CW
+L.append(dict(q='The field points <b>out of the page</b> and is <b>growing</b>. Which way is the induced current?',
+  opts=OPTS,correct=0,before=lp()+dots('⊙')+cap('out of page, growing'),
+  after=lp()+dots('⊙')+curarrow(LC,LY,LR-6,True)+cap('induced field: into the page','bf'),
+  why='<b>Clockwise.</b> The out-of-page flux is growing, so the loop opposes it with field <em>into the page</em>: a clockwise current.'))
+# L4 out of page, decreasing -> CCW
+L.append(dict(q='The field points <b>out of the page</b> and is <b>fading</b>. Which way is the induced current?',
+  opts=OPTS,correct=1,before=lp()+dots('⊙')+cap('out of page, fading'),
+  after=lp()+dots('⊙')+curarrow(LC,LY,LR-6,False)+cap('induced field: out of the page','bf'),
+  why='<b>Counter-clockwise.</b> The loop keeps the fading out-of-page flux going by adding field <em>out of the page</em>: a counter-clockwise current.'))
+# L5 magnet N approaching (flux out, growing) -> CW
+mag='<rect x="112" y="48" width="40" height="28" style="fill:color-mix(in srgb,var(--hot) 20%,transparent);stroke:var(--ink);stroke-width:1.6"/>'+txt(122,67,'N','pos',12)+txt(142,67,'S','neg',12)+arr(110,62,86,62,'ink','',2)
+L.append(dict(q='You push a bar magnet\'s <b>north pole toward the loop</b>, so its field points out of the page and the flux grows. Which way is the induced current, and does the loop pull or push the magnet?',
+  opts=OPTS,correct=0,before=lp()+dots('⊙')+mag+cap('N pole moving in →','ink'),
+  after=lp()+dots('⊙')+curarrow(LC,LY,LR-6,True)+cap('it repels the magnet','frc'),
+  why='<b>Clockwise.</b> The out-of-page flux grows, so the loop opposes it with field into the page (clockwise). That makes the loop\'s near face a north pole, which <em>pushes back</em> against the incoming magnet. You do work against this push.'))
+# L6 magnet N leaving (flux out, fading) -> CCW
+mag2='<rect x="118" y="48" width="40" height="28" style="fill:color-mix(in srgb,var(--hot) 20%,transparent);stroke:var(--ink);stroke-width:1.6"/>'+txt(128,67,'N','pos',12)+txt(148,67,'S','neg',12)+arr(120,62,150,62,'ink','',2)
+L.append(dict(q='Now you <b>pull the same north pole away</b>, so the out-of-page flux fades. Which way is the induced current, and does the loop pull or push the magnet?',
+  opts=OPTS,correct=1,before=lp()+dots('⊙')+mag2+cap('N pole moving out →','ink'),
+  after=lp()+dots('⊙')+curarrow(LC,LY,LR-6,False)+cap('it attracts the magnet','frc'),
+  why='<b>Counter-clockwise.</b> The flux fades, so the loop keeps it up with field out of the page (counter-clockwise). The near face is now a south pole, which <em>pulls</em> the departing north pole back. Either way the loop fights the change.'))
+# L7 loop squeezed smaller, B into page -> CW
+L.append(dict(q='The field is steady and points <b>into the page</b>, but the loop is being <b>squeezed smaller</b>. Which way is the induced current?',
+  opts=OPTS,correct=0,before=loop(LC,LY,LR,'ink',2.6)+loop(LC,LY,LR-16,'ink',1.6)+dots('×')+''.join(arr(LC+dx*LR,LY+dy*LR,LC+dx*(LR-14),LY+dy*(LR-14),'frc','',1.8) for dx,dy in((1,0),(-1,0),(0,1),(0,-1)))+cap('area shrinking'),
+  after=loop(LC,LY,LR-16,'ink',2.6)+dots('×')+curarrow(LC,LY,LR-22,True)+cap('oppose the loss','bf'),
+  why='<b>Clockwise.</b> A smaller area means fewer into-page field lines through the loop, so the into-page flux drops. The loop opposes the loss by adding field into the page: a clockwise current.'))
+# L8 loop stretched larger, B into page -> CCW
+L.append(dict(q='The field is steady and <b>into the page</b>, and the loop is being <b>stretched larger</b>. Which way is the induced current?',
+  opts=OPTS,correct=1,before=loop(LC,LY,LR-14,'ink',2.6)+loop(LC,LY,LR,'ink',1.6)+dots('×')+''.join(arr(LC+dx*(LR-16),LY+dy*(LR-16),LC+dx*(LR-2),LY+dy*(LR-2),'frc','',1.8) for dx,dy in((1,0),(-1,0),(0,1),(0,-1)))+cap('area growing'),
+  after=loop(LC,LY,LR,'ink',2.6)+dots('×')+curarrow(LC,LY,LR-6,False)+cap('oppose the gain','bf'),
+  why='<b>Counter-clockwise.</b> A bigger area lets more into-page flux through, so the loop opposes the gain with field out of the page: a counter-clockwise current.'))
+# L9 nearby wire above, current right, increasing -> at loop below, B into page, increasing -> CCW
+wire='<line x1="6" y1="16" x2="154" y2="16" style="stroke:var(--cv);stroke-width:4"/>'+arr(44,16,96,16,'cv','',2.2)+txt(104,12,'I grows →','cv',10,anchor='start')
+L.append(dict(q='A long wire runs <b>above</b> the loop, carrying current to the right that is <b>increasing</b>. (Below the wire its field points into the page.) Which way is the loop\'s induced current?',
+  opts=OPTS,correct=1,before=wire+loop(LC,LY+14,LR-4,'ink',2.6)+''.join(txt(x,y,'×','bf',13,weight=500) for x,y in((64,64),(96,64),(80,86))),
+  after=wire+loop(LC,LY+14,LR-4,'ink',2.6)+''.join(txt(x,y,'×','bf',13,weight=500) for x,y in((64,64),(96,64),(80,86)))+curarrow(LC,LY+14,LR-12,False)+cap('oppose the growth','bf'),
+  why='<b>Counter-clockwise.</b> A rising current in the wire makes a stronger into-page field at the loop, so the into-page flux grows. The loop opposes it the same way as case 1: counter-clockwise.'))
+# L10 induction cooktop (flux up, increasing, from above) -> CW
+pan='<ellipse cx="80" cy="34" rx="56" ry="12" style="fill:none;stroke:var(--muted);stroke-width:1.6"/>'+txt(80,20,'pan (from above)','mut',10)
+L.append(dict(q='On an <b>induction cooktop</b>, the coil below sends a field <b>up through the pan</b> that is rapidly <b>increasing</b>. Which way do the eddy currents circle in the pan, seen from above?',
+  opts=OPTS,correct=0,before=pan+''.join(txt(x,70,'⊙','ca',15,weight=500) for x in(56,80,104))+cap('field up, rising fast','ca'),
+  after=pan+''.join(txt(x,70,'⊙','ca',15,weight=500) for x in(56,80,104))+curarrow(LC,74,36,True,'frc')+cap('eddy currents oppose the rise','frc'),
+  why='<b>Clockwise.</b> The upward (out-of-the-pan) flux is rising, so the eddy currents oppose it by making field the other way: clockwise seen from above. Their resistance turns electrical energy into heat, which cooks the food. The pan itself is the circuit.'))
+# L11 guitar pickup: magnetized string approaches coil, flux up growing (from above) -> CW
+L.append(dict(q='In a <b>guitar pickup</b>, the steel string (magnetized by the pickup) vibrates <b>toward</b> the coil. As it nears, the upward flux through the coil <b>grows</b>. Seen from above, which way is the induced current while the string approaches?',
+  opts=OPTS,correct=0,before='<line x1="6" y1="22" x2="154" y2="22" style="stroke:var(--ink);stroke-width:3"/>'+txt(80,14,'string','mut',10)+loop(LC,74,34,'ink',2.4)+''.join(txt(x,74,'⊙','ca',14,weight=500) for x in(64,80,96))+cap('string nears: flux grows','ca'),
+  after='<line x1="6" y1="22" x2="154" y2="22" style="stroke:var(--ink);stroke-width:3"/>'+txt(80,14,'string','mut',10)+loop(LC,74,34,'ink',2.4)+''.join(txt(x,74,'⊙','ca',14,weight=500) for x in(64,80,96))+curarrow(LC,74,28,True)+cap('this makes the signal','bf'),
+  why='<b>Clockwise.</b> The growing upward flux is opposed by a clockwise current (seen from above). As the string vibrates away again the flux falls and the current reverses, so each vibration makes an alternating current: that is the signal sent to the amplifier.'))
+# L12 steady, no change -> none
+L.append(dict(q='The loop sits in a <b>strong but steady</b> field pointing into the page. Nothing moves or changes. Which way is the induced current?',
+  opts=OPTS,correct=2,before=lp()+dots('×')+cap('steady: not changing'),
+  after=lp()+dots('×')+txt(80,66,'no current','ink',13)+cap('flux constant → no EMF'),
+  why='<b>No current.</b> Induction responds only to a <em>change</em> in flux. A steady field, however strong, makes a constant flux, so dΦ/dt = 0 and there is no induced EMF or current.'))
+lenz_drill=drill("Lenz's law: which way does the induced current flow?",
+  'First decide which way the flux points and whether it is growing or fading. The induced current always fights the change. Taking the loop as seen on the page: a counter-clockwise current makes a field out of the page inside the loop, a clockwise current makes one into the page.',L)
+# ===== end LENZ =====
 module('faraday','Faraday &amp; Lenz',[('ap','AP C Unit 13'),('pu','AP 2: magnetism')],
  'Change the magnetic flux through a loop and an EMF appears in it. This one law drives generators, transformers, microphones and induction stoves, and Lenz\'s law tells you which way the current goes: always so as to fight the change.',
  ['Hold a loop of wire in a magnetic field: nothing happens. Move a magnet toward it, spin it, or change the field strength: the meter jumps. What matters is not the field itself but how the <b>flux</b> Φ = B A cos θ changes. Faraday\'s law says the induced EMF equals minus the rate of change of flux, ε = −dΦ/dt (times N for a coil of N turns).',
@@ -21,12 +98,13 @@ module('faraday','Faraday &amp; Lenz',[('ap','AP C Unit 13'),('pu','AP 2: magnet
   ('Double the number of turns.',[["click","#fa-mode [data-k=auto]"],["#fa-N",200]],'Each turn gets the same EMF, and they add in series, so ε doubles. The flux per turn is unchanged.'),
   ('Double the swing frequency.',[["click","#fa-mode [data-k=auto]"],["#fa-f",1.6]],'The same flux change happens in half the time, so the EMF doubles (and the graph squeezes horizontally).'),
   ('Switch to dragging. Move the magnet in slowly, then quickly.',[["click","#fa-mode [data-k=drag]"]],'Slow motion gives a small EMF; fast motion gives a large one. Hold the magnet still inside the coil: the EMF is exactly zero, even though the flux is at its maximum.')],
- dict(prob='A flat coil of 200 turns and radius 4.0 cm sits with its plane perpendicular to a uniform magnetic field. The field decreases from 0.50 T to zero in 0.10 s. (a) Find the average induced EMF. (b) If the coil\'s resistance is 10 Ω, find the average current. (c) Which way does the current flow if B points into the page?',svg=fa_svg,cap='A coil in a field pointing into the page, decreasing in strength.',
-  steps=[('Flux change.',m('<i>A</i> = π(0.040)² = 5.03 × 10⁻³ m²')+'. The field is perpendicular to the plane, so cos θ = 1: '+m('ΔΦ = Δ<i class="bf">B</i>·<i>A</i> = (0 − 0.50)(5.03 × 10⁻³) = −2.5 × 10⁻³ Wb')+' per turn.'),
-   ('EMF.',m('ε = −<i>N</i>ΔΦ/Δ<i>t</i> = −(200)(−2.5 × 10⁻³)/0.10 = +5.0 V')+'. (The size is what matters here: 5.0 V.)'),
-   ('Current.',m('<i class="cur">I</i> = ε/<i>R</i> = 5.0/10 = 0.50 A')+'.'),
-   ('Direction (Lenz).','The flux into the page is decreasing. The coil opposes that by making its own field <em>into</em> the page inside it, which requires a <b>clockwise</b> current (right-hand rule: fingers curl clockwise, thumb into the page).'),
-   ('Check.','Larger N, larger A, bigger field change or faster change would each increase ε. Nothing would happen at all if B were constant ✓.')]),
+ dict(prob='A wireless phone charger drives an alternating current in its coil at f = 125 kHz. In the phone, a flat receiver coil of 12 turns and radius 2.0 cm lies right over it, and the field through the coil (perpendicular to it) swings between +0.50 mT and −0.50 mT. (a) Find the change in flux per turn during one half-cycle. (b) Find the average EMF during that half-cycle. (c) Find the peak EMF. (d) At an instant when the field points up through the coil and is growing, which way does the induced current flow, seen from above?',svg='',cap='The receiver coil in the back of a phone, seen from above. ⊙: the charger\'s field, pointing up out of the page.',
+  steps=[('Area.',m('<i>A</i> = π(0.020 m)² = 1.26 × 10⁻³ m²')+'. The field is perpendicular to the coil, so cos θ = 1.'),
+   ('Flux change in a half-cycle.','The field goes from +0.50 mT to −0.50 mT, a change of 1.0 mT, not 0.50: '+m('ΔΦ = (−0.50 − 0.50) × 10⁻³ T × 1.26 × 10⁻³ m² = −1.26 × 10⁻⁶ Wb')+' per turn.'),
+   ('Average EMF.','A half-cycle lasts '+m('Δ<i>t</i> = 1/(2<i>f</i>) = 4.0 × 10⁻⁶ s')+'. So '+m('|ε| = <i>N</i>|ΔΦ|/Δ<i>t</i> = (12)(1.26 × 10⁻⁶)/(4.0 × 10⁻⁶) = 3.8 V')+'.'),
+   ('Peak EMF.','The flux is '+m('Φ = <i class="bf">B</i><sub>0</sub><i>A</i> cos ω<i>t</i>')+', so '+m('ε = <i>NB</i><sub>0</sub><i>A</i>ω sin ω<i>t</i>')+' with '+m('ω = 2π<i>f</i> = 7.85 × 10⁵ rad/s')+': '+m('ε<sub>peak</sub> = (12)(0.50 × 10⁻³)(1.26 × 10⁻³)(7.85 × 10⁵) = 5.9 V')+'.'),
+   ('Direction (Lenz).','The flux up through the coil is growing. The coil opposes that by making its own field <em>down</em> inside it, which takes a <b>clockwise</b> current seen from above (right-hand rule: thumb down, fingers curl clockwise as you look down).'),
+   ('Check.','The peak is π/2 times the average, as it should be for a sine wave ✓. The field is only about 10 times Earth\'s, but it changes 125,000 times a second, and the EMF depends on how fast the flux changes.')]),
  ['Writing ε = −dB/dt. It is the flux that matters: B, A and the angle can all change.','Using the sign of ε to decide direction without checking with Lenz\'s law. Always ask: what is changing, and how can the coil oppose it?','Thinking a large steady field makes a large EMF. It only matters how fast the flux changes.','Forgetting the factor of N for a coil with many turns.'],
  '''        <h2>Faraday's law in practice</h2>
         <ul>
@@ -41,7 +119,7 @@ module('faraday','Faraday &amp; Lenz',[('ap','AP C Unit 13'),('pu','AP 2: magnet
           <li><b>Energy:</b> pushing a magnet into a closed loop is harder than pushing it into an open one. The extra work you do becomes heat in the loop.</li>
           <li><b>Eddy currents:</b> in a solid conductor (a metal plate) a changing flux makes swirling currents that resist the motion: used for brakes and induction cookers.</li>
         </ul>''',
- dict(correct=1,explain='An EMF is induced only when the flux changes. A magnet at rest inside the coil makes a constant flux, so dΦ/dt = 0 and there is no EMF, however strong the field is.',q='a bar magnet is held motionless inside a coil of wire. The induced EMF in the coil is:',opts=['Large, because the field is strong','Zero, because the flux is not changing','Small but nonzero','Positive for north poles and negative for south poles']))
+ dict(correct=1,explain='An EMF is induced only when the flux changes. A magnet at rest inside the coil makes a constant flux, so dΦ/dt = 0 and there is no EMF, however strong the field is.',q='a bar magnet is held motionless inside a coil of wire. The induced EMF in the coil is:',opts=['Large, because the field is strong','Zero, because the flux is not changing','Small but nonzero','Positive for north poles and negative for south poles']),drill=lenz_drill)
 # ---------------- Motional EMF
 lab_m=lab('mo-canvas','A conducting rod sliding on rails in a magnetic field that points into the page, with graphs of speed and current.',
   '<div class="row"><button type="button" class="btn primary" id="mo-go">Launch</button><button type="button" class="btn" id="mo-rst">Reset</button></div>',

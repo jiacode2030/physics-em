@@ -16,6 +16,88 @@ bs=svg(f'<rect x="20" y="40" width="220" height="160" style="fill:color-mix(in s
   f'<path d="M 55 120 A 50 50 0 1 0 155 120 A 50 50 0 1 0 55 120" style="fill:none;stroke:var(--ink);stroke-width:2;stroke-dasharray:5 4"/>'+
   ch(105,70,'−',10)+arr(105,70,105,98,'frc','F',2.4,(10,0))+arr(105,70,148,70,'cur','v',2.4,(0,-10))+txt(105,196,'r = mv/(|q|B)','mut',12)+txt(120,28,'B into the page','bf',12),
   'An electron entering a field perpendicular to its velocity moves in a circle. The force points to the center.')
+# ===== RHR DRILL =====
+from mk import *
+I='into the page';O='out of the page'
+def V(x,y,dx,dy,c,lab): return arr(x,y,x+dx,y+dy,c,lab,2.6)
+DIR={'U':(0,-46),'D':(0,44),'L':(-46,0),'R':(46,0)}
+def charge(sg): return ch(72,86,sg,11)
+RHR=[]
+# 1 +q right, B into page -> Up
+RHR.append(dict(q='A <b>positive</b> charge moves to the right. The magnetic field points into the page. Which way is the force on it?',
+  opts=['Up','Down','Left','Right'],correct=0,
+  before=finto()+charge('+')+V(72,86,46,0,'cv','v'),
+  after=finto()+charge('+')+V(72,86,46,0,'cv','v')+V(72,86,0,-50,'frc','F'),
+  why='<b>Up.</b> Right hand: fingers point along v (right), curl into B (into the page), thumb points up. F = qv × B.'))
+# 2 electron right, B into page -> Down
+RHR.append(dict(q='An <b>electron</b> moves to the right. The field points into the page. Which way is the force?',
+  opts=['Up','Down','Left','Right'],correct=1,
+  before=finto()+charge('−')+V(72,86,46,0,'cv','v'),
+  after=finto()+charge('−')+V(72,86,46,0,'cv','v')+V(72,86,0,44,'frc','F'),
+  why='<b>Down.</b> The right-hand rule gives <em>up</em> for a positive charge, so for the negative electron the force flips to down.'))
+# 3 +q up, B out of page -> Right
+RHR.append(dict(q='A positive charge moves straight up. The field points <b>out of the page</b>. Which way is the force?',
+  opts=['Up','Down','Left','Right'],correct=3,
+  before=fout()+ch(72,96,'+',11)+arr(72,96,72,50,'cv','v',2.6),
+  after=fout()+ch(72,96,'+',11)+arr(72,96,72,50,'cv','v',2.6)+arr(72,96,118,96,'frc','F',2.6),
+  why='<b>Right.</b> Fingers up (v), curl out of the page (B), thumb points right.'))
+# 4 +q left, B into page -> Down
+RHR.append(dict(q='A positive charge moves to the left. The field points into the page. Which way is the force?',
+  opts=['Up','Down','Left','Right'],correct=1,
+  before=finto()+ch(92,86,'+',11)+arr(92,86,46,86,'cv','v',2.6),
+  after=finto()+ch(92,86,'+',11)+arr(92,86,46,86,'cv','v',2.6)+arr(92,86,92,130,'frc','F',2.6),
+  why='<b>Down.</b> Reverse of case 1: flip the velocity and the force flips too.'))
+# 5 proton into page, B up -> Right
+RHR.append(dict(q='A proton moves <b>into the page</b> (⊗). The field points straight up, in the plane of the page. Which way is the force?',
+  opts=['Up','Down','Left','Right'],correct=3,
+  before=''.join(arr(x,120,x,40,'bf','',2) for x in (40,118))+txt(80,30,'B up','bf',12)+txt(72,90,'⊗','ink',22,weight=500)+txt(72,112,'v (into page)','ink',11),
+  after=''.join(arr(x,120,x,40,'bf','',2) for x in (40,118))+txt(80,30,'B up','bf',12)+txt(72,90,'⊗','ink',22,weight=500)+arr(72,86,118,86,'frc','F',2.6),
+  why='<b>Right.</b> Point the right fingers into the page (v), curl them up (B); the thumb points right. F = qv × B.'))
+# 6 wire current right, point above -> B out
+RHR.append(dict(q='A long wire carries current to the <b>right</b>. At a point directly <b>above</b> the wire, which way does its magnetic field point?',
+  opts=[I,O,'Up','Down'],correct=1,
+  before=ln(14,96,246,96,'cv',4)+arr(70,96,130,96,'cv','I',2.4)+dotp(80,52,'P','ink',0,-10),
+  after=ln(14,96,246,96,'cv',4)+arr(70,96,130,96,'cv','I',2.4)+dotp(80,52,'P','ink',0,-10)+txt(80,46,'⊙','bf',20,weight=500)+txt(118,52,'B out','bf',11,'start'),
+  why='<b>Out of the page.</b> Grab the wire with the right hand, thumb along the current (right). Above the wire the fingers come out of the page.'))
+# 7 wire current right, point below -> B into
+RHR.append(dict(q='Same wire, current to the right. At a point directly <b>below</b> it, which way does the field point?',
+  opts=[I,O,'Up','Down'],correct=0,
+  before=ln(14,64,246,64,'cv',4)+arr(70,64,130,64,'cv','I',2.4)+dotp(80,108,'P','ink',0,16),
+  after=ln(14,64,246,64,'cv',4)+arr(70,64,130,64,'cv','I',2.4)+dotp(80,108,'P','ink',0,16)+txt(80,100,'×','bf',20,weight=500)+txt(118,108,'B in','bf',11,'start'),
+  why='<b>Into the page.</b> Below the wire the curled fingers of the right hand go into the page. The field circles the wire.'))
+# 8 wire current up, external B right -> force into page
+RHR.append(dict(q='A wire carries current straight <b>up</b>, sitting in a field that points to the <b>right</b>. Which way is the force on the wire?',
+  opts=[I,O,'Left','Right'],correct=0,
+  before=arr(72,120,72,30,'cv','I',2.6)+''.join(arr(96,y,140,y,'bf','',2) for y in (50,80,110))+txt(140,38,'B','bf',12,'start'),
+  after=arr(72,120,72,30,'cv','I',2.6)+''.join(arr(96,y,140,y,'bf','',2) for y in (50,80,110))+txt(72,78,'⊗','frc',22,weight=500)+txt(72,104,'F in','frc',11),
+  why='<b>Into the page.</b> F = IL × B: fingers up (current), curl toward the right (B), thumb into the page.'))
+# 9 wire current right, external B up -> force out
+RHR.append(dict(q='A wire carries current to the <b>right</b>, in a field that points <b>up</b>. Which way is the force on the wire?',
+  opts=[I,O,'Up','Down'],correct=1,
+  before=arr(30,80,138,80,'cv','I',2.6)+''.join(arr(x,120,x,44,'bf','',2) for x in (60,110))+txt(100,38,'B up','bf',12),
+  after=arr(30,80,138,80,'cv','I',2.6)+''.join(arr(x,120,x,44,'bf','',2) for x in (60,110))+txt(84,80,'⊙','frc',22,weight=500)+txt(104,80,'F out','frc',11,'start'),
+  why='<b>Out of the page.</b> F = IL × B: fingers right (current), curl up (B), thumb out of the page.'))
+# 10 two parallel wires same direction -> attract
+RHR.append(dict(q='Two parallel wires both carry current to the <b>right</b>. Which way is the force on the <b>top</b> wire?',
+  opts=['Toward the other wire','Away from the other wire','No force'],correct=0,
+  before=ln(14,54,246,54,'cv',4)+arr(70,54,130,54,'cv','I',2.2)+ln(14,108,246,108,'cv',4)+arr(70,108,130,108,'cv','I',2.2),
+  after=ln(14,54,246,54,'cv',4)+arr(70,54,130,54,'cv','I',2.2)+ln(14,108,246,108,'cv',4)+arr(70,108,130,108,'cv','I',2.2)+arr(120,60,120,104,'frc','F',2.6),
+  why='<b>Toward the other wire.</b> Parallel currents in the same direction attract. (Each wire sits in the other\'s field; work the rule through and the forces pull them together.)'))
+# 11 antiparallel -> repel
+RHR.append(dict(q='Now the <b>top</b> wire carries current to the right and the <b>bottom</b> wire to the left. Which way is the force on the top wire?',
+  opts=['Toward the other wire','Away from the other wire','No force'],correct=1,
+  before=ln(14,80,246,80,'cv',4)+arr(70,80,130,80,'cv','I',2.2)+ln(14,120,246,120,'cv',4)+arr(130,120,70,120,'cv','I',2.2),
+  after=ln(14,80,246,80,'cv',4)+arr(70,80,130,80,'cv','I',2.2)+ln(14,120,246,120,'cv',4)+arr(130,120,70,120,'cv','I',2.2)+arr(120,80,120,36,'frc','F',2.6),
+  why='<b>Away from the other wire.</b> Antiparallel (opposite) currents repel.'))
+# 12 charge at rest -> no force
+RHR.append(dict(q='A positive charge sits <b>at rest</b> in a field that points into the page. What is the magnetic force on it?',
+  opts=['Up','Down','No force'],correct=2,
+  before=finto()+ch(80,74,'+',12),
+  after=finto()+ch(80,74,'+',12)+txt(80,112,'F = 0','ink',13),
+  why='<b>No force.</b> The magnetic force is qv × B. With v = 0 there is nothing for the field to push on. A charge must be moving to feel a magnetic force.'))
+rhr_drill=drill('Right-hand rule: which way is the force or field?',
+  'Look at the setup, use your right hand, then choose. The answer diagram appears when you get it right. For an electron, find the direction for a positive charge and flip it.',RHR)
+# ===== end RHR =====
 module('bforce','Magnetic force on charges',[('ap','AP C Unit 12'),('pu','AP 2: magnetism')],
  'A magnetic field pushes moving charges sideways. The push is always perpendicular to the motion, so it can bend a path into a circle or a spiral but can never speed a charge up or slow it down. That one fact drives mass spectrometers, cyclotrons and auroras.',
  ['A charge sitting still in a magnetic field feels nothing. Make it move and a force appears, at right angles to both the velocity and the field: F = q v × B. Faster charges, stronger fields and bigger charges all feel more force, but only the part of the velocity <em>perpendicular</em> to B counts: F = qvB sin θ.',
@@ -27,12 +109,13 @@ module('bforce','Magnetic force on charges',[('ap','AP C Unit 12'),('pu','AP 2: 
   ('Tilt the velocity: set the angle to 30° so there is a component along B.',[["click","#bf-sp [data-k=e]"],["#bf-ang",30],["#bf-v",5],["#bf-B",2]],'The circle shrinks (only v sin θ counts for the radius) and the particle spirals along B. The pitch is v cos θ times the period.'),
   ('Double the magnetic field.',[["click","#bf-sp [data-k=e]"],["#bf-ang",90],["#bf-v",5],["#bf-B",4]],'The radius halves and the period halves: the particle circles twice as often. The speed has not changed.'),
   ('In the velocity selector, tune the speed to exactly E/B.',[["#vs-E",5],["#vs-B",.05],["#vs-v",100]],'At 100 km/s = E/B, the electric and magnetic forces cancel and the proton flies straight through. Move the speed either way and it bends.')],
- dict(prob='An electron enters a region of uniform magnetic field B = 2.0 mT, directed into the page, with speed 5.0 × 10⁶ m/s perpendicular to the field. Find the radius of its circular path, the period of the motion and the magnetic force on it. What electric field, applied at the same time, would make the electron go straight?',svg=bs,cap='The field points into the page. The force on the electron is toward the center of its circular path.',
-  steps=[('Direction first.','Velocity along +x (right), B into the page. For a positive charge F would point up; the electron is negative, so the force is <em>down</em>. It is always toward the center of the circle.'),
-   ('Use the magnetic force as the centripetal force.',m('|<i>q</i>|<i>v</i><i class="bf">B</i> = <i>mv</i>²/<i>r</i>')+', so '+m('<i>r</i> = <i>mv</i>/(<i>e</i><i class="bf">B</i>) = (9.11 × 10⁻³¹)(5.0 × 10⁶)/((1.6 × 10⁻¹⁹)(2.0 × 10⁻³)) = 1.4 × 10⁻² m')+'.'),
-   ('Period.',m('<i>T</i> = 2π<i>m</i>/(<i>e</i><i class="bf">B</i>) = 2π(9.11 × 10⁻³¹)/((1.6 × 10⁻¹⁹)(2.0 × 10⁻³)) = 1.8 × 10⁻⁸ s')+'. It doesn\'t depend on the speed.'),
-   ('Force.',m('<i class="frc">F</i> = <i>ev</i><i class="bf">B</i> = (1.6 × 10⁻¹⁹)(5.0 × 10⁶)(2.0 × 10⁻³) = 1.6 × 10⁻¹⁵ N')+'. Check: '+m('<i>mv</i>²/<i>r</i> = 1.6 × 10⁻¹⁵ N')+' ✓.'),
-   ('Straight-line condition.','The electric force must cancel the magnetic force: '+m('<i>eE</i> = <i>ev</i><i class="bf">B</i>')+', so '+m('<i class="ef">E</i> = <i>v</i><i class="bf">B</i> = (5.0 × 10⁶)(2.0 × 10⁻³) = 1.0 × 10⁴ V/m')+', directed so that the electric force on the electron is upward (E points down).')]),
+ dict(prob='The aurora: an electron from the solar wind arrives high above the Arctic at 2.0 × 10⁷ m/s (about 1 keV), moving at 30° to Earth\'s magnetic field, which there is about 5.0 × 10⁻⁵ T. Find (a) the magnetic force on it, (b) the radius of the spiral it follows, (c) the time for one turn and (d) how far along the field it moves per turn. Why do these electrons end up near the poles?',svg='',cap='An electron spiraling around one of Earth\'s field lines. Solid: the near side of each turn; dashed: the far side.',
+  steps=[('Split the velocity.','Only the part perpendicular to B feels a force: '+m('<i>v</i><sub>⊥</sub> = <i>v</i> sin 30° = 1.0 × 10⁷ m/s')+'. The part along B is '+m('<i>v</i><sub>∥</sub> = <i>v</i> cos 30° = 1.73 × 10⁷ m/s')+'.'),
+   ('Force.',m('<i class="frc">F</i> = <i>ev</i><sub>⊥</sub><i class="bf">B</i> = (1.60 × 10⁻¹⁹)(1.0 × 10⁷)(5.0 × 10⁻⁵) = 8.0 × 10⁻¹⁷ N')+'. It is perpendicular to both v and B, so it always points toward the axis of the spiral.'),
+   ('Radius.',m('<i>r</i> = <i>mv</i><sub>⊥</sub>/(<i>e</i><i class="bf">B</i>) = (9.11 × 10⁻³¹)(1.0 × 10⁷)/((1.60 × 10⁻¹⁹)(5.0 × 10⁻⁵)) = 1.1 m')+'.'),
+   ('Time for one turn.',m('<i>T</i> = 2π<i>m</i>/(<i>e</i><i class="bf">B</i>) = 2π(9.11 × 10⁻³¹)/((1.60 × 10⁻¹⁹)(5.0 × 10⁻⁵)) = 7.2 × 10⁻⁷ s')+'. It does not depend on the speed.'),
+   ('Distance along the field per turn.',m('<i>p</i> = <i>v</i><sub>∥</sub><i>T</i> = (1.73 × 10⁷)(7.2 × 10⁻⁷) = 12 m')+'.'),
+   ('Why the poles?','The magnetic force never has a part along B, so v∥ never changes: the electron is tied to its field line like a bead on a wire, in a corkscrew about 2 m wide. Earth\'s field lines dip into the atmosphere near the magnetic poles, so that is where the electrons hit the air (about 100 km up) and make it glow. Check: '+m('<i>mv</i><sub>⊥</sub>²/<i>r</i> = 8.0 × 10⁻¹⁷ N')+' ✓.')]),
  ['Using v instead of v sin θ for the force or the radius.','Getting the direction wrong for a negative charge. The right-hand rule gives the force on a positive charge; for an electron reverse it.','Thinking the magnetic force speeds the particle up. It does no work: the speed is constant.','Using B in mT in the formula without converting to tesla.'],
  '''        <h2>Motion in a magnetic field</h2>
         <ul>
@@ -47,7 +130,7 @@ module('bforce','Magnetic force on charges',[('ap','AP C Unit 12'),('pu','AP 2: 
           <li><b>Mass spectrometer:</b> select the speed, then send the ions into a second field. They circle with <span class="m"><i>r</i> = <i>mv</i>/(<i>qB</i>)</span>, so <span class="m"><i>m</i> = <i>qBr</i>/<i>v</i></span>: measure where they land to find the mass.</li>
           <li><b>Hall effect:</b> in a current-carrying conductor in a field, charges pile up on one side, creating a measurable transverse voltage; its sign shows whether the carriers are positive or negative.</li>
         </ul>''',
- dict(correct=1,explain='The magnetic force is always perpendicular to the velocity, so it does no work. It changes the direction of the velocity but not the speed, and the kinetic energy stays constant.',q='a proton moves through a uniform magnetic field perpendicular to its velocity. Its kinetic energy:',opts=['Increases steadily','Stays constant','Decreases steadily','Oscillates up and down']))
+ dict(correct=1,explain='The magnetic force is always perpendicular to the velocity, so it does no work. It changes the direction of the velocity but not the speed, and the kinetic energy stays constant.',q='a proton moves through a uniform magnetic field perpendicular to its velocity. Its kinetic energy:',opts=['Increases steadily','Stays constant','Decreases steadily','Oscillates up and down']),drill=rhr_drill)
 # ---------------- Forces on wires and loops
 lab_w=lab('wf-canvas','3D view of a current-carrying wire or loop in a magnetic field that points up. Drag to rotate.',
   seg('wf-mode','Show',[('wire','A wire'),('loop','A loop (motor)')])+'<div class="row"><button type="button" class="btn primary" id="wf-spin">Spin the loop</button><label style="display:flex;gap:6px;align-items:center;font-weight:400"><input type="checkbox" id="wf-comm"> commutator</label></div>',
