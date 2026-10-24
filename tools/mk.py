@@ -2,7 +2,7 @@
 import json, html as _h
 import os
 OUT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','src','modules','')
-C={'ef':'var(--cx)','bf':'var(--ca)','cur':'var(--cv)','frc':'var(--hot)','pos':'var(--pos)','neg':'var(--neg)','ink':'var(--ink)','mut':'var(--muted)'}
+C={'cx':'var(--cx)','ca':'var(--ca)','cv':'var(--cv)','bad':'var(--bad)','ef':'var(--cx)','bf':'var(--ca)','cur':'var(--cv)','frc':'var(--hot)','pos':'var(--pos)','neg':'var(--neg)','ink':'var(--ink)','mut':'var(--muted)'}
 def m(s): return f'<span class="m">{s}</span>'
 def i(s,c=''): return f'<i class="{c}">{s}</i>' if c else f'<i>{s}</i>'
 # ---- tiny SVG toolkit for worked-example diagrams (viewBox 260 x 230)

@@ -27,17 +27,18 @@ LAY['slices']=(
    (5,arr(40,188,0,188,'ef','',4)+txt(24,206,'E','ef',13),'E = 3.6 × 10⁴ N/C, pointing −x','e'),
    (6,'','✓ bigger than a point charge at the center','i')])
 # ---- Exponential change
-def _X(t): return 36+200*t/2.5
-def _Y(v): return 190-138*v/12
-f_=lambda t:12*(1-math.exp(-t/0.5))
+def _X(t): return 36+200*t/6
+def _Y(v): return 190-138*v/300
+f_=lambda t:300*(1-math.exp(-t/1.5))
 LAY['expo']=(
-  ln(36,190,240,190,'mut',1.5)+ln(36,190,36,36,'mut',1.5)+ln(36,52,240,52,'mut',1,'4 4')+txt(30,56,'12','mut',11,'end')+
-  f'<polyline points="{curve_pts(f_,36,236,190,52,2.5,12)}" style="fill:none;stroke:var(--cx);stroke-width:2.8"/>'+txt(138,214,'t (s)','mut',12)+txt(14,46,'V','mut',12),
-  [(1,'','starts at 0, rises fast, never passes 12 V','e'),
-   (2,ln(_X(.75),190,_X(.75),_Y(f_(.75)),'frc',1.5,'4 3')+ln(36,_Y(f_(.75)),_X(.75),_Y(f_(.75)),'frc',1.5,'4 3')+dotp(_X(.75),_Y(f_(.75)),'','frc')+txt(150,162,'9.3 V at 0.75 s','frc',12,'start'),'t/τ = 1.5, V = 9.3 V','f'),
-   (3,ln(36,_Y(10),240,_Y(10),'cv',1.5,'3 3')+txt(238,_Y(10)-6,'10 V','cv',11,'end'),'target: 10 V, so e^(−t/τ) = 1/6','v'),
-   (4,ln(_X(.896),_Y(10),_X(.896),190,'cv',1.5,'3 3')+dotp(_X(.896),_Y(10),'','cv')+txt(_X(.896),206,'0.90 s','cv',12),'t = τ ln 6 = 0.90 s','v'),
-   (5,'','✓ 10 V is 83% of 12 V, just under 2τ','i')])
+  ln(36,190,240,190,'mut',1.5)+ln(36,190,36,36,'mut',1.5)+ln(36,52,240,52,'mut',1,'4 4')+txt(30,56,'300','mut',11,'end')+
+  f'<polyline points="{curve_pts(f_,36,236,190,52,6,300)}" style="fill:none;stroke:var(--cx);stroke-width:2.8"/>'+txt(138,214,'time after the flash (s)','mut',12)+txt(14,46,'V','mut',12)+
+  ''.join(txt(_X(k),204,str(k),'mut',10) for k in (2,4,6)),
+  [(1,'','starts at 0 (the flash emptied it), never passes 300 V','e'),
+   (2,ln(_X(2),190,_X(2),_Y(f_(2)),'frc',1.5,'4 3')+ln(36,_Y(f_(2)),_X(2),_Y(f_(2)),'frc',1.5,'4 3')+dotp(_X(2),_Y(f_(2)),'','frc')+txt(_X(2)+8,_Y(f_(2))+18,'221 V at 2.0 s','frc',12,'start'),'t/τ = 1.33, V = 221 V','f'),
+   (3,ln(36,_Y(280),240,_Y(280),'cv',1.5,'3 3')+txt(238,_Y(280)+14,'ready: 280 V','cv',11,'end'),'target 280 V, so e^(−t/τ) = 1/15','v'),
+   (4,ln(_X(4.06),_Y(280),_X(4.06),190,'cv',1.5,'3 3')+dotp(_X(4.06),_Y(280),'','cv')+txt(_X(4.06)+5,184,'4.1 s','cv',12,'start'),'t = τ ln 15 = 4.1 s','v'),
+   (5,'','✓ 93% of 300 V: between 2τ (86%) and 3τ (95%)','i')])
 # ---- Rods, rings, disks
 LAY['continuous']=(
   ln(40,115,248,115,'mut',1.5,'4 4')+ln(70,60,70,170,'ink',3)+ch(70,60,'+',9)+ch(70,170,'+',9)+dotp(210,115,'P','ink',0,-12)+
@@ -74,16 +75,17 @@ LAY['penergy']=(
    (4,txt(130,226,'electron: 1.3 × 10⁷ m/s, same energy','mut',11),'electron: 1.3 × 10⁷ m/s (43× faster)','v'),
    (5,'','✓ speed ratio = √(m_p/m_e) = 43','i')])
 # ---- Conductors
-def _chs(r,sgn,n=8,off=0): return ''.join(ch(130+r*math.cos(a*math.pi/4+off),115+r*math.sin(a*math.pi/4+off),sgn,5) for a in range(n))
+_car='<path d="M 30 150 L 30 128 Q 32 118 48 116 L 78 112 L 102 84 Q 108 78 120 78 L 178 78 Q 188 78 194 86 L 214 112 L 232 116 Q 240 120 240 132 L 240 150 Z" style="fill:color-mix(in srgb,var(--muted) 14%,transparent);stroke:var(--ink);stroke-width:2.6;stroke-linejoin:round"/>'+\
+  '<path d="M 110 110 L 120 88 L 146 88 L 146 110 Z M 154 88 L 180 88 L 196 110 L 154 110 Z" style="fill:var(--surface);stroke:var(--muted);stroke-width:1.4"/>'+\
+  ''.join(f'<circle cx="{x}" cy="152" r="13" style="fill:var(--ink)"/><circle cx="{x}" cy="152" r="5" style="fill:var(--muted)"/>' for x in (68,204))
 LAY['conductors']=(
-  f'<circle cx="130" cy="115" r="82" style="fill:var(--sunk);stroke:var(--ink);stroke-width:2"/><circle cx="130" cy="115" r="46" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>'+ch(130,115,'+',11)+txt(130,98,'+3 nC','pos',11)+
-  txt(130,222,'cavity 4 cm · metal 4–6 cm · outside','mut',11),
-  [(1,_chs(46,'−'),'inner wall: −3.0 nC (cancels the point charge)','e'),
-   (2,_chs(82,'+',off=.39),'outer surface: +3.0 nC (the shell was neutral)','e'),
-   (3,arr(130+20,115,130+40,115,'ef','',1.6)+txt(163,110,'E','ef',11),'r = 2 cm: E = 6.7 × 10⁴ N/C','e'),
-   (4,txt(130,152,'E = 0','ink',12)+f'<circle cx="130" cy="115" r="64" style="fill:none;stroke:var(--ink);stroke-width:1.5;stroke-dasharray:4 4"/>','r = 5 cm (in the metal): E = 0','i'),
-   (5,arr(130+88,115,130+125,115,'ef','',2.4)+txt(220,104,'E','ef',12),'r = 8 cm: E = 4.2 × 10³ N/C','e'),
-   (6,'','✓ σ/ε₀ at the outer surface equals kq/R²','i')])
+  ln(10,166,250,166,'ink',2)+_car+''.join(arr(x,62,x,36,'ef','',1.8) for x in (30,80,130,230))+txt(8,22,'E ≈ 1.0 × 10⁴ V/m under the cloud','ef',11,'start')+txt(130,190,'ground','mut',10),
+  [(1,txt(150,136,'E = 0 inside','ink',12),'E = 0 inside the metal, and so inside the closed body','i'),
+   (2,''.join(txt(x,74,'+','pos',13) for x in (122,138,154,170))+''.join(txt(x,182,'−','neg',13) for x in (100,130,160)),'σ = ε₀E = 8.9 × 10⁻⁸ C/m² on the roof','e'),
+   (3,'','roof (3.0 m²): Q = σA = 0.27 μC; the car stays neutral','e'),
+   (4,'<polyline points="192,0 180,28 194,32 182,58 196,60 176,78" style="fill:none;stroke:var(--hot);stroke-width:3;stroke-linejoin:round"/>'+'<path d="M 176 78 L 178 78 Q 188 78 194 86 L 214 112 L 232 116 Q 240 120 240 132 L 240 150" style="fill:none;stroke:var(--hot);stroke-width:3.5;opacity:.75"/>'+arr(242,152,248,164,'frc','',2),'the strike\'s current runs over the outside of the metal to the ground','f'),
+   (5,txt(68,214,'rubber tires: not what protects you','mut',10,'start'),'it crossed kilometers of air: tires don\'t stop it','i'),
+   (6,'','✓ just outside a conductor, E = σ/ε₀, perpendicular to the surface','i')])
 # ---- Capacitors
 LAY['capacitors']=(
   '<path d="M 80 20 L 80 92 Q 80 110 100 110 L 160 110 Q 180 110 180 92 L 180 20" style="fill:color-mix(in srgb,var(--hot) 12%,transparent);stroke:var(--ink);stroke-width:2"/>'+txt(130,48,'fingertip','ink',11)+
@@ -220,29 +222,36 @@ LAY['motional']=(
    (5,'','released: τ = mR/(B²L²) = 5.0 s','i')])
 # ---- Inductors
 LAY['inductance']=(
-  ln(40,50,200,50,'ink',2)+ln(40,175,200,175,'ink',2)+ln(40,50,40,95,'ink',2)+ln(40,135,40,175,'ink',2)+bat(40,115,'',True)+txt(28,119,'12 V','ink',11,'end')+res(80,50,150,'50 Ω')+ln(200,50,200,85,'ink',2)+ln(200,175,200,145,'ink',2)+
-  f'<path d="M 200 85 a 10 10 0 0 1 0 15 a 10 10 0 0 1 0 15 a 10 10 0 0 1 0 15 a 10 10 0 0 1 0 15" style="fill:none;stroke:var(--ink);stroke-width:2.5"/>'+txt(222,118,'0.20 H','ink',11,'start'),
-  [(1,txt(130,206,'τ = L/R = 4.0 ms','mut',12),'τ = 0.20 H / 50 Ω = 4.0 ms','i'),
-   (2,arr(100,38,150,38,'cur','I',2.2)+txt(125,26,'0.24 A','cur',11),'steady state: I = ε/R = 0.24 A','v'),
-   (3,txt(120,100,'0.15 A at t = τ','cur',10),'I(τ) = 0.24(1 − e⁻¹) = 0.15 A','v'),
-   (4,txt(120,116,'dI/dt = 60 A/s at t = 0','frc',10),'dI/dt = ε/L = 60 A/s at the start','f'),
-   (5,txt(120,132,'U = 5.8 mJ','frc',10),'U = ½LI² = 5.8 mJ','f'),
-   (6,'','after removing the battery: 9.2 ms to fall to 10%','i')])
+  ln(30,50,160,50,'ink',2)+ln(30,175,160,175,'ink',2)+ln(30,50,30,105,'ink',2)+ln(30,125,30,175,'ink',2)+bat(30,115,'',True)+txt(42,119,'12 V','ink',11,'start')+res(55,50,125,'')+txt(90,72,'2.0 Ω','mut',11)+
+  ln(160,50,160,80,'ink',2)+ln(160,140,160,175,'ink',2)+'<path d="M 160 80 a 9 7.5 0 0 1 0 15 a 9 7.5 0 0 1 0 15 a 9 7.5 0 0 1 0 15 a 9 7.5 0 0 1 0 15" style="fill:none;stroke:var(--ink);stroke-width:2.5"/>'+txt(152,160,'6.0 mH','ink',10,'end')+
+  ln(178,74,178,146,'mut',2)+ln(183,74,183,146,'mut',2)+
+  '<path d="M 200 72 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6 a 7 3 0 0 0 0 6" style="fill:none;stroke:var(--ink);stroke-width:1.4"/>'+
+  ln(200,72,232,72,'ink',1.6)+ln(232,72,232,104,'ink',1.6)+ln(200,144,232,144,'ink',1.6)+ln(232,144,232,116,'ink',1.6)+ln(226,104,238,104,'ink',3)+ln(226,116,238,116,'ink',3)+txt(214,62,'×100 turns','mut',10)+txt(232,160,'spark plug','mut',10)+
+  ln(80,175,92,175,'ink',2)+ln(92,175,112,165,'ink',2)+dotp(92,175,'','ink')+dotp(112,175,'','ink')+ln(112,175,160,175,'ink',2)+txt(102,194,'switch','mut',10),
+  [(1,txt(90,220,'τ = L/R = 3.0 ms','mut',12),'τ = 6.0 mH / 2.0 Ω = 3.0 ms','i'),
+   (2,arr(65,34,115,34,'cur','',2.2)+txt(90,24,'I → 6.0 A','cur',11),'if left on: I = ε/R = 6.0 A','v'),
+   (3,txt(95,94,'3.8 A after 3.0 ms','cur',10),'I(τ) = 6.0(1 − e⁻¹) = 3.8 A','v'),
+   (4,txt(95,110,'U = 43 mJ','frc',10),'U = ½LI² = 43 mJ','f'),
+   (5,txt(140,130,'≈ 230 V','frc',10,'end'),'switch opens, I → 0 in 0.10 ms: ε = LΔI/Δt ≈ 230 V','f'),
+   (6,'<polyline points="232,105 228,108 236,111 232,115" style="fill:none;stroke:var(--hot);stroke-width:2"/>'+txt(214,182,'≈ 23 kV','frc',11),'100× the turns: about 23 kV across the plug','f')])
 # ---- LC
 LAY['lc']=(
-  ln(40,60,220,60,'ink',2)+ln(40,170,220,170,'ink',2)+ln(40,60,40,100,'ink',2)+ln(40,130,40,170,'ink',2)+ln(28,100,52,100,'ink',3)+ln(28,114,52,114,'ink',3)+ln(40,114,40,130,'ink',2)+txt(26,92,'+','pos',13,'end')+txt(60,112,'20 μF','ink',11,'start')+
-  ln(220,60,220,85,'ink',2)+ln(220,170,220,145,'ink',2)+f'<path d="M 220 85 a 8 8 0 0 1 0 15 a 8 8 0 0 1 0 15 a 8 8 0 0 1 0 15 a 8 8 0 0 1 0 15" style="fill:none;stroke:var(--ink);stroke-width:2.5"/>'+txt(222,190,'50 mH','ink',11),
-  [(1,txt(130,206,'ω₀ = 1/√(LC) = 1000 rad/s','mut',12),'ω₀ = 1000 rad/s, f = 159 Hz, T = 6.3 ms','i'),
-   (2,txt(130,226,'U = ½CV² = 1.0 mJ','frc',11),'Q₀ = CV₀ = 2.0 × 10⁻⁴ C, U = 1.0 mJ','f'),
-   (3,arr(90,48,150,48,'cur','',2.2)+txt(120,38,'I_max = 0.20 A','cur',11),'all the energy in L: I_max = 0.20 A','v'),
-   (4,txt(60,136,'q = 1.7 × 10⁻⁴ C','cx',10,'start'),'at I = 0.10 A: q = 1.7 × 10⁻⁴ C','e'),
-   (5,'','✓ half the current, 87% of the charge','i')])
+  ln(60,60,200,60,'ink',2)+ln(60,170,200,170,'ink',2)+ln(60,60,60,85,'ink',2)+ln(60,145,60,170,'ink',2)+'<path d="M 60 85 a 8 7.5 0 0 1 0 15 a 8 7.5 0 0 1 0 15 a 8 7.5 0 0 1 0 15 a 8 7.5 0 0 1 0 15" style="fill:none;stroke:var(--ink);stroke-width:2.5"/>'+txt(46,118,'240 μH','ink',11,'end')+
+  ln(200,60,200,108,'ink',2)+ln(200,122,200,170,'ink',2)+ln(186,108,214,108,'ink',3)+ln(186,122,214,122,'ink',3)+arr(184,134,218,98,'ink','',1.6)+txt(222,118,'C','ink',12,'start')+
+  ln(60,60,60,22,'ink',2)+ln(48,22,72,22,'ink',2)+ln(48,22,60,40,'ink',1.5)+ln(72,22,60,40,'ink',1.5)+txt(44,30,'antenna','mut',10,'end'),
+  [(1,txt(130,100,'C = 106 pF','ink',12),'1000 kHz: C = 1/(4π²f²L) = 106 pF','i'),
+   (2,txt(130,128,'540 kHz: 362 pF','mut',11)+txt(130,144,'1700 kHz: 36.5 pF','mut',11),'C ∝ 1/f²: 36.5 pF to 362 pF','i'),
+   (3,txt(130,206,'ω = 2πf = 6.28 × 10⁶ rad/s','mut',11),'ω = 6.28 × 10⁶ rad/s','i'),
+   (4,arr(105,48,155,48,'cur','',2.2)+txt(130,38,'I_max = 33 μA','cur',11),'Q₀ = CV₀ = 5.3 pC, I_max = ωQ₀ = 33 μA','v'),
+   (5,'','✓ ½CV₀² = ½LI_max² gives the same 33 μA','i')])
 # ---- Maxwell
 LAY['maxwell']=(
-  f'<path d="M 20 150 Q 50 100 80 150 T 140 150 T 200 150 T 250 150" style="fill:none;stroke:var(--cx);stroke-width:3"/>'+f'<path d="M 20 150 Q 50 195 80 150 T 140 150 T 200 150 T 250 150" style="fill:none;stroke:var(--ca);stroke-width:3;stroke-dasharray:6 4"/>'+
-  arr(20,150,250,150,'mut','',1.4)+txt(130,227,'direction of travel →','mut',10)+txt(60,100,'E','ef',14)+txt(60,200,'B','bf',14)+txt(130,38,'E × B points along the motion','ink',12),
-  [(1,ln(20,198,140,198,'mut',1.2)+txt(80,212,'λ','mut',12)+txt(130,60,'f = 100 MHz → λ = 3.0 m','mut',11),'λ = c/f = 3.0 m','i'),
-   (2,arr(130,150,130,110,'ef','',2)+arr(130,150,150,160,'bf','',2),'B₀ = E₀/c = 1.7 × 10⁻⁷ T','b'),
-   (3,'','I = ½ε₀cE₀² = 3.3 W/m²','f'),
-   (4,arr(150,128,200,128,'cv','+x',2.6,(0,-6)),'E = +y, B = +z ⇒ E × B = +x','v'),
-   (5,'','✓ equal energy in E and B','i')])
+  '<rect x="14" y="132" width="40" height="22" rx="4" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>'+ln(24,132,20,108,'ink',2)+ln(44,132,48,108,'ink',2)+txt(34,172,'router','mut',10)+
+  ''.join(f'<path d="M {34+r*math.cos(a1):.1f} {140-r*math.sin(a1):.1f} A {r} {r} 0 0 1 {34+r*math.cos(-a1):.1f} {140-r*math.sin(-a1):.1f}" style="fill:none;stroke:var(--cx);stroke-width:1.6;opacity:.7"/>' for r,a1 in ((36,1.0),(66,0.75),(96,0.6),(126,0.5)))+
+  '<rect x="196" y="134" width="44" height="28" rx="2" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/>'+ln(188,162,248,162,'ink',3)+txt(205,180,'laptop, 3.0 m away','mut',10)+txt(130,222,'(not to scale)','mut',10),
+  [(1,ln(100,40,130,40,'mut',1.2)+ln(100,34,100,46,'mut',1.2)+ln(130,34,130,46,'mut',1.2)+txt(115,28,'λ = 12.5 cm','mut',11),'λ = c/f = 0.125 m = 12.5 cm','i'),
+   (2,txt(140,204,'I = 8.8 × 10⁻⁴ W/m² at the laptop','frc',10),'I = P/(4πr²) = 8.8 × 10⁻⁴ W/m²','f'),
+   (3,arr(218,90,218,58,'ef','E',2.4,(8,0)),'E₀ = √(2I/(ε₀c)) = 0.82 V/m','e'),
+   (4,arr(218,90,196,104,'bf','B',2.4,(-6,4)),'B₀ = E₀/c = 2.7 × 10⁻⁹ T','b'),
+   (5,arr(218,90,250,90,'cv','',2.4)+txt(244,82,'+x','cv',11,'end'),'E = +y, B = +z ⇒ E × B = +x: away from the router','v'),
+   (6,'','✓ a million times weaker than sunlight (~1000 W/m²)','i')])
