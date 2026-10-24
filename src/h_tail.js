@@ -444,6 +444,18 @@ function flipFrom(el,from,ms=480){if(REDUCE||!el.animate)return null;const to=el
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{redraw();navSync(true);stepSync(true);});
 current='';route();
 })();
+/* Direction drills (right-hand rule, Lenz's law): pick a direction, see the answer diagram.
+   Outside the main engine IIFE, so it uses plain DOM queries, not $ / $$. */
+(function directionDrills(){
+  const qa=(s,r)=>Array.prototype.slice.call((r||document).querySelectorAll(s));
+  qa('.sorter.drill').forEach(function(sorter){
+    const cases=qa('.fcase',sorter);let right=0;const score=sorter.querySelector('.fc-score');
+    const sc=()=>{if(score)score.textContent=right+' of '+cases.length+' right so far.';};
+    cases.forEach(function(cs){const c=+cs.dataset.correct,bs=qa('.sopts button',cs),pics=qa('.fcpics svg',cs),why=cs.querySelector('.fcwhy');let done=false;
+      bs.forEach((b,i)=>b.addEventListener('click',()=>{bs.forEach(x=>x.classList.remove('right','wrong'));b.classList.add(i===c?'right':'wrong');
+        if(i===c){if(pics.length>1){pics[0].setAttribute('hidden','');pics[1].removeAttribute('hidden');}why.hidden=false;if(!done){done=true;right++;sc();}}else{why.hidden=true;}}));});
+    sc();});
+})();
 /* Analytics: GoatCounter, shared with every Intulab site. Anonymous, no cookies, no personal data.
    Loads only on the public GitHub Pages site, and counts each module view as its own page. */
 (function analytics(){if(!/\.github\.io$/.test(location.hostname))return;

@@ -40,7 +40,7 @@ def stepfig(base,layers,cap_,h=230):
     notes=''.join(f'<span class="{c}" data-s="{k}" hidden>{t}</span>' for k,_,t,c in layers if t)
     return f'<figure class="fbdfig"><div class="stepfig"><svg viewBox="0 0 260 {h}" role="img" aria-label="{_h.escape(cap_)}">{base}{g}</svg><div class="fbdnotes">{notes}</div></div><figcaption>{cap_}</figcaption></figure>'
 def show_btn(show): return f'<button type="button" class="btn link" data-show=\'{json.dumps(show)}\'>Set it up for me</button>'
-def module(id,title,tags,lede,intuit,eqs,lab,tries,example,oops,prose,quiz,assume=None,unit='Unit'):
+def module(id,title,tags,lede,intuit,eqs,lab,tries,example,oops,prose,quiz,assume=None,unit='Unit',drill=None):
     from layers import LAY
     tg=''.join(f'<span class="tag {k}">{v}</span>' for k,v in tags)
     s=f'  <!-- ============ {title.upper()} ============ -->\n  <section class="view" id="v-{id}" hidden>\n    <div class="wrap">\n      <div class="head">\n        <div class="eyebrow">{unit}{tg}</div>\n        <h1>{title}</h1>\n        <p class="lede">{lede}</p>\n      </div>\n'
@@ -49,6 +49,7 @@ def module(id,title,tags,lede,intuit,eqs,lab,tries,example,oops,prose,quiz,assum
         s+='      <div class="assume fornow"><h3>'+assume.get('h','Simplification for now')+'</h3><dl>'+''.join(f'<dt>{a}</dt><dd>{b}</dd>' for a,b in assume['rows'])+'</dl></div>\n'
     s+='      <div class="eqgrid">\n'+''.join(f'        <div class="eqn"><span>{a}</span><small>{b}</small></div>\n' for a,b in eqs)+'      </div>\n'
     s+=lab+'\n'
+    if drill: s+=drill+'\n'
     s+='      <div class="try"><h3>Try this</h3><p class="small" style="margin:0">Predict what will happen first. Then set it up and check.</p><ol>\n'
     for p,show,ans in tries:
         s+=f'        <li><p>{p} '+(show_btn(show) if show else '')+f'</p><details><summary>What you should see</summary><p>{ans}</p></details></li>\n'
@@ -79,3 +80,33 @@ def add3(labhtml,cid,cap,aria):
     i=labhtml.rindex('      </div>')
     return labhtml[:i]+f'        <div class="v3block"><p class="v3cap"><b>In 3D</b> {cap}</p><canvas id="{cid}" aria-label="{_h.escape(aria)}"></canvas></div>\n'+labhtml[i:]
 
+
+# ---- Direction-drill helpers (right-hand rule, Lenz's law) : compact 160x140 SVGs
+def dsvg(body,label,w=160,h=140): return f'<svg viewBox="0 0 {w} {h}" role="img" aria-label="{_h.escape(label)}">{body}</svg>'
+def fgrid(sym,c,xs,ys,size=15): return ''.join(txt(x,y+size*0.35,sym,c,size,weight=500) for x in xs for y in ys)
+def finto(c='bf',xs=(34,70,106,142),ys=(34,70,106)): return fgrid('×',c,xs,ys)
+def fout(c='bf',xs=(34,70,106,142),ys=(34,70,106)): return fgrid('⊙',c,xs,ys)
+def loop(cx,cy,r,c='ink',w=2.4): return f'<circle cx="{cx}" cy="{cy}" r="{r}" style="fill:none;stroke:{C.get(c,c)};stroke-width:{w}"/>'
+import math as _m
+def _pt(cx,cy,r,phi): return (cx+r*_m.sin(_m.radians(phi)), cy-r*_m.cos(_m.radians(phi)))
+def curarrow(cx,cy,r,cw,c='cv',w=3.2):
+    a0,a1=(25,330) if cw else (-25,-330)
+    x0,y0=_pt(cx,cy,r,a0);x1,y1=_pt(cx,cy,r,a1)
+    sweep=1 if cw else 0
+    if cw: tx,ty=_m.cos(_m.radians(a1)),_m.sin(_m.radians(a1))
+    else: tx,ty=-_m.cos(_m.radians(a1)),-_m.sin(_m.radians(a1))
+    L=_m.hypot(tx,ty);tx,ty=tx/L,ty/L;px,py=-ty,tx;hh=11;col=C.get(c,c)
+    return (f'<path d="M {x0:.1f} {y0:.1f} A {r} {r} 0 1 {sweep} {x1:.1f} {y1:.1f}" style="fill:none;stroke:{col};stroke-width:{w}"/>'
+            f'<polygon points="{x1:.1f},{y1:.1f} {x1-tx*hh-px*hh*0.55:.1f},{y1-ty*hh-py*hh*0.55:.1f} {x1-tx*hh+px*hh*0.55:.1f},{y1-ty*hh+py*hh*0.55:.1f}" style="fill:{col}"/>')
+def drill(title,intro,cases):
+    s=f'      <div class="sorter drill"><h3>{title}</h3><p class="small" style="margin:0">{intro} <span class="fc-score"></span></p><div class="fcases">\n'
+    for n,cs in enumerate(cases,1):
+        opts=''.join(f'<button type="button">{o}</button>' for o in cs['opts'])
+        after=cs.get('after','')
+        pics=f'<div class="fcpics">{dsvg(cs["before"],cs.get("lab",title))}'+(dsvg(after,cs.get("lab",title)) and f'<svg viewBox="0 0 160 140" hidden role="img" aria-label="{_h.escape(cs.get("lab",title))} (answer)">{after}</svg>' if after else '')+'</div>'
+        s+=(f'        <div class="fcase" data-correct="{cs["correct"]}">{pics}'
+            f'<div class="fcbody"><p class="fq"><b>{n}.</b> {cs["q"]}</p>'
+            f'<div class="sopts">{opts}</div>'
+            f'<div class="fcwhy" hidden><p>{cs["why"]}</p></div></div></div>\n')
+    s+='      </div></div>'
+    return s
