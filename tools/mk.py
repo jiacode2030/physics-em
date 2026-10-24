@@ -1,6 +1,7 @@
 """Helpers that turn a short spec into a module's HTML, following the Electric fields template."""
 import json, html as _h
-OUT='/home/user/em-lab/src/modules/'
+import os
+OUT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','src','modules','')
 C={'ef':'var(--cx)','bf':'var(--ca)','cur':'var(--cv)','frc':'var(--hot)','pos':'var(--pos)','neg':'var(--neg)','ink':'var(--ink)','mut':'var(--muted)'}
 def m(s): return f'<span class="m">{s}</span>'
 def i(s,c=''): return f'<i class="{c}">{s}</i>' if c else f'<i>{s}</i>'
